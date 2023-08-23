@@ -6,7 +6,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 // Components
 import { CategoryComponent } from 'src/app/components/category/category.component';
@@ -16,7 +15,6 @@ import { TransactionComponent } from 'src/app/components/transaction/transaction
 import { ModalCrudComponent } from 'src/app/components/modal-crud/modal-crud.component';
 import { ModalCategoryComponent } from 'src/app/components/modal-category/modal-category.component';
 import { MatButtonModule } from '@angular/material/button';
-import { HomeService } from 'src/app/services/home.service';
 
 
 
@@ -36,7 +34,6 @@ import { HomeService } from 'src/app/services/home.service';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
-    MatSnackBarModule
   ]
 })
 export class HomeComponent {
@@ -146,8 +143,6 @@ export class HomeComponent {
 
   constructor(
     public dialog: MatDialog,
-    private _snackBar: MatSnackBar,
-    private _homeSvc: HomeService
   ) { }
 
   openDialogCrud(type: string): void {
@@ -200,15 +195,15 @@ export class HomeComponent {
     })
   }
 
-  getDataUser(){
-    this._homeSvc.getCategories(1).subscribe(res => {
-      console.log(res)
-    }, (err) => {
-      this.openSnackBar(err, null)
-    })
-  }
+  // getDataUser(){
+  //   this._homeSvc.getCategories(1).subscribe(res => {
+  //     console.log(res)
+  //   }, (err) => {
+  //     this.openSnackBar(err, null)
+  //   })
+  // }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
-  }
+  // openSnackBar(message: string, action: string) {
+  //   this._snackBar.open(message, action);
+  // }
 }
