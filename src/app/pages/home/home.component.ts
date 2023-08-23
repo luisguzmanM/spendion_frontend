@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // Angular material
 import { MatTabsModule } from '@angular/material/tabs';
@@ -15,13 +15,15 @@ import { TransactionComponent } from 'src/app/components/transaction/transaction
 import { ModalCrudComponent } from 'src/app/components/modal-crud/modal-crud.component';
 import { ModalCategoryComponent } from 'src/app/components/modal-category/modal-category.component';
 import { MatButtonModule } from '@angular/material/button';
-
+import { HomeService } from 'src/app/services/home.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
+  providers: [HomeService],
   standalone: true,
   imports: [
     CommonModule,
@@ -34,9 +36,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
+    HttpClientModule
   ]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
   user = {
     first_name: 'Luis',
@@ -143,7 +146,12 @@ export class HomeComponent {
 
   constructor(
     public dialog: MatDialog,
+    private _homeSvc: HomeService
   ) { }
+
+  ngOnInit(): void {
+      this.getDataUser()
+  }
 
   openDialogCrud(type: string): void {
 
@@ -195,15 +203,9 @@ export class HomeComponent {
     })
   }
 
-  // getDataUser(){
-  //   this._homeSvc.getCategories(1).subscribe(res => {
-  //     console.log(res)
-  //   }, (err) => {
-  //     this.openSnackBar(err, null)
-  //   })
-  // }
-
-  // openSnackBar(message: string, action: string) {
-  //   this._snackBar.open(message, action);
-  // }
+  getDataUser(){
+    this._homeSvc.getCategories(1).subscribe((res)=> {
+      console.log(res)
+    })
+  }
 }
