@@ -1,0 +1,40 @@
+.card {
+  width: 250px;
+  height: 100%;
+  backdrop-filter: blur(0px) saturate(180%);
+  -webkit-backdrop-filter: blur(0px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+}
+
+mat-card mat-card-header span {
+  font-weight: bold;
+}
+
+mat-card-content span {
+  color: darkgrey;
+}
+
+mat-card-content {
+  text-align: center;
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mat-mdc-card-content:last-child {
+  padding-bottom: 0px;
+}
+
+@media screen and (max-width: 1060px){
+  .card {
+    min-height: 150px;
+  }
+}
