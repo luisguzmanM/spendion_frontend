@@ -24,7 +24,8 @@ import { Router, RouterModule } from '@angular/router';
     MatDividerModule,
     MatButtonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   providers: [
     AuthService
@@ -46,6 +47,7 @@ export class SignupComponent {
   ){}
 
   signup():void {
+    
     const user = this.buildUserObject()
     this.callSignUpService(user)
   }
