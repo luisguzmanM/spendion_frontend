@@ -13,7 +13,7 @@ export class HomeService {
     private _httpClient: HttpClient
   ) { }
 
-  getCategories(id:number):Observable<any>{
+  getAllDataUser(id:number):Observable<any>{
     return this._httpClient.get<any>(`${this.API_URL}/${id}`)
   }
 

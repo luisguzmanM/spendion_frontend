@@ -204,8 +204,8 @@ export class HomeComponent implements OnInit{
   }
 
   getDataUser(){
-    this._homeSvc.getCategories(1).subscribe((res)=> {
-      console.log(res)
+    this._homeSvc.getAllDataUser(1).subscribe((res)=> {
+      this.user = res
     })
   }
 }
