@@ -28,6 +28,7 @@ import { AuthService } from 'src/app/services/auth.service';
     HttpClientModule,
     RouterModule
   ],
+  providers: [AuthService]
 })
 
 export class LoginComponent {

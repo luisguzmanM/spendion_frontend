@@ -9,6 +9,7 @@ import { MatDividerModule } from '@angular/material/divider';
 
 // Components
 import { AvatarComponent } from '../avatar/avatar.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,8 @@ import { AvatarComponent } from '../avatar/avatar.component';
   styleUrls: ['./header.component.css'],
   standalone: true,
   imports: [
+    RouterModule,
+
     // Angular material components
     MatToolbarModule,
     MatIconModule,
