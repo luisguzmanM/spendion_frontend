@@ -45,7 +45,6 @@ export class LoginComponent {
   ){}
 
   login():void {
-    
     const user = this.buildUserObject()
     this.callSignUpService(user)
   }
@@ -59,6 +58,7 @@ export class LoginComponent {
 
   callSignUpService(userData:User){
     this._AuthSvc.login(userData).subscribe(res => {
+      localStorage.setItem('user', res.user)
       this._router.navigate(['/dashboard'])
     })
   }

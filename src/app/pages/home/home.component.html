@@ -1,45 +1,18 @@
-<app-header [user]="user"></app-header>
+<ng-container *ngIf="!loading">
 
-<mat-divider></mat-divider>
+  <app-header [user]="user"></app-header>
 
-<div class="grid">
-  <div class="summaries">
-    <app-summary *ngFor="let user of user.summary" [user]="user"></app-summary>
-  </div>
+  <mat-divider></mat-divider>
 
-  <div class="transactions">
-    <app-transaction class="table-transactions"></app-transaction>
-  </div>
-
-  <div class="categories">
-    <app-category
-      *ngFor="let category of user.categories"
-      [data]="category"
-      (click)="openDialogCategory(category)"
-    ></app-category>
-  </div>
-
-  <button mat-raised-button class="btn-add-category-desktop" (click)="openDialogCrud('create')">
-    <mat-icon>add</mat-icon>
-    <span>Add category</span>
-  </button>
-</div>
-
-<mat-tab-group class="tabs">
-  <mat-tab label="Summary">
+  <div class="grid">
     <div class="summaries">
-      <app-summary
-        *ngFor="let user of user.summary"
-        [user]="user"
-      ></app-summary>
+      <app-summary *ngFor="let user of user.summary" [user]="user"></app-summary>
     </div>
-  </mat-tab>
-  <mat-tab label="Transactions">
+
     <div class="transactions">
       <app-transaction class="table-transactions"></app-transaction>
     </div>
-  </mat-tab>
-  <mat-tab label="Categories">
+
     <div class="categories">
       <app-category
         *ngFor="let category of user.categories"
@@ -47,8 +20,43 @@
         (click)="openDialogCategory(category)"
       ></app-category>
     </div>
-    <button mat-fab color="primary" class="btn-add-category-mobile" (click)="openDialogCrud('create')">
+
+    <button mat-raised-button class="btn-add-category-desktop" (click)="openDialogCrud('create')">
       <mat-icon>add</mat-icon>
+      <span>Add category</span>
     </button>
-  </mat-tab>
-</mat-tab-group>
+  </div>
+
+  <mat-tab-group class="tabs">
+    <mat-tab label="Summary">
+      <div class="summaries">
+        <app-summary
+          *ngFor="let user of user.summary"
+          [user]="user"
+        ></app-summary>
+      </div>
+    </mat-tab>
+    <mat-tab label="Transactions">
+      <div class="transactions">
+        <app-transaction class="table-transactions"></app-transaction>
+      </div>
+    </mat-tab>
+    <mat-tab label="Categories">
+      <div class="categories">
+        <app-category
+          *ngFor="let category of user.categories"
+          [data]="category"
+          (click)="openDialogCategory(category)"
+        ></app-category>
+      </div>
+      <button mat-fab color="primary" class="btn-add-category-mobile" (click)="openDialogCrud('create')">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-tab>
+  </mat-tab-group>
+
+</ng-container>
+
+<div class="spinner">
+  <mat-spinner *ngIf="loading"></mat-spinner>
+</div>

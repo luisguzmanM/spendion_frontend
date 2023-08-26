@@ -6,6 +6,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // Components
 import { CategoryComponent } from 'src/app/components/category/category.component';
@@ -36,11 +37,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ]
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
 
+  loading: boolean = false;
   user = {
     first_name: 'Luis',
     last_name: 'Guzman',
@@ -62,7 +65,6 @@ export class HomeComponent implements OnInit{
         amount: 1350,
       },
     ],
-    record: [],
     categories: [
       {
         title: 'life',
@@ -150,7 +152,7 @@ export class HomeComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-      this.getDataUser()
+    this.getDataUser()
   }
 
   openDialogCrud(type: string): void {
@@ -203,9 +205,11 @@ export class HomeComponent implements OnInit{
     })
   }
 
-  getDataUser(){
-    this._homeSvc.getAllDataUser(1).subscribe((res)=> {
+  getDataUser() {
+    this.loading = true
+    this._homeSvc.getAllDataUser(1).subscribe((res) => {
       this.user = res
+      this.loading = false
     })
   }
 }
