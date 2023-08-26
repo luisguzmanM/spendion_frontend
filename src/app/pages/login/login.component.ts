@@ -6,11 +6,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { User } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-login',
@@ -26,9 +28,10 @@ import { AuthService } from 'src/app/services/auth.service';
     MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    MatSnackBarModule
   ],
-  providers: [AuthService]
+  providers: [AuthService, UtilsService]
 })
 
 export class LoginComponent {
@@ -41,26 +44,34 @@ export class LoginComponent {
 
   constructor(
     private _AuthSvc: AuthService,
-    private _router: Router
-  ){}
+    private _router: Router,
+    private utilSvc: UtilsService
+  ) { }
 
-  login():void {
+  login(): void {
     const user = this.buildUserObject()
-    this.callSignUpService(user)
+    this.callLoginService(user)
   }
 
-  buildUserObject():User{
+  buildUserObject(): User {
     return {
       email: this.form.controls.email.value,
       password: this.form.controls.password.value,
     }
   }
 
-  callSignUpService(userData:User){
-    this._AuthSvc.login(userData).subscribe(res => {
-      localStorage.setItem('user', res.user)
-      this._router.navigate(['/dashboard'])
+  callLoginService(userData: User) {
+    this._AuthSvc.login(userData).subscribe({
+      next: (res) => {
+        localStorage.setItem('user', res.user)
+        this.utilSvc.openSnackBar('Login success', 'Close')
+        setTimeout(() => {
+          this._router.navigate(['/dashboard'])
+        }, 3000)
+      },
+      error: (err) => {
+        this.utilSvc.openSnackBar('Login error', 'Close')
+      }
     })
   }
-
 }
