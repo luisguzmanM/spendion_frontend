@@ -152,7 +152,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getDataUser()
+    // this.getDataUser()
   }
 
   openDialogCrud(type: string): void {
