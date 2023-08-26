@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 import { NewUser } from 'src/app/models/auth.model';
 import { Router, RouterModule } from '@angular/router';
+import { UtilsService } from 'src/app/services/utils.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -25,29 +27,31 @@ import { Router, RouterModule } from '@angular/router';
     MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    MatSnackBarModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    UtilsService
   ]
 })
 
 export class SignupComponent {
 
   form = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]),
   })
 
   constructor(
     private _AuthSvc: AuthService,
-    private _router: Router
+    private _router: Router,
+    private _utilSvc: UtilsService
   ){}
 
   signup():void {
-    
     const user = this.buildUserObject()
     this.callSignUpService(user)
   }
@@ -62,9 +66,17 @@ export class SignupComponent {
   }
 
   callSignUpService(userData:NewUser){
-    this._AuthSvc.signup(userData).subscribe(res => {
-      this._router.navigate(['/dashboard'])
+    this._AuthSvc.signup(userData).subscribe({
+      next: (res) => {
+        this._utilSvc.openSnackBar('Signup success', 'Close')
+        setTimeout(() => {
+          this._router.navigate(['/dashboard'])
+        }, 3000)
+      },
+      error: (err) => {
+        this._utilSvc.openSnackBar('Signup error', 'Close')
+      }
     })
   }
-
+  
 }

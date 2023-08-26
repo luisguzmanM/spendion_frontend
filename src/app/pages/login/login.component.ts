@@ -37,15 +37,14 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class LoginComponent {
 
   form = new FormGroup({
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]),
   })
-
 
   constructor(
     private _AuthSvc: AuthService,
     private _router: Router,
-    private utilSvc: UtilsService
+    private _utilSvc: UtilsService
   ) { }
 
   login(): void {
@@ -64,13 +63,13 @@ export class LoginComponent {
     this._AuthSvc.login(userData).subscribe({
       next: (res) => {
         localStorage.setItem('user', res.user)
-        this.utilSvc.openSnackBar('Login success', 'Close')
+        this._utilSvc.openSnackBar('Login success', 'Close')
         setTimeout(() => {
           this._router.navigate(['/dashboard'])
         }, 3000)
       },
       error: (err) => {
-        this.utilSvc.openSnackBar('Login error', 'Close')
+        this._utilSvc.openSnackBar('Login error', 'Close')
       }
     })
   }
