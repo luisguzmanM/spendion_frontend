@@ -74,7 +74,7 @@ export class SignupComponent {
         }, 3000)
       },
       error: (err) => {
-        this._utilSvc.openSnackBar('Signup error', 'Close')
+        this._utilSvc.openSnackBar(err.error.msj, 'Close')
       }
     })
   }

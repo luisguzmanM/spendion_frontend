@@ -69,7 +69,7 @@ export class LoginComponent {
         }, 3000)
       },
       error: (err) => {
-        this._utilSvc.openSnackBar('Login error', 'Close')
+        this._utilSvc.openSnackBar(err.error.msj, 'Close')
       }
     })
   }
