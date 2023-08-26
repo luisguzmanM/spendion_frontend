@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NewUser, User } from '../models/auth.model';
@@ -15,7 +15,9 @@ export class AuthService {
   ) { }
 
   signup(payload:NewUser):Observable<any>{
-    return this._httpClient.post<any>(`${this.API_URL}/signup`, payload)
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    return this._httpClient.post<any>(`${this.API_URL}/signup`, payload, {headers: headers})
   }
 
   login(payload:User):Observable<any>{
