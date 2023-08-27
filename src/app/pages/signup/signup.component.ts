@@ -49,8 +49,8 @@ export class SignupComponent {
 
   constructor(
     private _AuthSvc: AuthService,
-    private _router: Router,
-    private _utilSvc: UtilsService
+    private _utilSvc: UtilsService,
+    private router: Router
   ){}
 
   signup():void {
@@ -70,13 +70,12 @@ export class SignupComponent {
   callSignUpService(userData:NewUser){
     this._AuthSvc.signup(userData).subscribe({
       next: (res) => {
-        this._utilSvc.openSnackBar('Signup success', 'Close')
-        setTimeout(() => {
-          this._router.navigate(['/dashboard'])
-        }, 3000)
+        this._utilSvc.openSnackBar('Signup success', 'Close');
+        localStorage.setItem('isLoggedIn', JSON.stringify(true));
+        this.router.navigate(['/dashboard'])
       },
       error: (err) => {
-        this._utilSvc.openSnackBar(err.error.msj, 'Close')
+        this._utilSvc.openSnackBar(err.error.msj, 'Close');
       }
     })
   }

@@ -9,7 +9,7 @@ import { MatDividerModule } from '@angular/material/divider';
 
 // Components
 import { AvatarComponent } from '../avatar/avatar.component';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -37,6 +37,13 @@ export class HeaderComponent {
   @Input() user: any;
   @Input() avatar: string;
 
-  constructor() {}
+  constructor(
+    private router: Router
+  ) {}
+
+  loggout():void {
+    localStorage.setItem('isLoggedIn', JSON.stringify(false));
+    this.router.navigate(['/login'])
+  }
 
 }

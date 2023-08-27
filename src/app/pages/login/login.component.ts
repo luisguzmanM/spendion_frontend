@@ -45,8 +45,8 @@ export class LoginComponent {
 
   constructor(
     private _AuthSvc: AuthService,
-    private _router: Router,
-    private _utilSvc: UtilsService
+    private _utilSvc: UtilsService,
+    private router: Router
   ) { }
 
   login(): void {
@@ -66,9 +66,8 @@ export class LoginComponent {
       next: (res) => {
         localStorage.setItem('user', res.user)
         this._utilSvc.openSnackBar('Login success', 'Close')
-        setTimeout(() => {
-          this._router.navigate(['/dashboard'])
-        }, 3000)
+        localStorage.setItem('isLoggedIn', JSON.stringify(true));
+        this.router.navigate(['/dashboard'])
       },
       error: (err) => {
         this._utilSvc.openSnackBar(err.error.msj, 'Close')
