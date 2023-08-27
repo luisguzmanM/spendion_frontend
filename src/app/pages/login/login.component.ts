@@ -13,6 +13,7 @@ import { User } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UtilsService } from 'src/app/services/utils.service';
+import { LogoComponent } from 'src/app/components/logo/logo.component';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ import { UtilsService } from 'src/app/services/utils.service';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    LogoComponent
   ],
   providers: [AuthService, UtilsService]
 })

@@ -12,6 +12,7 @@ import { NewUser } from 'src/app/models/auth.model';
 import { Router, RouterModule } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LogoComponent } from 'src/app/components/logo/logo.component';
 
 @Component({
   selector: 'app-signup',
@@ -28,7 +29,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    LogoComponent
   ],
   providers: [
     AuthService,
