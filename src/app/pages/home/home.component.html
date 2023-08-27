@@ -6,7 +6,10 @@
 
   <div class="grid">
     <div class="summaries">
-      <app-summary *ngFor="let user of user.summary" [user]="user"></app-summary>
+      <ng-container *ngIf="user.summary.length">
+        <app-summary *ngFor="let user of user.summary" [user]="user"></app-summary>
+      </ng-container>
+      <div class="empty-wrapper" *ngIf="!user.summary.length">There is not data yet</div>
     </div>
 
     <div class="transactions">
@@ -14,11 +17,10 @@
     </div>
 
     <div class="categories">
-      <app-category
-        *ngFor="let category of user.categories"
-        [data]="category"
-        (click)="openDialogCategory(category)"
-      ></app-category>
+      <ng-container *ngIf="user.categories.length">
+        <app-category *ngFor="let category of user.categories" [data]="category" (click)="openDialogCategory(category)"></app-category>
+      </ng-container>
+      <div class="empty-wrapper" *ngIf="!user.categories.length">There is not data yet</div>
     </div>
 
     <button mat-raised-button class="btn-add-category-desktop" (click)="openDialogCrud('create')">

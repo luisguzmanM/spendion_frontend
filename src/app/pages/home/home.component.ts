@@ -44,106 +44,13 @@ import { HttpClientModule } from '@angular/common/http';
 export class HomeComponent implements OnInit {
 
   loading: boolean = false;
+  
   user = {
     first_name: 'Luis',
     last_name: 'Guzman',
     photo: '',
-    summary: [
-      {
-        title: 'Income',
-        icon: 'attach_money',
-        amount: 1800,
-      },
-      {
-        title: 'Expense',
-        icon: 'call_missed_outgoing',
-        amount: 450,
-      },
-      {
-        title: 'Balance',
-        icon: 'account_balance',
-        amount: 1350,
-      },
-    ],
-    categories: [
-      {
-        title: 'life',
-        budget: 900,
-        spent: 90,
-        available: 810,
-        progress: 30,
-      },
-      {
-        title: 'life',
-        budget: 900,
-        spent: 90,
-        available: 810,
-        progress: 30,
-      },
-      {
-        title: 'life',
-        budget: 900,
-        spent: 90,
-        available: 810,
-        progress: 30,
-      },
-      {
-        title: 'life',
-        budget: 900,
-        spent: 90,
-        available: 810,
-        progress: 30,
-      },
-      {
-        title: 'life',
-        budget: 900,
-        spent: 90,
-        available: 810,
-        progress: 30,
-      },
-      {
-        title: 'life',
-        budget: 900,
-        spent: 90,
-        available: 810,
-        progress: 30,
-      },
-      {
-        title: 'life',
-        budget: 900,
-        spent: 90,
-        available: 810,
-        progress: 30,
-      },
-      {
-        title: 'life',
-        budget: 900,
-        spent: 90,
-        available: 810,
-        progress: 30,
-      },
-      {
-        title: 'life',
-        budget: 900,
-        spent: 90,
-        available: 810,
-        progress: 30,
-      },
-      {
-        title: 'life',
-        budget: 900,
-        spent: 90,
-        available: 810,
-        progress: 30,
-      },
-      {
-        title: 'life',
-        budget: 900,
-        spent: 90,
-        available: 810,
-        progress: 30,
-      },
-    ]
+    summary: [],
+    categories: []
   };
 
   constructor(
