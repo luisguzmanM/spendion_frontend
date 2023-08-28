@@ -72,6 +72,7 @@ export class SignupComponent {
       next: (res) => {
         this._utilSvc.openSnackBar('Signup success', 'Close');
         localStorage.setItem('isLoggedIn', JSON.stringify(true));
+        localStorage.setItem('userEmail', this.form.controls.email.value)
         this.router.navigate(['/dashboard'])
       },
       error: (err) => {

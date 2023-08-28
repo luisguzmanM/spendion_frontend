@@ -19,10 +19,10 @@ export class AuthService {
   signup(payload:NewUser):Observable<any>{
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
-    return this._httpClient.post<any>(`${this.URL_PRODUCTION}/signup`, payload, {headers: headers})
+    return this._httpClient.post<any>(`${this.URL_LOCAL}/signup`, payload, {headers: headers})
   }
 
   login(payload:User):Observable<any>{
-    return this._httpClient.post<any>(`${this.URL_PRODUCTION}/login`, payload)
+    return this._httpClient.post<any>(`${this.URL_LOCAL}/login`, payload)
   }
 }

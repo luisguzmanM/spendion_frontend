@@ -42,7 +42,8 @@ export class HeaderComponent {
   ) {}
 
   loggout():void {
-    localStorage.setItem('isLoggedIn', JSON.stringify(false));
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userEmail');
     this.router.navigate(['/login'])
   }
 

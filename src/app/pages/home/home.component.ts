@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.getDataUser()
+    this.getDataUser()
   }
 
   openDialogCrud(type: string): void {
@@ -113,10 +113,11 @@ export class HomeComponent implements OnInit {
   }
 
   getDataUser() {
-    this.loading = true
-    this._homeSvc.getAllDataUser(1).subscribe((res) => {
-      this.user = res
-      this.loading = false
+    this.loading = true;
+    const email = localStorage.getItem('userEmail') || '';
+    this._homeSvc.getAllDataUser(email).subscribe((res) => {
+      this.user = res;
+      this.loading = false;
     })
   }
 }
