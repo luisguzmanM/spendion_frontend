@@ -15,11 +15,9 @@ export class HomeService {
     private _httpClient: HttpClient
   ) { }
 
-  getAllDataUser(email:string):Observable<any>{
-    const params = new HttpParams()
-      .append('email', email)
-    console.log(`${this.URL_LOCAL}`, {params: params})
-    return this._httpClient.get<any>(`${this.URL_LOCAL}`, {params: params})
+  getAllDataUser(email: string): Observable<any> {
+    const params = new HttpParams().append('email', email);
+    return this._httpClient.get<any>(`${this.URL_LOCAL}`, { params: params });
   }
 
 }
