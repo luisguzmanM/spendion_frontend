@@ -17,8 +17,7 @@ export class AuthService {
   ) { }
 
   signup(payload:NewUser):Observable<any>{
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._httpClient.post<any>(`${this.URL_LOCAL}/signup`, payload, {headers: headers})
   }
 

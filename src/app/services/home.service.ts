@@ -17,7 +17,7 @@ export class HomeService {
 
   getAllDataUser(email: string): Observable<any> {
     const params = new HttpParams().append('email', email);
-    return this._httpClient.get<any>(`${this.URL_LOCAL}`, { params: params });
+    return this._httpClient.get(`${this.URL_LOCAL}`, { params: params });
   }
 
 }
