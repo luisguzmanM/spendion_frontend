@@ -110,8 +110,6 @@ export class HomeComponent implements OnInit {
     const email = localStorage.getItem('userEmail') || '';
     this._homeSvc.getAllDataUser(email).subscribe((res) => {
       this.user = res;
-      console.log(this.user)
-      console.log(this.user.summary)
       this.loading = false;
     })
   }
