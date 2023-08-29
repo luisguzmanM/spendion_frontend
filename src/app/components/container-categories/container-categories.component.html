@@ -1,0 +1,5 @@
+<div class="spinner" *ngIf="loading">
+  <mat-spinner mode="indeterminate" color="primary" diameter="40"></mat-spinner>
+</div>
+
+<app-category *ngFor="let category of categories" [data]="category"></app-category>

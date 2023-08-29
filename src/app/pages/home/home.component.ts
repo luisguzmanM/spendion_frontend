@@ -20,6 +20,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UtilsService } from 'src/app/services/utils.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ContainerCategoriesComponent } from 'src/app/components/container-categories/container-categories.component';
 
 
 @Component({
@@ -44,7 +45,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ContainerCategoriesComponent
   ]
 })
 export class HomeComponent implements OnInit {
