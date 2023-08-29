@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
 
   openDialogCategory(category: any): void {
 
-    const { title, budget, spent, available, progress } = category;
+    const { title, budget, spent, available, progress, record, id_category } = category;
 
     const dialogRef = this.dialog.open(ModalCategoryComponent, {
       width: '600px',
@@ -100,7 +100,9 @@ export class HomeComponent implements OnInit {
         budget: budget,
         spent: spent,
         available: available,
-        progress: progress
+        progress: progress,
+        record: record,
+        id_category: id_category
       },
     })
   }

@@ -24,7 +24,6 @@ export class TransactionComponent implements AfterViewInit, OnInit  {
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>(this.transactions);
-    console.log(this.dataSource)
   }
 
   ngAfterViewInit() {

@@ -8,7 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CategoryService } from 'src/app/services/category.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-modal-crud',
@@ -22,8 +24,11 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
+  providers: [CategoryService]
 })
 export class ModalCrudComponent {
 
@@ -31,13 +36,36 @@ export class ModalCrudComponent {
   defaultLabelTextField = 'Text field';
   defaultLabelNumberField = 'Number field';
 
+  form: FormGroup;
+
   constructor(
     public dialogRef: MatDialogRef<ModalCrudComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-  ) { }
+    private _categorySvc: CategoryService
+  ) {
+    this.form = new FormGroup({
+      title: new FormControl('', Validators.required),
+      budget: new FormControl('', Validators.required)
+    })
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  buildObjectNewCategory():any {
+    return {
+      title: this.form.controls['title'].value,
+      budget: this.form.controls['budget'].value,
+      token: localStorage.getItem('token')
+    }
+  }
+
+  callServiceCreateCategory():void {
+    const newCategory = this.buildObjectNewCategory();
+    this._categorySvc.createCategory(newCategory).subscribe(res => {
+      console.log(res)
+    })
   }
 
 }

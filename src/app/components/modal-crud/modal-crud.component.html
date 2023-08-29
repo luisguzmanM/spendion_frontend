@@ -8,19 +8,19 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<form>
+<form [formGroup]="form" (ngSubmit)="callServiceCreateCategory()" (keyup.enter)="callServiceCreateCategory()">
   <mat-form-field class="full-width">
     <mat-label>{{ data.labelTextField ? data.labelTextField : defaultLabelTextField }}</mat-label>
-    <input matInput type="text" placeholder="Ex. Pizza" value="">
+    <input matInput type="text" placeholder="Ex. Pizza" value="" formControlName="title">
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <mat-label>{{ data.labelNumberField ? data.labelNumberField : defaultLabelNumberField }}</mat-label>
-    <input matInput type="number" placeholder="Ex. 9.90" value="">
+    <input matInput type="number" placeholder="Ex. 9.90" value="" formControlName="budget">
   </mat-form-field>
 </form>
 
 <div mat-dialog-actions align="end" class="dialog-actions">
   <button mat-stroked-button (click)="onNoClick()">Cancel</button>
-  <button mat-raised-button color="primary" cdkFocusInitial>Confirm</button>
+  <button mat-raised-button color="primary" cdkFocusInitial (click)="callServiceCreateCategory()" [disabled]="form.invalid">Confirm</button>
 </div>
