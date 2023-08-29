@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-modal-crud',
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressBarModule
   ],
   providers: [CategoryService]
 })
@@ -37,7 +39,8 @@ export class ModalCrudComponent {
   defaultLabelNumberField = 'Number field';
 
   form: FormGroup;
-  @Output() confirm:any = new EventEmitter();
+  @Output() confirm: any = new EventEmitter();
+  loading: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<ModalCrudComponent>,
@@ -54,7 +57,7 @@ export class ModalCrudComponent {
     this.dialogRef.close();
   }
 
-  buildObjectNewCategory():any {
+  buildObjectNewCategory(): any {
     return {
       title: this.form.controls['title'].value,
       budget: this.form.controls['budget'].value,
@@ -62,7 +65,8 @@ export class ModalCrudComponent {
     }
   }
 
-  callServiceCreateCategory():void {
+  callServiceCreateCategory(): void {
+    this.loading = true;
     const newCategory = this.buildObjectNewCategory();
     this._categorySvc.createCategory(newCategory).subscribe(res => {
       this.confirm.emit(newCategory);

@@ -96,8 +96,7 @@ export class HomeComponent implements OnInit {
     })
 
     dialogRef.componentInstance.confirm.subscribe(res => {
-      dialogRef.close()
-
+      
       const newCategory = {
         title: res.title,
         budget: res.budget,
@@ -106,10 +105,12 @@ export class HomeComponent implements OnInit {
         record: null,
         spent: 0
       }
-
+      
       this.user.categories.push(newCategory)
-      console.log(this.user)
+      
+      dialogRef.componentInstance.loading = false;
 
+      dialogRef.close()
       this._utilsSvc.openSnackBar('Category created successfully', 'Close');
     })
   }
