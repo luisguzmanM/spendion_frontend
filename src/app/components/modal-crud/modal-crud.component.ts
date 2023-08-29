@@ -65,7 +65,7 @@ export class ModalCrudComponent {
   callServiceCreateCategory():void {
     const newCategory = this.buildObjectNewCategory();
     this._categorySvc.createCategory(newCategory).subscribe(res => {
-      this.confirm.emit(res);
+      this.confirm.emit(newCategory);
     })
   }
 
