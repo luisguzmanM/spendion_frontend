@@ -18,13 +18,18 @@ import { ModalCategoryComponent } from 'src/app/components/modal-category/modal-
 import { MatButtonModule } from '@angular/material/button';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UtilsService } from 'src/app/services/utils.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [HomeService],
+  providers: [
+    HomeService,
+    UtilsService
+  ],
   standalone: true,
   imports: [
     CommonModule,
@@ -38,7 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatDividerModule,
     MatButtonModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ]
 })
 export class HomeComponent implements OnInit {
@@ -48,7 +54,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private _homeSvc: HomeService
+    private _homeSvc: HomeService,
+    private _utilsSvc: UtilsService
   ) { }
 
   ngOnInit(): void {
@@ -84,6 +91,11 @@ export class HomeComponent implements OnInit {
         labelTextField: labelTextField,
         labelNumberField: labelNumberField
       },
+    })
+
+    dialogRef.componentInstance.confirm.subscribe(res => {
+      dialogRef.close()
+      this._utilsSvc.openSnackBar('Category created successfully', 'Close');
     })
   }
 

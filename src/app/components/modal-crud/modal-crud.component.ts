@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Angular material components
@@ -37,6 +37,7 @@ export class ModalCrudComponent {
   defaultLabelNumberField = 'Number field';
 
   form: FormGroup;
+  @Output() confirm:any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalCrudComponent>,
@@ -64,7 +65,7 @@ export class ModalCrudComponent {
   callServiceCreateCategory():void {
     const newCategory = this.buildObjectNewCategory();
     this._categorySvc.createCategory(newCategory).subscribe(res => {
-      console.log(res)
+      this.confirm.emit(res);
     })
   }
 

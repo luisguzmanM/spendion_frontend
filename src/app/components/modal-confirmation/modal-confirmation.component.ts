@@ -20,7 +20,7 @@ export class ModalConfirmationComponent {
   defaultTitle: string = 'Action';
   defaultMessage: string = 'Are you sure to execute this action?';
 
-  deleteCategory: any = new EventEmitter();
+  @Output() deleteCategory: any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalConfirmationComponent>,
@@ -32,7 +32,7 @@ export class ModalConfirmationComponent {
   }
 
   confirm():void {
-    this.deleteCategory.emit(true);
+    this.deleteCategory.emit();
   }
 
 }

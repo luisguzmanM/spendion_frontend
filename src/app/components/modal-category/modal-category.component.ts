@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Angular material components
@@ -127,21 +127,22 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
     })
 
     dialogRef.componentInstance.deleteCategory.subscribe(res => {
-      this.callCategoryDeleteService();
+      this.callCategoryDeleteService(dialogRef);
     })
   }
 
-  callCategoryDeleteService(): void {
+  callCategoryDeleteService(dialog): void {
     const payload = {
       token: localStorage.getItem('token'),
       id_category: this.data.id_category
     }
     this._categorySvc.deleteCategory(payload).subscribe({
       next: (res) => {
-        console.log(res)
+        console.log(res);
+        dialog.close();
       },
       error: (err) => {
-        console.log(err)
+        console.log(err);
       }
     })
   }
