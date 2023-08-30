@@ -51,6 +51,7 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['id', 'desc', 'amount', 'category'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @Output() deletedCategory: any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalCategoryComponent>,
@@ -126,7 +127,7 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
       },
     })
 
-    dialogRef.componentInstance.deleteCategory.subscribe(res => {
+    dialogRef.componentInstance.confirmButton.subscribe(res => {
       this.callCategoryDeleteService(dialogRef);
     })
   }
@@ -138,7 +139,8 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
     }
     this._categorySvc.deleteCategory(payload).subscribe({
       next: (res) => {
-        console.log(res);
+        this.deletedCategory.emit(res);
+        dialog.loading = false;
         dialog.close();
       },
       error: (err) => {

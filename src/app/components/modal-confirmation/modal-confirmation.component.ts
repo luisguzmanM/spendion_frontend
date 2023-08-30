@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-modal-confirmation',
@@ -12,15 +13,17 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressBarModule
   ],
 })
 export class ModalConfirmationComponent {
 
   defaultTitle: string = 'Action';
   defaultMessage: string = 'Are you sure to execute this action?';
+  loading: boolean = false;
 
-  @Output() deleteCategory: any = new EventEmitter();
+  @Output() confirmButton: any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalConfirmationComponent>,
@@ -32,7 +35,8 @@ export class ModalConfirmationComponent {
   }
 
   confirm():void {
-    this.deleteCategory.emit();
+    this.loading = true;
+    this.confirmButton.emit();
   }
 
 }

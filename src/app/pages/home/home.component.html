@@ -18,7 +18,7 @@
 
     <div class="categories">
       <ng-container *ngIf="user.categories.length">
-        <app-container-categories [categories]="user.categories"></app-container-categories>
+        <app-container-categories [categories]="user.categories" (deletedCategory)="deleteCategory($event)"></app-container-categories>
       </ng-container>
       <div class="empty-wrapper" *ngIf="!user.categories.length">There is not data yet</div>
     </div>
@@ -45,11 +45,7 @@
     </mat-tab>
     <mat-tab label="Categories">
       <div class="categories">
-        <app-category
-          *ngFor="let category of user.categories"
-          [data]="category"
-          (click)="openDialogCategory(category)"
-        ></app-category>
+        <app-container-categories [categories]="user.categories"></app-container-categories>
       </div>
       <button mat-fab color="primary" class="btn-add-category-mobile" (click)="openDialogCrud('create')">
         <mat-icon>add</mat-icon>

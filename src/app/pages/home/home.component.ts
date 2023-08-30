@@ -14,7 +14,6 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SummaryComponent } from 'src/app/components/summary/summary.component';
 import { TransactionComponent } from 'src/app/components/transaction/transaction.component';
 import { ModalCrudComponent } from 'src/app/components/modal-crud/modal-crud.component';
-import { ModalCategoryComponent } from 'src/app/components/modal-category/modal-category.component';
 import { MatButtonModule } from '@angular/material/button';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -103,7 +102,8 @@ export class HomeComponent implements OnInit {
         available: res.budget,
         progress: 0,
         record: null,
-        spent: 0
+        spent: 0,
+        id_category: res.id_category
       }
       
       this.user.categories.push(newCategory)
@@ -115,26 +115,6 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  openDialogCategory(category: any): void {
-
-    const { title, budget, spent, available, progress, record, id_category } = category;
-
-    const dialogRef = this.dialog.open(ModalCategoryComponent, {
-      width: '600px',
-      maxHeight: '90vh',
-      disableClose: true,
-      data: {
-        title: title,
-        budget: budget,
-        spent: spent,
-        available: available,
-        progress: progress,
-        record: record,
-        id_category: id_category
-      },
-    })
-  }
-
   getDataUser() {
     this.loading = true;
     const email = localStorage.getItem('userEmail') || '';
@@ -142,5 +122,11 @@ export class HomeComponent implements OnInit {
       this.user = res;
       this.loading = false;
     })
+  }
+
+  deleteCategory(event:any):void {
+    console.log(event)
+    this.user.categories = this.user.categories.filter(c => c.id_category !== event.deletedCategory.id_category);
+    console.log(this.user.categories)
   }
 }

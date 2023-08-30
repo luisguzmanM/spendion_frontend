@@ -69,7 +69,7 @@ export class ModalCrudComponent {
     this.loading = true;
     const newCategory = this.buildObjectNewCategory();
     this._categorySvc.createCategory(newCategory).subscribe(res => {
-      this.confirm.emit(newCategory);
+      this.confirm.emit(res);
     })
   }
 
