@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Angular material components
@@ -32,7 +32,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   ],
   providers: [CategoryService]
 })
-export class ModalCrudComponent {
+export class ModalCrudComponent implements OnInit {
 
   defaultTitle: string = 'Title modal';
   defaultLabelTextField = 'Text field';
@@ -40,6 +40,7 @@ export class ModalCrudComponent {
 
   form: FormGroup;
   @Output() confirm: any = new EventEmitter();
+  @Output() newExpenseObj: any = new EventEmitter();
   loading: boolean = false;
 
   constructor(
@@ -53,6 +54,8 @@ export class ModalCrudComponent {
     })
   }
 
+  ngOnInit(): void {}
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -65,12 +68,16 @@ export class ModalCrudComponent {
     }
   }
 
-  callServiceCreateCategory(): void {
-    this.loading = true;
-    const newCategory = this.buildObjectNewCategory();
-    this._categorySvc.createCategory(newCategory).subscribe(res => {
-      this.confirm.emit(res);
-    })
+  callService(): void {
+    const obj = this.buildObjectNewCategory();
+    if(this.data.type === 'insert'){
+      this.newExpenseObj.emit(obj);
+    } else {
+      this.loading = true;
+      this._categorySvc.createCategory(obj).subscribe(res => {
+        this.confirm.emit(res);
+      })
+    }
   }
 
 }

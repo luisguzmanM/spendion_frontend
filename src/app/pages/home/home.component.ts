@@ -125,8 +125,6 @@ export class HomeComponent implements OnInit {
   }
 
   deleteCategory(event:any):void {
-    console.log(event)
     this.user.categories = this.user.categories.filter(c => c.id_category !== event.deletedCategory.id_category);
-    console.log(this.user.categories)
   }
 }

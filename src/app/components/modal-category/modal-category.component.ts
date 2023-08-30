@@ -98,8 +98,23 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
       data: {
         title: title,
         labelTextField: labelTextField,
-        labelNumberField: labelNumberField
+        labelNumberField: labelNumberField,
+        type: type
       },
+    })
+
+    dialogRef.componentInstance.newExpenseObj.subscribe(res => {
+      res.id_category = this.data.id_category;
+      this._categorySvc.addNewExpense(res).subscribe({
+        next: (res) => {
+          console.log(res)
+        }, 
+        error: (err) => {
+          console.log(err)
+        }
+      })
+      // dialogRef.componentInstance.loading = false;
+      // dialogRef.close(); 
     })
   }
 

@@ -25,4 +25,8 @@ export class CategoryService {
     return this._httpClient.delete<any>(`${this.URL_LOCAL}/deleteCategory`, { params: params });
   }
 
+  addNewExpense(payload:any):Observable<any>{
+    return this._httpClient.put<any>(`${this.URL_LOCAL}/addNewExpense`, payload)
+  }
+
 }
