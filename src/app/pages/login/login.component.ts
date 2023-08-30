@@ -64,10 +64,10 @@ export class LoginComponent {
   callLoginService(userData: User) {
     this._AuthSvc.login(userData).subscribe({
       next: (res) => {
-        localStorage.setItem('user', res.user)
         this._utilSvc.openSnackBar('Login success', 'Close')
         localStorage.setItem('isLoggedIn', JSON.stringify(true));
         localStorage.setItem('userEmail', this.form.controls.email.value)
+        localStorage.setItem('token', res.token);
         this.router.navigate(['/dashboard'])
       },
       error: (err) => {
