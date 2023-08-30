@@ -32,6 +32,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   ],
   providers: [CategoryService]
 })
+
 export class ModalCrudComponent implements OnInit {
 
   defaultTitle: string = 'Title modal';
