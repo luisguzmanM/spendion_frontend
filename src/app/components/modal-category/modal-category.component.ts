@@ -52,6 +52,7 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Output() deletedCategory: any = new EventEmitter();
+  @Output() newExp: any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalCategoryComponent>,
@@ -107,14 +108,14 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
       res.id_category = this.data.id_category;
       this._categorySvc.addNewExpense(res).subscribe({
         next: (res) => {
-          console.log(res)
+          this.newExp.emit(res);
         }, 
         error: (err) => {
           console.log(err)
         }
       })
-      // dialogRef.componentInstance.loading = false;
-      // dialogRef.close(); 
+      dialogRef.componentInstance.loading = false;
+      dialogRef.close(); 
     })
   }
 
