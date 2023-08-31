@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { API_URL_LOCAL } from '../globals';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class CategoryService {
 
   URL_LOCAL: string = API_URL_LOCAL + '/dashboard';
+  categories$: BehaviorSubject<any> = new BehaviorSubject({});
 
   constructor(
     private _httpClient: HttpClient
@@ -27,6 +28,14 @@ export class CategoryService {
 
   addNewExpense(payload:any):Observable<any>{
     return this._httpClient.put<any>(`${this.URL_LOCAL}/addNewExpense`, payload)
+  }
+
+  setCategories(arr){
+    this.categories$.next(arr);
+  }
+
+  getCategories(){
+    return this.categories$.asObservable();
   }
 
 }

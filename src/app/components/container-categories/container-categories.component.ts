@@ -21,6 +21,7 @@ export class ContainerCategoriesComponent implements OnInit {
 
   @Input() categories: any;
   @Output() deletedCategory: any = new EventEmitter();
+  @Output() newExp: any = new EventEmitter();
   loading: boolean = false;
 
   constructor(
@@ -49,6 +50,10 @@ export class ContainerCategoriesComponent implements OnInit {
     dialogRef.componentInstance.deletedCategory.subscribe(res => {
       this.deletedCategory.emit(res);
       dialogRef.close();
+    })
+
+    dialogRef.componentInstance.newExpense.subscribe(res => {
+      this.newExp.emit(res)
     })
   }
 

@@ -38,11 +38,11 @@ export class ModalCrudComponent implements OnInit {
   defaultTitle: string = 'Title modal';
   defaultLabelTextField = 'Text field';
   defaultLabelNumberField = 'Number field';
-
   form: FormGroup;
+  loading: boolean = false;
+  
   @Output() confirm: any = new EventEmitter();
   @Output() newExpenseObj: any = new EventEmitter();
-  loading: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<ModalCrudComponent>,

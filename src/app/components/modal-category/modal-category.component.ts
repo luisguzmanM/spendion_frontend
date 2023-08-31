@@ -52,12 +52,13 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Output() deletedCategory: any = new EventEmitter();
+  @Output() newExpense: any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
-    private _categorySvc: CategoryService
+    private _categorySvc: CategoryService,
   ) {
     this.dataSource = new MatTableDataSource<any>();
   }
@@ -122,6 +123,8 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
     this.data.available = this.data.budget - this.data.spent;
     this.data.available > this.data.budget ? this.data.available = this.data.budget : this.data.available;
     this.data.progress = this.data.spent * 100 / this.data.available;
+    this.newExpense.emit(category)
+    this._categorySvc.setCategories(res);
   }
 
   openModalCategoryConfirmation(action: string): void {

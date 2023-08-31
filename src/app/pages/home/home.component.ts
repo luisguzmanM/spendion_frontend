@@ -11,7 +11,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // Components
 import { CategoryComponent } from 'src/app/components/category/category.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
-import { SummaryComponent } from 'src/app/components/summary/summary.component';
 import { TransactionComponent } from 'src/app/components/transaction/transaction.component';
 import { ModalCrudComponent } from 'src/app/components/modal-crud/modal-crud.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,6 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UtilsService } from 'src/app/services/utils.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ContainerCategoriesComponent } from 'src/app/components/container-categories/container-categories.component';
+import { CategoryService } from 'src/app/services/category.service';
+import { ContainerSummaryComponent } from 'src/app/components/container-summary/container-summary.component';
 
 
 @Component({
@@ -28,13 +29,13 @@ import { ContainerCategoriesComponent } from 'src/app/components/container-categ
   styleUrls: ['./home.component.css'],
   providers: [
     HomeService,
-    UtilsService
+    UtilsService,
+    CategoryService
   ],
   standalone: true,
   imports: [
     CommonModule,
     HeaderComponent,
-    SummaryComponent,
     CategoryComponent,
     TransactionComponent,
     MatTabsModule,
@@ -45,57 +46,41 @@ import { ContainerCategoriesComponent } from 'src/app/components/container-categ
     HttpClientModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    ContainerCategoriesComponent
+    ContainerCategoriesComponent,
+    ContainerSummaryComponent
   ]
 })
 export class HomeComponent implements OnInit {
 
   loading: boolean = false;
   user;
+  categories: any = [];
 
   constructor(
     public dialog: MatDialog,
     private _homeSvc: HomeService,
-    private _utilsSvc: UtilsService
+    private _utilsSvc: UtilsService,
+    private _categorySvc: CategoryService
   ) { }
 
   ngOnInit(): void {
-    this.getDataUser()
+    this.getDataUser();
+    this.getCategories();
   }
 
-  openDialogCrud(type: string): void {
-
-    let title: string = '';
-    let labelTextField: string = '';
-    let labelNumberField: string = '';
-
-    if (type === 'create') {
-      title = 'Create category';
-      labelTextField = 'Title';
-      labelNumberField = 'Budget';
-    } else if (type === 'update') {
-      title = 'Update category';
-      labelTextField = 'Title';
-      labelNumberField = 'Budget';
-    } else {
-      title = 'Update expense';
-      labelTextField = 'Description';
-      labelNumberField = 'Amount';
-    }
-
+  openDialogCrud(): void {
     const dialogRef = this.dialog.open(ModalCrudComponent, {
       width: '250px',
       maxHeight: '90vh',
       disableClose: true,
       data: {
-        title: title,
-        labelTextField: labelTextField,
-        labelNumberField: labelNumberField
+        title: 'Create category',
+        labelTextField: 'Title',
+        labelNumberField: 'Budget'
       },
     })
 
     dialogRef.componentInstance.confirm.subscribe(res => {
-      
       const newCategory = {
         title: res.title,
         budget: res.budget,
@@ -105,11 +90,8 @@ export class HomeComponent implements OnInit {
         spent: 0,
         id_category: res.id_category
       }
-      
       this.user.categories.push(newCategory)
-      
       dialogRef.componentInstance.loading = false;
-
       dialogRef.close()
       this._utilsSvc.openSnackBar('Category created successfully', 'Close');
     })
@@ -120,12 +102,19 @@ export class HomeComponent implements OnInit {
     const email = localStorage.getItem('userEmail') || '';
     this._homeSvc.getAllDataUser(email).subscribe((res) => {
       this.user = res;
+      this._categorySvc.setCategories(res.categories);
       this.loading = false;
     })
   }
 
   deleteCategory(event:any):void {
     this.user.categories = this.user.categories.filter(c => c.id_category !== event.deletedCategory.id_category);
+  }
+
+  getCategories(){
+    this._categorySvc.getCategories().subscribe(res => {
+      this.categories = res;
+    })
   }
 
 }

@@ -21,6 +21,12 @@
   flex-wrap: wrap;
 }
 
+.container-summary {
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+}
+
 .transactions {
   grid-column: 1/2;
   grid-row-start: 3;
