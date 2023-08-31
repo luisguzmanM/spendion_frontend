@@ -61,7 +61,7 @@ export class ModalCrudComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  buildObjectNewCategory(): any {
+  buildObject(): any {
     return {
       title: this.form.controls['title'].value,
       budget: this.form.controls['budget'].value,
@@ -70,7 +70,7 @@ export class ModalCrudComponent implements OnInit {
   }
 
   callService(): void {
-    const obj = this.buildObjectNewCategory();
+    const obj = this.buildObject();
     if(this.data.type === 'insert'){
       this.newExpenseObj.emit(obj);
     } else {
