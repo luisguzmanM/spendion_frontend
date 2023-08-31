@@ -6,7 +6,7 @@
 
   <div class="grid">
     <div class="summaries">
-      <ng-container *ngIf="user.summary.length">
+      <ng-container>
         <app-container-summary [categories]="categories" class="container-summary"></app-container-summary>
       </ng-container>
     </div>
@@ -16,7 +16,7 @@
     </div>
 
     <div class="categories">
-      <ng-container *ngIf="user.categories.length">
+      <ng-container>
         <app-container-categories [categories]="categories"></app-container-categories>
       </ng-container>
     </div>

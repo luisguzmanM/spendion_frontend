@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -9,7 +10,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
   standalone: true,
   imports: [
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    CommonModule
   ],
 })
 
