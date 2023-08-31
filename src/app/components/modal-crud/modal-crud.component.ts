@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { TYPE_ELEMENT } from 'src/app/models/category.model';
 
 @Component({
   selector: 'app-modal-crud',
@@ -70,7 +71,7 @@ export class ModalCrudComponent implements OnInit {
     this.loading = true;
     const obj = this.buildObject();
 
-    if(this.data.type === 'expense'){
+    if(this.data.type === TYPE_ELEMENT.EXPENSE){
       this.newExpenseEmitter.emit(obj);
     } else {
       this.newCategoryEmitter.emit(obj);
