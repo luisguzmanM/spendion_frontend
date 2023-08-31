@@ -21,6 +21,7 @@ import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirma
 import { CategoryService } from 'src/app/services/category.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TYPE_ELEMENT } from 'src/app/models/category.model';
 
 @Component({
   selector: 'app-modal-category',
@@ -81,10 +82,10 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
       maxHeight: '90vh',
       disableClose: true,
       data: {
-        title: 'Add new expense',
+        title: 'Create expense',
         labelTextField: 'Description',
         labelNumberField: 'amount',
-        type: 'expense'
+        type: TYPE_ELEMENT.EXPENSE
       },
     })
 

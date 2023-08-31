@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ContainerCategoriesComponent } from 'src/app/components/container-categories/container-categories.component';
 import { CategoryService } from 'src/app/services/category.service';
 import { ContainerSummaryComponent } from 'src/app/components/container-summary/container-summary.component';
+import { TYPE_ELEMENT } from 'src/app/models/category.model';
 
 
 @Component({
@@ -76,7 +77,8 @@ export class HomeComponent implements OnInit {
       data: {
         title: 'Create category',
         labelTextField: 'Title',
-        labelNumberField: 'Budget'
+        labelNumberField: 'Budget',
+        type: TYPE_ELEMENT.CATEGORY
       },
     })
 
