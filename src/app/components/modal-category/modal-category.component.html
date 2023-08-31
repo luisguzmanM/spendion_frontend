@@ -5,35 +5,23 @@
 
     <span class="spacer"></span>
     
-    <button mat-icon-button [matMenuTriggerFor]="menuCategory">
+    <button mat-icon-button [matMenuTriggerFor]="menuCategory" matTooltip="Options">
       <mat-icon>more_vert</mat-icon>
     </button>
 
     <mat-menu #menuCategory="matMenu" yPosition="below" xPosition="before">
       <button mat-menu-item (click)="openModalUpdateCategory('insert')">
         <mat-icon>add</mat-icon>
-        <span>Expense</span>
-      </button>
-      <button mat-menu-item (click)="openModalUpdateCategory('update')" disabled>
-        <mat-icon>update</mat-icon>
-        <span>Update</span>
-      </button>
-      <button mat-menu-item disabled>
-        <mat-icon>import_export</mat-icon>
-        <span>Export</span>
-      </button>
-      <button mat-menu-item (click)="openModalCategoryConfirmation('reset')" disabled>
-        <mat-icon>clear_all</mat-icon>
-        <span>Reset</span>
+        <span>New expense</span>
       </button>
       <mat-divider></mat-divider>
-      <button mat-menu-item (click)="openModalCategoryConfirmation('delete')">
+      <button mat-menu-item (click)="openModalDeleteCategory()">
         <mat-icon>delete</mat-icon>
-        <span>Delete</span>
+        <span>Delete Budget</span>
       </button>
     </mat-menu>
 
-    <button mat-icon-button (click)="onNoClick()">
+    <button mat-icon-button (click)="onNoClick()" matTooltip="Close">
       <mat-icon>close</mat-icon>
     </button>
 

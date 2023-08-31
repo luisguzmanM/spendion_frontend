@@ -20,6 +20,7 @@ import { ModalCrudComponent } from '../modal-crud/modal-crud.component';
 import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
 import { CategoryService } from 'src/app/services/category.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-modal-category',
@@ -41,7 +42,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTooltipModule
   ],
   providers: [CategoryService]
 })
@@ -123,36 +125,23 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
     this._categorySvc.setCategories(res);
   }
 
-  openModalCategoryConfirmation(action: string): void {
-    let title: string = '';
-    let actionMessage: string = '';
-
-    if (action === 'reset') {
-      title = 'Reset category';
-      actionMessage = 'Are you sure to reset this category?';
-    }
-
-    if (action === 'delete') {
-      title = 'Delete category';
-      actionMessage = 'Are you sure to delete this category?';
-    }
-
+  openModalDeleteCategory(): void {
     const dialogRef = this.dialog.open(ModalConfirmationComponent, {
       width: '300px',
       maxHeight: '90vh',
       disableClose: true,
       data: {
-        title: title,
-        actionMessage: actionMessage,
+        title: 'Delete budget',
+        actionMessage: 'Are you sure to delete this category?',
       },
     })
 
     dialogRef.componentInstance.confirmButton.subscribe(res => {
-      this.callCategoryDeleteService(dialogRef);
+      this.deleteCategory(dialogRef);
     })
   }
 
-  callCategoryDeleteService(dialog): void {
+  deleteCategory(dialog): void {
     const payload = {
       token: localStorage.getItem('token'),
       id_category: this.data.id_category
