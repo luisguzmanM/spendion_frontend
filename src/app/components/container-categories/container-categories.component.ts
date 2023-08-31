@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryComponent } from '../category/category.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ModalCategoryComponent } from '../modal-category/modal-category.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -13,7 +12,6 @@ import { MatDialog } from '@angular/material/dialog';
   imports: [
     CommonModule,
     CategoryComponent,
-    MatProgressSpinnerModule
   ],
 })
 
@@ -22,7 +20,6 @@ export class ContainerCategoriesComponent implements OnInit {
   @Input() categories: any;
   @Output() deletedCategory: any = new EventEmitter();
   @Output() newExp: any = new EventEmitter();
-  loading: boolean = false;
 
   constructor(
     public dialog: MatDialog,

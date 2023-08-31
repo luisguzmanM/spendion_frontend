@@ -24,6 +24,7 @@ export class ContainerSummaryComponent implements OnInit {
   }
 
   getSummary():void {
+    console.log(this.categories.length)
     const income = 1800;
     const expense = this.categories.map(c => c.record.reduce((acc, e) => acc + e.amount, 0)).reduce((acc, e) => acc + e, 0);
     const balance = income - expense;

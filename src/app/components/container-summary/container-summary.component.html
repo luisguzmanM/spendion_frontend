@@ -1,1 +1,4 @@
-<app-summary *ngFor="let item of summary" [summary]="item"></app-summary>
+<ng-container *ngIf="categories.length !== 0">
+  <app-summary *ngFor="let item of summary" [summary]="item"></app-summary>
+</ng-container>
+<div class="empty-wrapper" *ngIf="categories.length === 0">There is not data yet</div>

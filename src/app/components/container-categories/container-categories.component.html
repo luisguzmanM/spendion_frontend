@@ -1,5 +1,5 @@
-<div class="spinner" *ngIf="loading">
-  <mat-spinner mode="indeterminate" color="primary" diameter="40"></mat-spinner>
-</div>
+<ng-container *ngIf="categories.length !== 0">
+  <app-category *ngFor="let category of categories" [data]="category" (click)="openDialogCategory(category)"></app-category>
+</ng-container>
 
-<app-category *ngFor="let category of categories" [data]="category" (click)="openDialogCategory(category)"></app-category>
+<div class="empty-wrapper" *ngIf="categories.length === 0">There is not data yet</div>
