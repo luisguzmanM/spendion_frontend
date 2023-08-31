@@ -41,7 +41,7 @@ export class ModalCrudComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
   
-  @Output() confirm: any = new EventEmitter();
+  @Output() confirmation: any = new EventEmitter();
   @Output() newExpenseObj: any = new EventEmitter();
 
   constructor(
@@ -69,14 +69,14 @@ export class ModalCrudComponent implements OnInit {
     }
   }
 
-  callService(): void {
+  confirm(): void {
     const obj = this.buildObject();
     if(this.data.type === 'insert'){
       this.newExpenseObj.emit(obj);
     } else {
       this.loading = true;
       this._categorySvc.createCategory(obj).subscribe(res => {
-        this.confirm.emit(res);
+        this.confirmation.emit(res);
       })
     }
   }

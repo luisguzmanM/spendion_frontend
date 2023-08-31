@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
       },
     })
 
-    dialogRef.componentInstance.confirm.subscribe(res => {
+    dialogRef.componentInstance.confirmation.subscribe(res => {
       const newCategory = {
         title: res.title,
         budget: res.budget,
