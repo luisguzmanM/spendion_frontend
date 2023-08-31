@@ -9,7 +9,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CategoryService } from 'src/app/services/category.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
@@ -30,7 +29,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     HttpClientModule,
     MatProgressBarModule
   ],
-  providers: [CategoryService]
 })
 
 export class ModalCrudComponent implements OnInit {
@@ -42,12 +40,11 @@ export class ModalCrudComponent implements OnInit {
   loading: boolean = false;
   
   @Output() newCategoryEmitter: any = new EventEmitter();
-  @Output() newExpenseObj: any = new EventEmitter();
+  @Output() newExpenseEmitter: any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalCrudComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _categorySvc: CategoryService
   ) {
     this.form = new FormGroup({
       title: new FormControl('', Validators.required),
@@ -72,9 +69,9 @@ export class ModalCrudComponent implements OnInit {
   confirm(): void {
     this.loading = true;
     const obj = this.buildObject();
-    
+
     if(this.data.type === 'insert'){
-      this.newExpenseObj.emit(obj);
+      this.newExpenseEmitter.emit(obj);
     } else {
       this.newCategoryEmitter.emit(obj);
     }
