@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-summary',
@@ -25,18 +24,8 @@ export class SummaryComponent implements OnInit {
 
   @Input() summary: any;
 
-  constructor(
-    private _categorySvc: CategoryService
-  ){}
+  constructor(){}
 
-  ngOnInit(): void {
-    this.getTotalExpenses();
-  }
-
-  getTotalExpenses():void{
-    this._categorySvc.getCategories().subscribe(res => {
-      console.log(res)
-    })
-  }
+  ngOnInit(): void {}
 
 }
