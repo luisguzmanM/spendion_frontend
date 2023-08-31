@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class CategoryService {
 
   URL_LOCAL: string = API_URL_LOCAL + '/dashboard';
-  categories$: BehaviorSubject<any> = new BehaviorSubject({});
+  categories$ = new BehaviorSubject({});
 
   constructor(
     private _httpClient: HttpClient
