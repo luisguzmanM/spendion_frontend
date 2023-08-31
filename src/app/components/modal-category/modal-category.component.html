@@ -58,13 +58,13 @@
       </ng-container>
 
       <ng-container matColumnDef="desc">
-        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.desc }}</mat-cell>
+        <mat-header-cell class="d-flex-center" *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell class="d-flex-center" *matCellDef="let element">{{ element.desc }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="amount">
-        <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.amount }}</mat-cell>
+        <mat-header-cell class="d-flex-center" *matHeaderCellDef>Amount</mat-header-cell>
+        <mat-cell class="d-flex-center" *matCellDef="let element">{{ element.amount.toFixed(2) }}</mat-cell>
       </ng-container>
 
       <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>

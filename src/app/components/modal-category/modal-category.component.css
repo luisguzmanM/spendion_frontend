@@ -36,3 +36,8 @@ mat-table {
   max-height: 296px;
   overflow-y: auto;
 }
+
+.d-flex-center {
+  display: flex;
+  justify-content: center;
+}
