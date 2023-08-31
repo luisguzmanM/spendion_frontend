@@ -51,8 +51,6 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['id', 'desc', 'amount'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Output() deletedCategory: any = new EventEmitter();
-  @Output() newExpense: any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalCategoryComponent>,
@@ -69,7 +67,6 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource.data)
   }
 
   onNoClick(): void {
@@ -122,8 +119,7 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
     this.data.spent = category[0].record.reduce((acc, e) => acc + e.amount, 0);
     this.data.available = this.data.budget - this.data.spent;
     this.data.available > this.data.budget ? this.data.available = this.data.budget : this.data.available;
-    this.data.progress = this.data.spent * 100 / this.data.available;
-    this.newExpense.emit(category)
+    this.data.progress = (this.data.spent * 100) / this.data.budget;
     this._categorySvc.setCategories(res);
   }
 
@@ -163,7 +159,6 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
     }
     this._categorySvc.deleteCategory(payload).subscribe({
       next: (res) => {
-        this.deletedCategory.emit(res);
         dialog.loading = false;
         dialog.close();
       },

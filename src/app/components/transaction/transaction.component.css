@@ -12,3 +12,8 @@ mat-table {
 mat-paginator {
   border-radius: 0 0 12px 12px;
 }
+
+.d-flex-center {
+  display: flex;
+  justify-content: center;
+}
