@@ -107,21 +107,21 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
     dialogRef.componentInstance.newExpenseObj.subscribe(res => {
       res.id_category = this.data.id_category;
       this._categorySvc.addNewExpense(res).subscribe({
-        next: (res) => {
-          const category = res.filter(c => c.id_category === this.data.id_category)
-          this.dataSource.data = category[0].record;
-          this.data.spent = category[0].record.reduce((acc, e) => acc + e.amount, 0);
-          this.data.available = this.data.budget - this.data.spent;
-          this.data.available > this.data.budget ? this.data.available = this.data.budget : this.data.available;
-          this.data.progress = this.data.spent * 100 / this.data.available;
-        }, 
-        error: (err) => {
-          console.log(err)
-        }
+        next: (res) => this.updateModal(res), 
+        error: (err) => console.log(err)
       })
       dialogRef.componentInstance.loading = false;
       dialogRef.close(); 
     })
+  }
+
+  updateModal(res:any):void {
+    const category = res.filter(c => c.id_category === this.data.id_category)
+    this.dataSource.data = category[0].record;
+    this.data.spent = category[0].record.reduce((acc, e) => acc + e.amount, 0);
+    this.data.available = this.data.budget - this.data.spent;
+    this.data.available > this.data.budget ? this.data.available = this.data.budget : this.data.available;
+    this.data.progress = this.data.spent * 100 / this.data.available;
   }
 
   openModalCategoryConfirmation(action: string): void {
