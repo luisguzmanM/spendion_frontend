@@ -1,5 +1,4 @@
 <ng-container *ngIf="categories.length !== 0">
   <app-category *ngFor="let category of categories" [data]="category" (click)="openDialogCategory(category)"></app-category>
 </ng-container>
-
 <div class="empty-wrapper" *ngIf="categories.length === 0">There is not data yet</div>
