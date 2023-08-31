@@ -104,7 +104,7 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
       },
     })
 
-    dialogRef.componentInstance.newExpenseObj.subscribe(res => {
+    dialogRef.componentInstance.newExpenseEmitter.subscribe(res => {
       res.id_category = this.data.id_category;
       this._categorySvc.addNewExpense(res).subscribe({
         next: (res) => this.updateModal(res), 
