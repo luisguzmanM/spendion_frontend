@@ -75,32 +75,16 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
     this.dialogRef.close();
   }
 
-  openModalUpdateCategory(type: string) {
-    let title: string = '';
-    let labelTextField: string = '';
-    let labelNumberField: string = '';
-
-    if (type === 'insert') {
-      title = 'Insert new expense';
-      labelTextField = 'Description';
-      labelNumberField = 'Amount';
-    }
-
-    if (type === 'update') {
-      title = 'Update category';
-      labelTextField = 'Title';
-      labelNumberField = 'Budget';
-    }
-
+  openModalAddNewExpense() {
     const dialogRef = this.dialog.open(ModalCrudComponent, {
       width: '250px',
       maxHeight: '90vh',
       disableClose: true,
       data: {
-        title: title,
-        labelTextField: labelTextField,
-        labelNumberField: labelNumberField,
-        type: type
+        title: 'Add new expense',
+        labelTextField: 'Description',
+        labelNumberField: 'amount',
+        type: 'expense'
       },
     })
 

@@ -70,7 +70,7 @@ export class ModalCrudComponent implements OnInit {
     this.loading = true;
     const obj = this.buildObject();
 
-    if(this.data.type === 'insert'){
+    if(this.data.type === 'expense'){
       this.newExpenseEmitter.emit(obj);
     } else {
       this.newCategoryEmitter.emit(obj);
