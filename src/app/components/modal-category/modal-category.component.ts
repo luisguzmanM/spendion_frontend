@@ -48,11 +48,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 export class ModalCategoryComponent implements AfterViewInit, OnInit {
 
-  displayedColumns: string[] = ['id', 'desc', 'amount', 'category'];
+  displayedColumns: string[] = ['id', 'desc', 'amount'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Output() deletedCategory: any = new EventEmitter();
-  @Output() newExp: any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalCategoryComponent>,
@@ -69,6 +68,7 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    console.log(this.dataSource.data)
   }
 
   onNoClick(): void {
@@ -108,7 +108,9 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
       res.id_category = this.data.id_category;
       this._categorySvc.addNewExpense(res).subscribe({
         next: (res) => {
-          this.newExp.emit(res);
+          const category = res.filter(c => c.id_category === this.data.id_category)
+          this.dataSource.data = category[0].record;
+          console.log(this.data)
         }, 
         error: (err) => {
           console.log(err)

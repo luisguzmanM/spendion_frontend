@@ -47,62 +47,31 @@
     <span>Available: ${{ data.available }}</span>
   </div>
 
-  <mat-progress-bar
-    mode="determinate"
-    [value]="data.progress"
-  ></mat-progress-bar>
-
-  <!-- <form>
-    <mat-form-field class="half-width">
-      <mat-label>Search expense...</mat-label>
-      <mat-icon matPrefix>search</mat-icon>
-      <input matInput type="text" placeholder="Ex. Coffee" />
-    </mat-form-field>
-    <mat-form-field class="half-width">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker">
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>  
-  </form> -->
+  <mat-progress-bar mode="determinate" [value]="data.progress"></mat-progress-bar>
 
   <div class="mat-elevation-z8 container-table" *ngIf="dataSource.data">
     <mat-table [dataSource]="dataSource">
-      <!-- Position Column -->
+
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
         <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
       </ng-container>
 
-      <!-- Name Column -->
       <ng-container matColumnDef="desc">
         <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
         <mat-cell *matCellDef="let element">{{ element.desc }}</mat-cell>
       </ng-container>
 
-      <!-- Weight Column -->
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
         <mat-cell *matCellDef="let element">{{ element.amount }}</mat-cell>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="category">
-        <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.category }}</mat-cell>
       </ng-container>
 
       <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
       <mat-row mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
 
-    <mat-paginator
-      [pageSizeOptions]="[5, 10, 20]"
-      showFirstLastButtons
-      aria-label="Select page of periodic elements"
-    >
-    </mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
   </div>
 
   <div class="wrapper-no-data" *ngIf="!dataSource.data">
