@@ -24,21 +24,24 @@ export class ContainerSummaryComponent implements OnInit {
   }
 
   getSummary():void {
+    const income = 1800;
+    const expense = this.categories.map(c => c.record.reduce((acc, e) => acc + e.amount, 0)).reduce((acc, e) => acc + e, 0);
+    const balance = income - expense;
     this.summary = [
       {
         title: 'Income',
         icon: '',
-        amount: '1800'
+        amount: income.toFixed(2)
       },
       {
         title: 'Expense',
         icon: '',
-        amount: '100'
+        amount: expense.toFixed(2)
       },
       {
         title: 'Balance',
         icon: '',
-        amount: '1700'
+        amount: balance.toFixed(2)
       },
     ]
   }
