@@ -110,7 +110,10 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
         next: (res) => {
           const category = res.filter(c => c.id_category === this.data.id_category)
           this.dataSource.data = category[0].record;
-          console.log(this.data)
+          this.data.spent = category[0].record.reduce((acc, e) => acc + e.amount, 0);
+          this.data.available = this.data.budget - this.data.spent;
+          this.data.available > this.data.budget ? this.data.available = this.data.budget : this.data.available;
+          this.data.progress = this.data.spent * 100 / this.data.available;
         }, 
         error: (err) => {
           console.log(err)
