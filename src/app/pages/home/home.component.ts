@@ -80,20 +80,22 @@ export class HomeComponent implements OnInit {
       },
     })
 
-    dialogRef.componentInstance.confirmation.subscribe(res => {
-      const newCategory = {
-        title: res.title,
-        budget: res.budget,
-        available: res.budget,
-        progress: 0,
-        record: null,
-        spent: 0,
-        id_category: res.id_category
-      }
-      this.user.categories.push(newCategory)
-      dialogRef.componentInstance.loading = false;
-      dialogRef.close()
-      this._utilsSvc.openSnackBar('Category created successfully', 'Close');
+    dialogRef.componentInstance.newCategoryEmitter.subscribe(res => {
+      this._categorySvc.createCategory(res).subscribe(response => {
+        const newCategory = {
+          title: response.title,
+          budget: response.budget,
+          available: response.budget,
+          progress: 0,
+          record: null,
+          spent: 0,
+          id_category: response.id_category
+        }
+        this.user.categories.push(newCategory)
+        dialogRef.componentInstance.loading = false;
+        dialogRef.close()
+        this._utilsSvc.openSnackBar('Category created successfully', 'Close');
+      })
     })
   }
 
