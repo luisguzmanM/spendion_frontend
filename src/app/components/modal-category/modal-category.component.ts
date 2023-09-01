@@ -107,7 +107,6 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
     this.data.available = this.data.budget - this.data.spent;
     this.data.available > this.data.budget ? this.data.available = this.data.budget : this.data.available;
     this.data.progress = (this.data.spent * 100) / this.data.budget;
-    this._categorySvc.setCategories(res);
     dialogRef.componentInstance.loading = false;
     dialogRef.close(); 
   }
