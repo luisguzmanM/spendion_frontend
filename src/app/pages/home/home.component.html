@@ -7,7 +7,7 @@
   <div class="grid">
     <div class="summaries">
       <ng-container>
-        <app-container-summary [categories]="categories" class="container-summary"></app-container-summary>
+        <app-container-summary [categories]="user.categories" class="container-summary"></app-container-summary>
       </ng-container>
     </div>
 
@@ -17,7 +17,7 @@
 
     <div class="categories">
       <ng-container>
-        <app-container-categories [categories]="categories"></app-container-categories>
+        <app-container-categories [categories]="user.categories"></app-container-categories>
       </ng-container>
     </div>
 
@@ -30,7 +30,7 @@
   <mat-tab-group class="tabs">
     <mat-tab label="Summary">
       <div class="summaries">
-        <app-container-summary [categories]="categories"></app-container-summary>
+        <app-container-summary [categories]="user.categories"></app-container-summary>
       </div>
     </mat-tab>
     <mat-tab label="Transactions">

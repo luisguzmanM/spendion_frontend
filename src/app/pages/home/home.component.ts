@@ -55,7 +55,6 @@ export class HomeComponent implements OnInit {
 
   loading: boolean = false;
   user;
-  categories: any = [];
 
   constructor(
     public dialog: MatDialog,
@@ -66,7 +65,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDataUser();
-    this.getCategories();
   }
 
   openDialogCrud(): void {
@@ -108,12 +106,6 @@ export class HomeComponent implements OnInit {
       this.user = res;
       this._categorySvc.setCategories(res.categories);
       this.loading = false;
-    })
-  }
-
-  getCategories(){
-    this._categorySvc.getCategories().subscribe(res => {
-      this.categories = res;
     })
   }
 
