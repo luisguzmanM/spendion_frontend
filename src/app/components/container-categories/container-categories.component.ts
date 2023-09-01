@@ -45,6 +45,7 @@ export class ContainerCategoriesComponent implements OnInit {
 
     dialogRef.componentInstance.deleteCategoryEmitter.subscribe(res => {
       this.deletedCategoryHomeEmitter.emit(res);
+      dialogRef.close();
     })
   }
 

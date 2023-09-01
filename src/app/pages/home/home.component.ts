@@ -104,12 +104,13 @@ export class HomeComponent implements OnInit {
     const email = localStorage.getItem('userEmail') || '';
     this._homeSvc.getAllDataUser(email).subscribe((res) => {
       this.user = res;
-      this._categorySvc.setCategories(res.categories);
       this.loading = false;
     })
   }
   updateCategories(event:any):void {
-    this.user.categories = event;
+    this.user.summary = event.summary;
+    this.user.categories = event.categories;
+    this.user.transaction = event.transactions;
   }
 
 }
