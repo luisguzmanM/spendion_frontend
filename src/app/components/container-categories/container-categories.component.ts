@@ -18,6 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class ContainerCategoriesComponent implements OnInit {
 
   @Input() categories: any;
+  @Output() deletedCategoryHomeEmitter: any = new EventEmitter();
 
   constructor(
     public dialog: MatDialog,
@@ -41,6 +42,10 @@ export class ContainerCategoriesComponent implements OnInit {
         id_category: id_category
       },
     });
+
+    dialogRef.componentInstance.deleteCategoryEmitter.subscribe(res => {
+      this.deletedCategoryHomeEmitter.emit(res);
+    })
   }
 
 }

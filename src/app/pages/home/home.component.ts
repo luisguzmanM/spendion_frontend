@@ -108,5 +108,8 @@ export class HomeComponent implements OnInit {
       this.loading = false;
     })
   }
+  updateCategories(event:any):void {
+    this.user.categories = event;
+  }
 
 }

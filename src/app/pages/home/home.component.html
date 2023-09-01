@@ -17,7 +17,7 @@
 
     <div class="categories">
       <ng-container>
-        <app-container-categories [categories]="user.categories"></app-container-categories>
+        <app-container-categories [categories]="user.categories"(deletedCategoryHomeEmitter)="updateCategories($event)"></app-container-categories>
       </ng-container>
     </div>
 
