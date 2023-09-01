@@ -92,15 +92,14 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
     dialogRef.componentInstance.newExpenseEmitter.subscribe(res => {
       res.id_category = this.data.id_category;
       this._categorySvc.addNewExpense(res).subscribe({
-        next: (res) => this.updateModal(res), 
+        next: (res) => this.updateModal(res, dialogRef), 
         error: (err) => console.log(err)
       })
-      dialogRef.componentInstance.loading = false;
-      dialogRef.close(); 
+      
     })
   }
 
-  updateModal(res:any):void {
+  updateModal(res:any, dialogRef):void {
     const category = res.filter(c => c.id_category === this.data.id_category)
     this.dataSource.data = category[0].record;
     this.data.spent = category[0].record.reduce((acc, e) => acc + e.amount, 0);
@@ -108,6 +107,8 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
     this.data.available > this.data.budget ? this.data.available = this.data.budget : this.data.available;
     this.data.progress = (this.data.spent * 100) / this.data.budget;
     this._categorySvc.setCategories(res);
+    dialogRef.componentInstance.loading = false;
+    dialogRef.close(); 
   }
 
   openModalDeleteCategory(): void {
