@@ -17,7 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 export class ContainerCategoriesComponent implements OnInit {
 
-  @Input() categories: any;
+  @Input() budgets: any;
   @Output() deletedCategoryHomeEmitter: any = new EventEmitter();
 
   constructor(
@@ -26,15 +26,15 @@ export class ContainerCategoriesComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openDialogCategory(category: any): void {
-    const { title, budget, spent, available, progress, record, id_category } = category;
+  openDialogCategory(budget: any): void {
+    const { title, amount, spent, available, progress, record, id_category } = budget;
     const dialogRef = this.dialog.open(ModalCategoryComponent, {
       width: '600px',
       maxHeight: '90vh',
       disableClose: true,
       data: {
         title: title,
-        budget: budget,
+        amount: amount,
         spent: spent,
         available: available,
         progress: progress,

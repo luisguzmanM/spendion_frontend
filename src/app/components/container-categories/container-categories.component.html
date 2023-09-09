@@ -1,4 +1,4 @@
-<ng-container *ngIf="categories.length !== 0">
-  <app-category *ngFor="let category of categories" [data]="category" (click)="openDialogCategory(category)"></app-category>
+<ng-container *ngIf="budgets.length !== 0">
+  <app-category *ngFor="let budget of budgets" [data]="budget" (click)="openDialogCategory(budget)"></app-category>
 </ng-container>
-<div class="empty-wrapper" *ngIf="categories.length === 0">There is not data yet</div>
+<div class="empty-wrapper" *ngIf="budgets.length === 0">There is not data yet</div>

@@ -7,7 +7,7 @@
   <div class="grid">
     <div class="summaries">
       <ng-container>
-        <app-container-summary [categories]="user.categories" class="container-summary"></app-container-summary>
+        <app-container-summary [budgets]="budgets" class="container-summary"></app-container-summary>
       </ng-container>
     </div>
 
@@ -17,7 +17,7 @@
 
     <div class="categories">
       <ng-container>
-        <app-container-categories [categories]="user.categories"(deletedCategoryHomeEmitter)="updateCategories($event)"></app-container-categories>
+        <app-container-categories [budgets]="budgets"(deletedCategoryHomeEmitter)="updateCategories($event)"></app-container-categories>
       </ng-container>
     </div>
 
@@ -30,7 +30,7 @@
   <mat-tab-group class="tabs">
     <mat-tab label="Summary">
       <div class="summaries">
-        <app-container-summary [categories]="user.categories"></app-container-summary>
+        <app-container-summary [budgets]="budgets"></app-container-summary>
       </div>
     </mat-tab>
     <mat-tab label="Transactions">
@@ -40,7 +40,7 @@
     </mat-tab>
     <mat-tab label="Categories">
       <div class="categories">
-        <app-container-categories [categories]="user.categories"></app-container-categories>
+        <app-container-categories [budgets]="budgets"></app-container-categories>
       </div>
       <button mat-fab color="primary" class="btn-add-category-mobile" (click)="openDialogCrud()">
         <mat-icon>add</mat-icon>

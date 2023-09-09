@@ -22,6 +22,7 @@ import { ContainerCategoriesComponent } from 'src/app/components/container-categ
 import { CategoryService } from 'src/app/services/category.service';
 import { ContainerSummaryComponent } from 'src/app/components/container-summary/container-summary.component';
 import { TYPE_ELEMENT } from 'src/app/models/category.model';
+import { Budget } from 'src/app/models/budget.model';
 
 
 @Component({
@@ -55,6 +56,7 @@ export class HomeComponent implements OnInit {
 
   loading: boolean = false;
   user;
+  budgets: Budget[] = [];
 
   constructor(
     public dialog: MatDialog,
@@ -103,7 +105,9 @@ export class HomeComponent implements OnInit {
     this.loading = true;
     const person = JSON.parse(localStorage.getItem('person'));
     this._homeSvc.getBudgets(person.id_person).subscribe((res) => {
+      console.log(res)
       this.user = res;
+      this.budgets = res.budgets;
       this.loading = false;
     })
   }

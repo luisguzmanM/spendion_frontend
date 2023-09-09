@@ -14,7 +14,7 @@ import { SummaryComponent } from '../summary/summary.component';
 })
 export class ContainerSummaryComponent implements OnInit {
 
-  @Input() categories: any;
+  @Input() budgets: any;
   summary: any[] = [];
 
   constructor(){}
@@ -25,7 +25,7 @@ export class ContainerSummaryComponent implements OnInit {
 
   getSummary():void {
     const income = 1800;
-    const expense = this.categories.map(c =>{
+    const expense = this.budgets.map(c =>{
       if(c.record !== null){
         return c.record.reduce((acc:number, e:any) => acc + e.amount, 0);
       } else {
