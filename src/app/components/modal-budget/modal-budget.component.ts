@@ -92,7 +92,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
 
     dialogRef.componentInstance.newExpenseEmitter.subscribe(res => {
       res.id_category = this.data.id_category;
-      this._categorySvc.addNewExpense(res).subscribe({
+      this._categorySvc.createUpdateOrDeleteExpense(res).subscribe({
         next: (res) => this.updateModal(res, dialogRef), 
         error: (err) => console.log(err)
       })
