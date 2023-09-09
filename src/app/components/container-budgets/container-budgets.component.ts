@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryComponent } from '../category/category.component';
-import { ModalCategoryComponent } from '../modal-category/modal-category.component';
+import { BudgetComponent } from '../budget/budget.component';
+import { ModalBudgetComponent } from '../modal-budget/modal-budget.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
   standalone: true,
   imports: [
     CommonModule,
-    CategoryComponent,
+    BudgetComponent,
   ],
 })
 
@@ -28,7 +28,7 @@ export class ContainerBudgetsComponent implements OnInit {
 
   openDialogCategory(budget: any): void {
     const { title, amount, spent, available, progress, record, id_category } = budget;
-    const dialogRef = this.dialog.open(ModalCategoryComponent, {
+    const dialogRef = this.dialog.open(ModalBudgetComponent, {
       width: '600px',
       maxHeight: '90vh',
       disableClose: true,

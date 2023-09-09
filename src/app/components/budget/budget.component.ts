@@ -7,9 +7,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css'],
+  selector: 'app-budget',
+  templateUrl: './budget.component.html',
+  styleUrls: ['./budget.component.css'],
   standalone: true,
   imports: [
     MatCardModule,
@@ -18,7 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule
   ]
 })
-export class CategoryComponent {
+export class BudgetComponent {
 
   @Input() data: any;
 

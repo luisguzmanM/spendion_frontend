@@ -21,12 +21,12 @@ import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirma
 import { BudgetService } from 'src/app/services/budget.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TYPE_ELEMENT } from 'src/app/models/category.model';
+import { TYPE_ELEMENT } from 'src/app/models/budget.model';
 
 @Component({
-  selector: 'app-modal-category',
-  templateUrl: './modal-category.component.html',
-  styleUrls: ['./modal-category.component.css'],
+  selector: 'app-modal-budget',
+  templateUrl: './modal-budget.component.html',
+  styleUrls: ['./modal-budget.component.css'],
   standalone: true,
   imports: [
     CommonModule,
@@ -49,7 +49,7 @@ import { TYPE_ELEMENT } from 'src/app/models/category.model';
   providers: [BudgetService]
 })
 
-export class ModalCategoryComponent implements AfterViewInit, OnInit {
+export class ModalBudgetComponent implements AfterViewInit, OnInit {
 
   displayedColumns: string[] = ['id', 'desc', 'amount'];
   dataSource: MatTableDataSource<any>;
@@ -57,7 +57,7 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
   @Output() deleteCategoryEmitter: any = new EventEmitter();
 
   constructor(
-    public dialogRef: MatDialogRef<ModalCategoryComponent>,
+    public dialogRef: MatDialogRef<ModalBudgetComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
     private _categorySvc: BudgetService,

@@ -13,3 +13,8 @@ export interface Record {
   title: string,
   amount: number
 }
+
+export const TYPE_ELEMENT = {
+  BUDGET: 'budget',
+  EXPENSE: 'expense'
+}

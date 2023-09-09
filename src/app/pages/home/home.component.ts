@@ -9,7 +9,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // Components
-import { CategoryComponent } from 'src/app/components/category/category.component';
+import { BudgetComponent } from 'src/app/components/budget/budget.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { TransactionComponent } from 'src/app/components/transaction/transaction.component';
 import { ModalCrudComponent } from 'src/app/components/modal-crud/modal-crud.component';
@@ -18,10 +18,10 @@ import { HomeService } from 'src/app/services/home.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UtilsService } from 'src/app/services/utils.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ContainerBudgetsComponent } from 'src/app/components/container-categories/container-budgets.component';
+import { ContainerBudgetsComponent } from 'src/app/components/container-budgets/container-budgets.component';
 import { BudgetService } from 'src/app/services/budget.service';
 import { ContainerSummaryComponent } from 'src/app/components/container-summary/container-summary.component';
-import { TYPE_ELEMENT } from 'src/app/models/category.model';
+import { TYPE_ELEMENT } from 'src/app/models/budget.model';
 import { Budget } from 'src/app/models/budget.model';
 
 
@@ -38,7 +38,7 @@ import { Budget } from 'src/app/models/budget.model';
   imports: [
     CommonModule,
     HeaderComponent,
-    CategoryComponent,
+    BudgetComponent,
     TransactionComponent,
     MatTabsModule,
     MatDialogModule,
@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
         title: 'Create category',
         labelTextField: 'Title',
         labelNumberField: 'Budget',
-        type: TYPE_ELEMENT.CATEGORY
+        type: TYPE_ELEMENT.BUDGET
       },
     })
 
