@@ -40,7 +40,7 @@ export class ModalCrudComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
   
-  @Output() newCategoryEmitter: any = new EventEmitter();
+  @Output() newBudgetEmitter: any = new EventEmitter();
   @Output() newExpenseEmitter: any = new EventEmitter();
 
   constructor(
@@ -49,7 +49,7 @@ export class ModalCrudComponent implements OnInit {
   ) {
     this.form = new FormGroup({
       title: new FormControl('', Validators.required),
-      budget: new FormControl('', Validators.required)
+      amount: new FormControl('', Validators.required)
     })
   }
 
@@ -62,7 +62,7 @@ export class ModalCrudComponent implements OnInit {
   buildObject(): any {
     return {
       title: this.form.controls['title'].value,
-      budget: this.form.controls['budget'].value,
+      amount: this.form.controls['amount'].value,
       token: localStorage.getItem('token')
     }
   }
@@ -70,7 +70,7 @@ export class ModalCrudComponent implements OnInit {
   confirm(): void {
     this.loading = true;
     const obj = this.buildObject();
-    this.data.type === TYPE_ELEMENT.EXPENSE ? this.newExpenseEmitter.emit(obj) : this.newCategoryEmitter.emit(obj);
+    this.data.type === TYPE_ELEMENT.EXPENSE ? this.newExpenseEmitter.emit(obj) : this.newBudgetEmitter.emit(obj);
   }
 
 }

@@ -82,21 +82,21 @@ export class HomeComponent implements OnInit {
       },
     })
 
-    dialogRef.componentInstance.newCategoryEmitter.subscribe(res => {
+    dialogRef.componentInstance.newBudgetEmitter.subscribe(res => {
       this._BudgetSvc.createBudget(res).subscribe(response => {
-        const newCategory = {
+        const newBudget = {
+          id_budget: response.id_budget,
           title: response.title,
-          budget: response.budget,
+          amount: response.amount,
+          record: null,
           available: response.budget,
           progress: 0,
-          record: null,
           spent: 0,
-          id_category: response.id_category
         }
-        this.user.categories.push(newCategory)
+        this.budgets.push(newBudget)
         dialogRef.componentInstance.loading = false;
         dialogRef.close()
-        this._utilsSvc.openSnackBar('Category created successfully', 'Close');
+        this._utilsSvc.openSnackBar('Budget created successfully', 'Close');
       })
     })
   }
