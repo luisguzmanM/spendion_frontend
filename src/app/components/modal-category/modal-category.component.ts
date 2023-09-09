@@ -18,7 +18,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ModalCrudComponent } from '../modal-crud/modal-crud.component';
 import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
-import { CategoryService } from 'src/app/services/category.service';
+import { BudgetService } from 'src/app/services/budget.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TYPE_ELEMENT } from 'src/app/models/category.model';
@@ -46,7 +46,7 @@ import { TYPE_ELEMENT } from 'src/app/models/category.model';
     HttpClientModule,
     MatTooltipModule
   ],
-  providers: [CategoryService]
+  providers: [BudgetService]
 })
 
 export class ModalCategoryComponent implements AfterViewInit, OnInit {
@@ -60,7 +60,7 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
     public dialogRef: MatDialogRef<ModalCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
-    private _categorySvc: CategoryService,
+    private _categorySvc: BudgetService,
   ) {
     this.dataSource = new MatTableDataSource<any>();
   }
@@ -132,7 +132,7 @@ export class ModalCategoryComponent implements AfterViewInit, OnInit {
       token: localStorage.getItem('token'),
       id_category: this.data.id_category
     }
-    this._categorySvc.deleteCategory(payload).subscribe({
+    this._categorySvc.deleteBudget(payload).subscribe({
       next: (res) => {
         this.deleteCategoryEmitter.emit(res.data);
         dialog.loading = false;

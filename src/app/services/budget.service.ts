@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { API_URL_LOCAL } from '../globals';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class BudgetService {
 
   URL_LOCAL: string = API_URL_LOCAL + '/dashboard';
 
@@ -14,15 +14,15 @@ export class CategoryService {
     private _httpClient: HttpClient
   ) { }
 
-  createCategory(payload:any):Observable<any>{
-    return this._httpClient.post<any>(`${this.URL_LOCAL}/createCategory`, payload);
+  createBudget(payload:any):Observable<any>{
+    return this._httpClient.post<any>(`${this.URL_LOCAL}/createBudget`, payload);
   }
 
-  deleteCategory(payload:any):Observable<any>{
+  deleteBudget(payload:any):Observable<any>{
     const params = new HttpParams()
       .append('token', payload.token)
-      .append('id_category', payload.id_category)
-    return this._httpClient.delete<any>(`${this.URL_LOCAL}/deleteCategory`, { params: params });
+      .append('id_budget', payload.id_budget)
+    return this._httpClient.delete<any>(`${this.URL_LOCAL}/deleteBudget`, { params: params });
   }
 
   addNewExpense(payload:any):Observable<any>{

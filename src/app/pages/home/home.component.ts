@@ -19,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UtilsService } from 'src/app/services/utils.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ContainerCategoriesComponent } from 'src/app/components/container-categories/container-categories.component';
-import { CategoryService } from 'src/app/services/category.service';
+import { BudgetService } from 'src/app/services/budget.service';
 import { ContainerSummaryComponent } from 'src/app/components/container-summary/container-summary.component';
 import { TYPE_ELEMENT } from 'src/app/models/category.model';
 import { Budget } from 'src/app/models/budget.model';
@@ -32,7 +32,7 @@ import { Budget } from 'src/app/models/budget.model';
   providers: [
     HomeService,
     UtilsService,
-    CategoryService
+    BudgetService
   ],
   standalone: true,
   imports: [
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog,
     private _homeSvc: HomeService,
     private _utilsSvc: UtilsService,
-    private _categorySvc: CategoryService
+    private _BudgetSvc: BudgetService
   ) { }
 
   ngOnInit(): void {
@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
     })
 
     dialogRef.componentInstance.newCategoryEmitter.subscribe(res => {
-      this._categorySvc.createCategory(res).subscribe(response => {
+      this._BudgetSvc.createBudget(res).subscribe(response => {
         const newCategory = {
           title: response.title,
           budget: response.budget,
