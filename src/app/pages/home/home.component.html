@@ -17,7 +17,7 @@
 
     <div class="categories">
       <ng-container>
-        <app-container-categories [budgets]="budgets"(deletedCategoryHomeEmitter)="updateCategories($event)"></app-container-categories>
+        <app-container-budgets [budgets]="budgets"(deletedCategoryHomeEmitter)="updateCategories($event)"></app-container-budgets>
       </ng-container>
     </div>
 
@@ -40,7 +40,7 @@
     </mat-tab>
     <mat-tab label="Categories">
       <div class="categories">
-        <app-container-categories [budgets]="budgets"></app-container-categories>
+        <app-container-budgets [budgets]="budgets"></app-container-budgets>
       </div>
       <button mat-fab color="primary" class="btn-add-category-mobile" (click)="openDialogCrud()">
         <mat-icon>add</mat-icon>

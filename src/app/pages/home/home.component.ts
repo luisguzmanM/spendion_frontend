@@ -18,7 +18,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UtilsService } from 'src/app/services/utils.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ContainerCategoriesComponent } from 'src/app/components/container-categories/container-categories.component';
+import { ContainerBudgetsComponent } from 'src/app/components/container-categories/container-budgets.component';
 import { BudgetService } from 'src/app/services/budget.service';
 import { ContainerSummaryComponent } from 'src/app/components/container-summary/container-summary.component';
 import { TYPE_ELEMENT } from 'src/app/models/category.model';
@@ -48,7 +48,7 @@ import { Budget } from 'src/app/models/budget.model';
     HttpClientModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    ContainerCategoriesComponent,
+    ContainerBudgetsComponent,
     ContainerSummaryComponent
   ]
 })

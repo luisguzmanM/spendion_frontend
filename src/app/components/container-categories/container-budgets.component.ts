@@ -5,9 +5,9 @@ import { ModalCategoryComponent } from '../modal-category/modal-category.compone
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-container-categories',
-  templateUrl: './container-categories.component.html',
-  styleUrls: ['./container-categories.component.css'],
+  selector: 'app-container-budgets',
+  templateUrl: './container-budgets.component.html',
+  styleUrls: ['./container-budgets.component.css'],
   standalone: true,
   imports: [
     CommonModule,
@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
   ],
 })
 
-export class ContainerCategoriesComponent implements OnInit {
+export class ContainerBudgetsComponent implements OnInit {
 
   @Input() budgets: any;
   @Output() deletedCategoryHomeEmitter: any = new EventEmitter();
