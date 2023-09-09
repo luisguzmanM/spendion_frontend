@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
-import { SignUp, SignUpResponse } from 'src/app/models/auth.model';
+import { SignUp, AuthResponse } from 'src/app/models/auth.model';
 import { Router, RouterModule } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -74,7 +74,7 @@ export class SignupComponent {
     })
   }
 
-  handleResponse(res: SignUpResponse): void {
+  handleResponse(res: AuthResponse): void {
     this._utilSvc.openSnackBar('Signup success', 'Close');
     localStorage.setItem('token', res.token);
     this.router.navigate(['/dashboard']);

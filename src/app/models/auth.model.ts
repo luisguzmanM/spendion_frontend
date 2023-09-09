@@ -9,16 +9,10 @@ export interface Login  {
   email: string,
   password: string
 }
-
-export interface SignUpResponse {
+export interface AuthResponse {
   msj: string,
   person: Person,
   token: string
-}
-
-export interface LoginResponse {
-  msj: string,
-  person: Person,
 }
 export interface Person {
 	email: string,

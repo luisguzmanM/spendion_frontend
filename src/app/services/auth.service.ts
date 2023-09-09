@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SignUp , Login, SignUpResponse, LoginResponse  } from '../models/auth.model';
+import { SignUp , Login, AuthResponse } from '../models/auth.model';
 import { API_URL_PRODUCTION, API_URL_LOCAL } from './../globals'
 
 @Injectable({
@@ -16,12 +16,12 @@ export class AuthService {
     private _httpClient : HttpClient
   ) { }
 
-  signup(payload:SignUp ):Observable<SignUpResponse>{
+  signup(payload:SignUp ):Observable<AuthResponse>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._httpClient.post<SignUpResponse>(`${this.URL_LOCAL}/signup`, payload, {headers: headers})
+    return this._httpClient.post<AuthResponse>(`${this.URL_LOCAL}/signup`, payload, {headers: headers})
   }
 
-  login(payload:Login ):Observable<LoginResponse>{
-    return this._httpClient.post<LoginResponse>(`${this.URL_LOCAL}/login`, payload)
+  login(payload:Login ):Observable<AuthResponse>{
+    return this._httpClient.post<AuthResponse>(`${this.URL_LOCAL}/login`, payload)
   }
 }
