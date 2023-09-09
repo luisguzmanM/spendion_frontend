@@ -9,7 +9,7 @@ export const ROUTES : Route[] = [
     pathMatch: 'full'
   },
   {
-    path: 'dashboard',
+    path: 'home',
     loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
     canActivate: [authGuard]
   },

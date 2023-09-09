@@ -78,7 +78,7 @@ export class SignupComponent {
     this._utilSvc.openSnackBar('Signup success', 'Close');
     localStorage.setItem('token', res.token);
     localStorage.setItem('person', JSON.stringify(res.person));
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/home']);
   }
 
   handleError(err): void {
