@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
-import { SignUp  } from 'src/app/models/auth.model';
+import { SignUp, SignUpResponse } from 'src/app/models/auth.model';
 import { Router, RouterModule } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -51,14 +51,14 @@ export class SignupComponent {
     private _AuthSvc: AuthService,
     private _utilSvc: UtilsService,
     private router: Router
-  ){}
+  ) { }
 
-  signup():void {
+  signup(): void {
     const user = this.buildUserObject()
     this.callSignUpService(user)
   }
 
-  buildUserObject():SignUp {
+  buildUserObject(): SignUp {
     return {
       firstName: this.form.controls.firstName.value,
       lastName: this.form.controls.lastName.value,
@@ -67,19 +67,21 @@ export class SignupComponent {
     }
   }
 
-  callSignUpService(userData:SignUp ){
+  callSignUpService(userData: SignUp) {
     this._AuthSvc.signup(userData).subscribe({
-      next: (res) => {
-        this._utilSvc.openSnackBar('Signup success', 'Close');
-        localStorage.setItem('isLoggedIn', JSON.stringify(true));
-        localStorage.setItem('userEmail', this.form.controls.email.value);
-        localStorage.setItem('token', res.token);
-        this.router.navigate(['/dashboard']);
-      },
-      error: (err) => {
-        this._utilSvc.openSnackBar(err.error.msj, 'Close');
-      }
+      next: (res) => this.handleResponse,
+      error: (err) => this.handleError
     })
   }
-  
+
+  handleResponse(res: SignUpResponse): void {
+    this._utilSvc.openSnackBar('Signup success', 'Close');
+    localStorage.setItem('token', res.token);
+    this.router.navigate(['/dashboard']);
+  }
+
+  handleError(err): void {
+    this._utilSvc.openSnackBar(err.error.msj, 'Close');
+  }
+
 }
