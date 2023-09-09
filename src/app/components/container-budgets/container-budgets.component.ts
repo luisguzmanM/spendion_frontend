@@ -27,7 +27,8 @@ export class ContainerBudgetsComponent implements OnInit {
   ngOnInit(): void {}
 
   openDialogCategory(budget: any): void {
-    const { title, amount, spent, available, progress, record, id_category } = budget;
+    console.log(budget)
+    const { title, amount, spent, free, progress, record, id_budget } = budget;
     const dialogRef = this.dialog.open(ModalBudgetComponent, {
       width: '600px',
       maxHeight: '90vh',
@@ -36,10 +37,10 @@ export class ContainerBudgetsComponent implements OnInit {
         title: title,
         amount: amount,
         spent: spent,
-        available: available,
+        free: free,
         progress: progress,
         record: record,
-        id_category: id_category
+        id_budget: id_budget
       },
     });
 
