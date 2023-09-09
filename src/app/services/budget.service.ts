@@ -9,7 +9,7 @@ import { Budget } from '../models/budget.model';
 })
 export class BudgetService {
 
-  URL_LOCAL: string = API_URL_LOCAL + '/dashboard';
+  URL_LOCAL: string = API_URL_LOCAL + '/home';
 
   constructor(
     private _httpClient: HttpClient

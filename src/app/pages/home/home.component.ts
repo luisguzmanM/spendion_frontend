@@ -84,12 +84,13 @@ export class HomeComponent implements OnInit {
 
     dialogRef.componentInstance.newBudgetEmitter.subscribe(res => {
       this._BudgetSvc.createBudget(res).subscribe(response => {
+        console.log(response)
         const newBudget = {
-          id_budget: response.id_budget,
-          title: response.title,
-          amount: response.amount,
+          id_budget: response.budget.id_budget,
+          title: response.budget.title,
+          amount: response.budget.amount,
           record: null,
-          available: response.budget,
+          free: response.budget.amount,
           progress: 0,
           spent: 0,
         }
