@@ -69,14 +69,15 @@ export class SignupComponent {
 
   callSignUpService(userData: SignUp) {
     this._AuthSvc.signup(userData).subscribe({
-      next: (res) => this.handleResponse,
-      error: (err) => this.handleError
+      next: (res) => this.handleResponse(res),
+      error: (err) => this.handleError(err)
     })
   }
 
   handleResponse(res: AuthResponse): void {
     this._utilSvc.openSnackBar('Signup success', 'Close');
     localStorage.setItem('token', res.token);
+    localStorage.setItem('person', JSON.stringify(res.person));
     this.router.navigate(['/dashboard']);
   }
 

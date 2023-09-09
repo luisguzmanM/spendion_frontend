@@ -54,25 +54,28 @@ export class LoginComponent {
     this.callLoginService(user)
   }
 
-  buildUserObject(): Login  {
+  buildUserObject(): Login {
     return {
       email: this.form.controls.email.value,
       password: this.form.controls.password.value,
     }
   }
 
-  callLoginService(userData: Login ) {
+  callLoginService(userData: Login) {
     this._AuthSvc.login(userData).subscribe({
-      next: (res) => {
-        this._utilSvc.openSnackBar('Login success', 'Close')
-        localStorage.setItem('isLoggedIn', JSON.stringify(true));
-        localStorage.setItem('userEmail', this.form.controls.email.value)
-        localStorage.setItem('token', res.token);
-        this.router.navigate(['/dashboard'])
-      },
-      error: (err) => {
-        this._utilSvc.openSnackBar(err.error.msj, 'Close')
-      }
+      next: (res) => this.handleResponse(res),
+      error: (err) => this.handleError(err)
     })
+  }
+
+  handleResponse(res): void {
+    this._utilSvc.openSnackBar('Login success', 'Close')
+    localStorage.setItem('token', res.token);
+    localStorage.setItem('person', JSON.stringify(res.person));
+    this.router.navigate(['/dashboard'])
+  }
+
+  handleError(err): void {
+    this._utilSvc.openSnackBar(err.error.msj, 'Close')
   }
 }
