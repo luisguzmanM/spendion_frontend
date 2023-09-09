@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
-import { NewUser } from 'src/app/models/auth.model';
+import { SignUp  } from 'src/app/models/auth.model';
 import { Router, RouterModule } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -58,7 +58,7 @@ export class SignupComponent {
     this.callSignUpService(user)
   }
 
-  buildUserObject():NewUser{
+  buildUserObject():SignUp {
     return {
       firstName: this.form.controls.firstName.value,
       lastName: this.form.controls.lastName.value,
@@ -67,7 +67,7 @@ export class SignupComponent {
     }
   }
 
-  callSignUpService(userData:NewUser){
+  callSignUpService(userData:SignUp ){
     this._AuthSvc.signup(userData).subscribe({
       next: (res) => {
         this._utilSvc.openSnackBar('Signup success', 'Close');

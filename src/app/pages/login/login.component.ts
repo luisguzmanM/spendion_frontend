@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
-import { User } from 'src/app/models/auth.model';
+import { Login } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -54,14 +54,14 @@ export class LoginComponent {
     this.callLoginService(user)
   }
 
-  buildUserObject(): User {
+  buildUserObject(): Login  {
     return {
       email: this.form.controls.email.value,
       password: this.form.controls.password.value,
     }
   }
 
-  callLoginService(userData: User) {
+  callLoginService(userData: Login ) {
     this._AuthSvc.login(userData).subscribe({
       next: (res) => {
         this._utilSvc.openSnackBar('Login success', 'Close')
