@@ -43,7 +43,7 @@ export class ContainerBudgetsComponent implements OnInit {
       },
     });
 
-    dialogRef.componentInstance.deleteCategoryEmitter.subscribe(res => {
+    dialogRef.componentInstance.deleteBudgetEmitter.subscribe(res => {
       this.deletedCategoryHomeEmitter.emit(res);
       dialogRef.close();
     })

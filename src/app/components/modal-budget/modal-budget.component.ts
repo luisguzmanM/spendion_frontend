@@ -54,7 +54,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['id', 'desc', 'amount'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Output() deleteCategoryEmitter: any = new EventEmitter();
+  @Output() deleteBudgetEmitter: any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalBudgetComponent>,
@@ -111,30 +111,30 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     dialogRef.close(); 
   }
 
-  openModalDeleteCategory(): void {
+  openModalDeleteBudget(): void {
     const dialogRef = this.dialog.open(ModalConfirmationComponent, {
       width: '300px',
       maxHeight: '90vh',
       disableClose: true,
       data: {
         title: 'Delete budget',
-        actionMessage: 'Are you sure to delete this category?',
+        actionMessage: 'Are you sure to delete this budget?',
       },
     })
 
     dialogRef.componentInstance.confirmButton.subscribe(res => {
-      this.deleteCategory(dialogRef);
+      this.deleteBudget(dialogRef);
     })
   }
 
-  deleteCategory(dialog): void {
+  deleteBudget(dialog): void {
     const payload = {
       token: localStorage.getItem('token'),
-      id_category: this.data.id_category
+      id_budget: this.data.id_budget
     }
     this._categorySvc.deleteBudget(payload).subscribe({
       next: (res) => {
-        this.deleteCategoryEmitter.emit(res.data);
+        this.deleteBudgetEmitter.emit(res.data);
         dialog.loading = false;
         dialog.close();
       },
