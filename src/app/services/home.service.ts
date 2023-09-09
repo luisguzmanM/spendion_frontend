@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { API_URL_LOCAL, API_URL_PRODUCTION } from '../globals';
 
@@ -8,16 +8,15 @@ import { API_URL_LOCAL, API_URL_PRODUCTION } from '../globals';
 })
 export class HomeService {
 
-  URL_PRODUCTION: string = API_URL_PRODUCTION + '/dashboard';
+  URL_PRODUCTION: string = API_URL_PRODUCTION + '';
   URL_LOCAL: string = API_URL_LOCAL + '/dashboard';
 
   constructor(
     private _httpClient: HttpClient
   ) { }
 
-  getAllDataUser(email: string): Observable<any> {
-    const params = new HttpParams().append('email', email);
-    return this._httpClient.get(`${this.URL_LOCAL}`, { params: params });
+  getBudgets(id: number): Observable<any> {
+    return this._httpClient.get(`${this.URL_LOCAL}/${id.toString()}`);
   }
 
 }

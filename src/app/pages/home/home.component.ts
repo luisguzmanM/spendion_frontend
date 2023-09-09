@@ -102,7 +102,7 @@ export class HomeComponent implements OnInit {
   getDataUser() {
     this.loading = true;
     const person = JSON.parse(localStorage.getItem('person'));
-    this._homeSvc.getAllDataUser(person.email).subscribe((res) => {
+    this._homeSvc.getBudgets(person.id_person).subscribe((res) => {
       this.user = res;
       this.loading = false;
     })
