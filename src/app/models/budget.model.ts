@@ -14,6 +14,12 @@ export interface Record {
   amount: number
 }
 
+export interface Transaction {
+  id: string,
+  desc: string,
+  amount: number
+}
+
 export const TYPE_ELEMENT = {
   BUDGET: 'budget',
   EXPENSE: 'expense'

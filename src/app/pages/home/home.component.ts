@@ -21,7 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ContainerBudgetsComponent } from 'src/app/components/container-budgets/container-budgets.component';
 import { BudgetService } from 'src/app/services/budget.service';
 import { ContainerSummaryComponent } from 'src/app/components/container-summary/container-summary.component';
-import { TYPE_ELEMENT } from 'src/app/models/budget.model';
+import { TYPE_ELEMENT, Transaction } from 'src/app/models/budget.model';
 import { Budget } from 'src/app/models/budget.model';
 import { Person } from 'src/app/models/auth.model';
 
@@ -58,10 +58,10 @@ export class HomeComponent implements OnInit {
   loading: boolean = false;
   user:Person;
   budgets: Budget[] = [];
-  transactions: any[] = [];
+  transactions: Transaction[] = [];
 
   constructor(
-    public dialog: MatDialog,
+    private _dialog: MatDialog,
     private _homeSvc: HomeService,
     private _utilsSvc: UtilsService,
     private _BudgetSvc: BudgetService
@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
   }
 
   openDialogCrud(): void {
-    const dialogRef = this.dialog.open(ModalCrudComponent, {
+    const dialogRef = this._dialog.open(ModalCrudComponent, {
       width: '250px',
       maxHeight: '90vh',
       disableClose: true,
@@ -86,40 +86,50 @@ export class HomeComponent implements OnInit {
     })
 
     dialogRef.componentInstance.newBudgetEmitter.subscribe(res => {
-      this._BudgetSvc.createBudget(res).subscribe(response => {
-        console.log(response)
-        const newBudget = {
-          id_budget: response.budget.id_budget,
-          title: response.budget.title,
-          amount: response.budget.amount,
-          record: null,
-          free: response.budget.amount,
-          progress: 0,
-          spent: 0,
-        }
-        this.budgets.push(newBudget)
-        dialogRef.componentInstance.loading = false;
-        dialogRef.close()
-        this._utilsSvc.openSnackBar('Budget created successfully', 'Close');
+      this._BudgetSvc.createBudget(res).subscribe({
+        next: (res) => this.handleResponseNewBudget(res, dialogRef),
+        error: (err) => this.handleErrorNewBudget(err)
       })
     })
+  }
+
+  handleResponseNewBudget(res, dialogRef):void {
+    const { id_budget, title, amount } = res.budget;
+    const newBudget = {
+      id_budget: id_budget,
+      title: title,
+      amount: amount,
+      record: null,
+      free: amount,
+      progress: 0,
+      spent: 0,
+    }
+    this.budgets.push(newBudget)
+    dialogRef.componentInstance.loading = false;
+    dialogRef.close()
+    this._utilsSvc.openSnackBar('Budget created successfully', 'Close');
+  }
+
+  handleErrorNewBudget(res):void {
+    this._utilsSvc.openSnackBar('Error creating budget', 'Close');
   }
 
   getDataUser() {
     this.loading = true;
     const person = JSON.parse(localStorage.getItem('person'));
-    this._homeSvc.getBudgets(person.id_person).subscribe((res) => {
-      this.budgets = res.budgets;
-      this.loading = false;
-      this.transactions = res.budgets.map(b => {
-        if(b.record === null){
-          b.record = [];
-          return b.record;
-        } else {
-          b.record;
-        }
-      });
+    this._homeSvc.getBudgets(person.id_person).subscribe({
+      next: (res) => this.handleResponseDataUser(res),
+      error: (err) => this.handleErrorDataUser(err)
     })
+  }
+
+  handleResponseDataUser(res):void {
+    this.budgets = res.budgets;
+    this.loading = false;
+  }
+
+  handleErrorDataUser(err):void {
+    this._utilsSvc.openSnackBar('Error loading data', 'Close');
   }
 
   updateCategories(event:any):void {
