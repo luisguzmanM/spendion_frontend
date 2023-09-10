@@ -134,7 +134,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     }
     this._categorySvc.deleteBudget(payload).subscribe({
       next: (res) => {
-        this.deleteBudgetEmitter.emit(res.data);
+        this.deleteBudgetEmitter.emit(payload.id_budget);
         dialog.loading = false;
         dialog.close();
       },

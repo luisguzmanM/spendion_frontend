@@ -12,12 +12,12 @@
     </div>
 
     <div class="transactions">
-      <app-transaction class="table-transactions" [transactions]="user.transactions"></app-transaction>
+      <app-transaction class="table-transactions" [transactions]="transactions"></app-transaction>
     </div>
 
     <div class="categories">
       <ng-container>
-        <app-container-budgets [budgets]="budgets"(deletedCategoryHomeEmitter)="updateCategories($event)"></app-container-budgets>
+        <app-container-budgets [budgets]="budgets"(deleteBudgetHomeEmitter)="updateCategories($event)"></app-container-budgets>
       </ng-container>
     </div>
 

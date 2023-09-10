@@ -23,6 +23,7 @@ import { BudgetService } from 'src/app/services/budget.service';
 import { ContainerSummaryComponent } from 'src/app/components/container-summary/container-summary.component';
 import { TYPE_ELEMENT } from 'src/app/models/budget.model';
 import { Budget } from 'src/app/models/budget.model';
+import { Person } from 'src/app/models/auth.model';
 
 
 @Component({
@@ -55,8 +56,9 @@ import { Budget } from 'src/app/models/budget.model';
 export class HomeComponent implements OnInit {
 
   loading: boolean = false;
-  user;
+  user:Person;
   budgets: Budget[] = [];
+  transactions: any[] = [];
 
   constructor(
     public dialog: MatDialog,
@@ -66,6 +68,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('person'));
     this.getDataUser();
   }
 
@@ -106,16 +109,21 @@ export class HomeComponent implements OnInit {
     this.loading = true;
     const person = JSON.parse(localStorage.getItem('person'));
     this._homeSvc.getBudgets(person.id_person).subscribe((res) => {
-      console.log(res)
-      this.user = res;
       this.budgets = res.budgets;
       this.loading = false;
+      this.transactions = res.budgets.map(b => {
+        if(b.record === null){
+          b.record = [];
+          return b.record;
+        } else {
+          b.record;
+        }
+      });
     })
   }
+
   updateCategories(event:any):void {
-    this.user.summary = event.summary;
-    this.user.categories = event.categories;
-    this.user.transaction = event.transactions;
+    this.budgets = this.budgets.filter(b=>b.id_budget !== event);
   }
 
 }

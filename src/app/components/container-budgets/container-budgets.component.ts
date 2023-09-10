@@ -18,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class ContainerBudgetsComponent implements OnInit {
 
   @Input() budgets: any;
-  @Output() deletedCategoryHomeEmitter: any = new EventEmitter();
+  @Output() deleteBudgetHomeEmitter: any = new EventEmitter();
 
   constructor(
     public dialog: MatDialog,
@@ -27,7 +27,6 @@ export class ContainerBudgetsComponent implements OnInit {
   ngOnInit(): void {}
 
   openDialogCategory(budget: any): void {
-    console.log(budget)
     const { title, amount, spent, free, progress, record, id_budget } = budget;
     const dialogRef = this.dialog.open(ModalBudgetComponent, {
       width: '600px',
@@ -45,7 +44,7 @@ export class ContainerBudgetsComponent implements OnInit {
     });
 
     dialogRef.componentInstance.deleteBudgetEmitter.subscribe(res => {
-      this.deletedCategoryHomeEmitter.emit(res);
+      this.deleteBudgetHomeEmitter.emit(res);
       dialogRef.close();
     })
   }
