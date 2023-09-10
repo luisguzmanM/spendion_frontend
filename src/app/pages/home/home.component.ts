@@ -70,6 +70,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('person'));
     this.getDataUser();
+    this.getTransactions();
   }
 
   openDialogCrud(): void {
@@ -134,6 +135,10 @@ export class HomeComponent implements OnInit {
 
   updateCategories(event:any):void {
     this.budgets = this.budgets.filter(b=>b.id_budget !== event);
+  }
+
+  getTransactions(){
+    this.budgets.map(b => console.log(b))
   }
 
 }

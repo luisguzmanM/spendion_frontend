@@ -67,6 +67,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>(this.data.record);
+    console.log(this.data)
   }
 
   ngAfterViewInit() {
