@@ -19,8 +19,8 @@ export class BudgetService {
     return this._httpClient.post<any>(`${this.URL_LOCAL}/createBudget`, payload);
   }
   
-  createUpdateOrDeleteExpense(payload:any):Observable<any>{
-    return this._httpClient.put<any>(`${this.URL_LOCAL}/createUpdateOrDeleteExpense`, payload)
+  updateRecord(payload:any):Observable<any>{
+    return this._httpClient.put<any>(`${this.URL_LOCAL}/updateRecord`, payload)
   }
 
   deleteBudget(payload:any):Observable<any>{

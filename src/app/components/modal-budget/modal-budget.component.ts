@@ -91,8 +91,10 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     })
 
     dialogRef.componentInstance.newExpenseEmitter.subscribe(res => {
-      res.id_category = this.data.id_category;
-      this._categorySvc.createUpdateOrDeleteExpense(res).subscribe({
+      
+      res.id_budget = this.data.id_budget;
+      console.log(res)
+      this._categorySvc.updateRecord(res).subscribe({
         next: (res) => this.updateModal(res, dialogRef), 
         error: (err) => console.log(err)
       })
@@ -101,12 +103,13 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
   }
 
   updateModal(res:any, dialogRef):void {
-    const category = res.filter(c => c.id_category === this.data.id_category)
-    this.dataSource.data = category[0].record;
-    this.data.spent = category[0].record.reduce((acc, e) => acc + e.amount, 0);
-    this.data.available = this.data.budget - this.data.spent;
-    this.data.available > this.data.budget ? this.data.available = this.data.budget : this.data.available;
-    this.data.progress = (this.data.spent * 100) / this.data.budget;
+    console.log(res)
+    // const budget = res.filter(c => c.id_category === this.data.id_category)
+    // this.dataSource.data = category[0].record;
+    // this.data.spent = category[0].record.reduce((acc, e) => acc + e.amount, 0);
+    // this.data.available = this.data.budget - this.data.spent;
+    // this.data.available > this.data.budget ? this.data.available = this.data.budget : this.data.available;
+    // this.data.progress = (this.data.spent * 100) / this.data.budget;
     dialogRef.componentInstance.loading = false;
     dialogRef.close(); 
   }

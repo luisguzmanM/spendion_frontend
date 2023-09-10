@@ -17,7 +17,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 export class TransactionComponent implements AfterViewInit, OnInit  {
 
-  @Input() transactions: any;
+  @Input() budgets: any;
   displayedColumns: string[] = ['id', 'desc', 'amount'];
   dataSource;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -25,7 +25,7 @@ export class TransactionComponent implements AfterViewInit, OnInit  {
   constructor() { }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<any>(this.transactions);
+    this.dataSource = new MatTableDataSource<any>(this.budgets);
   }
 
   ngAfterViewInit() {
