@@ -22,6 +22,7 @@ import { BudgetService } from 'src/app/services/budget.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TYPE_ELEMENT } from 'src/app/models/budget.model';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-modal-budget',
@@ -46,7 +47,10 @@ import { TYPE_ELEMENT } from 'src/app/models/budget.model';
     HttpClientModule,
     MatTooltipModule
   ],
-  providers: [BudgetService]
+  providers: [
+    BudgetService,
+    UtilsService
+  ]
 })
 
 export class ModalBudgetComponent implements AfterViewInit, OnInit {
@@ -61,13 +65,13 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
     private _categorySvc: BudgetService,
+    private _utilsSvc: UtilsService
   ) {
     this.dataSource = new MatTableDataSource<any>();
   }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>(this.data.record);
-    console.log(this.data)
   }
 
   ngAfterViewInit() {
@@ -92,10 +96,23 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     })
 
     dialogRef.componentInstance.newExpenseEmitter.subscribe(res => {
-      
-      res.id_budget = this.data.id_budget;
-      console.log(res)
-      this._categorySvc.updateRecord(res).subscribe({
+
+      const newExpense = {
+        id: this._utilsSvc.generarID(),
+        desc: res.title,
+        amount: res.amount,
+      }
+
+      this.data.record === null ? this.data.record = [] : '';
+
+      this.data.record.push(newExpense);
+
+      const payload = {
+        id_budget: this.data.id_budget,
+        record: this.data.record
+      }
+
+      this._categorySvc.updateRecord(payload).subscribe({
         next: (res) => this.updateModal(res, dialogRef), 
         error: (err) => console.log(err)
       })
@@ -104,15 +121,9 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
   }
 
   updateModal(res:any, dialogRef):void {
-    console.log(res)
-    // const budget = res.filter(c => c.id_category === this.data.id_category)
-    // this.dataSource.data = category[0].record;
-    // this.data.spent = category[0].record.reduce((acc, e) => acc + e.amount, 0);
-    // this.data.available = this.data.budget - this.data.spent;
-    // this.data.available > this.data.budget ? this.data.available = this.data.budget : this.data.available;
-    // this.data.progress = (this.data.spent * 100) / this.data.budget;
+    this.dataSource = new MatTableDataSource<any>(res.record);
     dialogRef.componentInstance.loading = false;
-    dialogRef.close(); 
+    dialogRef.close();
   }
 
   openModalDeleteBudget(): void {

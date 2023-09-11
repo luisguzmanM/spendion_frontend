@@ -15,4 +15,8 @@ export class UtilsService {
       duration: 3000
     });
   }
+
+  generarID():string {
+    return Math.random().toString(32).substring(2) + Date.now().toString(32)
+  }
 }
