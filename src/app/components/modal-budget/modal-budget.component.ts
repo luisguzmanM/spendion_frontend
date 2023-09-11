@@ -59,6 +59,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Output() deleteBudgetEmitter: any = new EventEmitter();
+  @Output() recordEmitter: any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalBudgetComponent>,
@@ -72,6 +73,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>(this.data.record);
+    console.log(this.data)
   }
 
   ngAfterViewInit() {
@@ -122,6 +124,10 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
 
   updateModal(res:any, dialogRef):void {
     this.dataSource = new MatTableDataSource<any>(res.record);
+    this.data.spent = res.record.reduce((acc, e) => acc + e.amount, 0);
+    this.data.free = this.data.spent <= this.data.amount ? this.data.amount - this.data.spent : 0; 
+    this.data.progress = this.data.amount > this.data.spent ? (this.data.spent * 100) / this.data.amount : 100;
+    this.recordEmitter.emit(this.data);
     dialogRef.componentInstance.loading = false;
     dialogRef.close();
   }

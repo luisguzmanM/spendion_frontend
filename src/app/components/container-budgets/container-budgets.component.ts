@@ -47,6 +47,14 @@ export class ContainerBudgetsComponent implements OnInit {
       this.deleteBudgetHomeEmitter.emit(res);
       dialogRef.close();
     })
+
+    dialogRef.componentInstance.recordEmitter.subscribe(res => {
+      for(let b of this.budgets){
+        if(b.id_budget === res.id_budget){
+          b = res;
+        }
+      }
+    })
   }
 
 }
