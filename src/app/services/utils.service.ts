@@ -19,4 +19,14 @@ export class UtilsService {
   generarID():string {
     return Math.random().toString(32).substring(2) + Date.now().toString(32)
   }
+
+  getCurrentDate():string {
+    const fechaActual = new Date();
+    const año = fechaActual.getFullYear();
+    const mes = String(fechaActual.getMonth() + 1).padStart(2, '0');
+    const día = String(fechaActual.getDate()).padStart(2, '0');
+    const fechaFormateada = `${año}-${mes}-${día}`;
+    console.log(fechaFormateada);
+    return fechaFormateada;
+  }
 }

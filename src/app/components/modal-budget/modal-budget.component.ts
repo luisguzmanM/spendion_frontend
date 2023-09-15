@@ -55,7 +55,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 
 export class ModalBudgetComponent implements AfterViewInit, OnInit {
 
-  displayedColumns: string[] = ['id', 'desc', 'amount'];
+  displayedColumns: string[] = ['date', 'desc', 'amount'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Output() deleteBudgetEmitter: any = new EventEmitter();
@@ -101,6 +101,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
 
       const newExpense = {
         id: this._utilsSvc.generarID(),
+        date: this._utilsSvc.getCurrentDate(),
         desc: res.title,
         amount: res.amount,
       }
