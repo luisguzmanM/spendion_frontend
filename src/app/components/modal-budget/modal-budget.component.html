@@ -30,9 +30,9 @@
 
 <main>
   <div class="category-info">
-    <span>Budget: ${{ data.amount }}</span>
-    <span>Spent: ${{ data.spent }}</span>
-    <span>Free: ${{ data.free }}</span>
+    <span>Budget: ${{ data.amount | number:'1.2-2' }}</span>
+    <span>Spent: ${{ data.spent | number:'1.2-2' }}</span>
+    <span>Free: ${{ data.free | number:'1.2-2' }}</span>
   </div>
 
   <mat-progress-bar mode="determinate" [value]="data.progress"></mat-progress-bar>
@@ -52,7 +52,7 @@
 
       <ng-container matColumnDef="amount">
         <mat-header-cell class="d-flex-center" *matHeaderCellDef>Amount</mat-header-cell>
-        <mat-cell class="d-flex-center" *matCellDef="let element">{{ element.amount.toFixed(2) }}</mat-cell>
+        <mat-cell class="d-flex-center" *matCellDef="let element">{{ element.amount | number:'1.2-2' }}</mat-cell>
       </ng-container>
 
       <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
