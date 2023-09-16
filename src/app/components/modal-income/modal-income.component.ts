@@ -53,7 +53,6 @@ export class ModalIncomeComponent {
   confirm(): void {
     this.loading = true;
     const obj = this.buildObject();
-    console.log(obj)
     this.addIncomeEmitter.emit(obj);
   }
 

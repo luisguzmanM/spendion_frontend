@@ -48,7 +48,6 @@ export class SummaryComponent implements OnInit {
     })
 
     dialogRef.componentInstance.addIncomeEmitter.subscribe(res => {
-      console.log(res);
       this.homeSvc.addIncome(res);
     })
   }
