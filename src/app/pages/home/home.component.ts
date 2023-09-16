@@ -142,7 +142,6 @@ export class HomeComponent implements OnInit {
     const allTransactions = [];
 
     this.budgets.forEach(b => {
-      console.log(b)
       if(b.record !== null){
         const obj = {
           record: b.record,
@@ -163,7 +162,6 @@ export class HomeComponent implements OnInit {
     })
 
     this.transactions = allTransactions;
-    console.log(this.transactions)
   }
 
 }
