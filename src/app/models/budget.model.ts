@@ -22,5 +22,6 @@ export interface Transaction {
 
 export const TYPE_ELEMENT = {
   BUDGET: 'budget',
-  EXPENSE: 'expense'
+  EXPENSE: 'expense',
+  INCOME: 'income'
 }

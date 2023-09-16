@@ -1,4 +1,4 @@
-<mat-card class="card">
+<mat-card class="card" [class.income]="summary.title === 'Income'" (click)="openModalAddIncome()">
 
   <mat-card-header>
     <span>{{ summary.title }}</span>

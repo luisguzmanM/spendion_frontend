@@ -38,3 +38,7 @@ mat-card-content {
     min-height: 150px;
   }
 }
+
+.income {
+  cursor: pointer;
+}
