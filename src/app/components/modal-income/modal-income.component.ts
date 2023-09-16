@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-income',
@@ -23,12 +24,15 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatInputModule,
     MatFormFieldModule,
     MatProgressBarModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule 
   ],
 })
 export class ModalIncomeComponent {
 
   loading : boolean = false;
+  form : FormControl = new FormControl('', [Validators.required]);
+  @Output() addIncomeEmitter: any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalIncomeComponent>,
@@ -37,6 +41,20 @@ export class ModalIncomeComponent {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  buildObject(): any {
+    return {
+      amount: this.form.value,
+      token: localStorage.getItem('token')
+    }
+  }
+
+  confirm(): void {
+    this.loading = true;
+    const obj = this.buildObject();
+    console.log(obj)
+    this.addIncomeEmitter.emit(obj);
   }
 
 }

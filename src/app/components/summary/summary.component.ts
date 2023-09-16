@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ModalIncomeComponent } from '../modal-income/modal-income.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TYPE_ELEMENT } from 'src/app/models/budget.model';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-summary',
@@ -28,7 +29,8 @@ export class SummaryComponent implements OnInit {
   @Input() summary: any;
 
   constructor(
-    public _dialog: MatDialog
+    public _dialog: MatDialog,
+    private homeSvc: HomeService
   ){}
 
   ngOnInit(): void {}
@@ -43,6 +45,11 @@ export class SummaryComponent implements OnInit {
         labelNumberField: 'Income',
         type: TYPE_ELEMENT.INCOME
       },
+    })
+
+    dialogRef.componentInstance.addIncomeEmitter.subscribe(res => {
+      console.log(res);
+      this.homeSvc.addIncome(res);
     })
   }
 
