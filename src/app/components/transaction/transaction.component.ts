@@ -17,15 +17,15 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 export class TransactionComponent implements AfterViewInit, OnInit  {
 
-  @Input() budgets: any;
-  displayedColumns: string[] = ['id', 'desc', 'amount'];
+  @Input() transactions: any;
+  displayedColumns: string[] = ['date', 'desc', 'amount'];
   dataSource;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<any>(this.budgets);
+    this.dataSource = new MatTableDataSource<any>(this.transactions);
   }
 
   ngAfterViewInit() {

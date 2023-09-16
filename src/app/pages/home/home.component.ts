@@ -70,7 +70,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('person'));
     this.getDataUser();
-    this.getTransactions();
   }
 
   openDialogCrud(): void {
@@ -127,6 +126,7 @@ export class HomeComponent implements OnInit {
   handleResponseDataUser(res):void {
     this.budgets = res.budgets;
     this.loading = false;
+    this.getTransactions();
   }
 
   handleErrorDataUser(err):void {
@@ -138,7 +138,22 @@ export class HomeComponent implements OnInit {
   }
 
   getTransactions(){
-    this.budgets.map(b => console.log(b))
+    const allRecords = [];
+    const allTransactions = [];
+
+    this.budgets.forEach(b => {
+      if(b.record !== null){
+        allRecords.push(b.record)
+      }
+    })
+
+    allRecords.forEach(r => {
+      r.forEach(x => {
+        allTransactions.push(x);
+      })
+    })
+
+    this.transactions = allTransactions;
   }
 
 }
