@@ -49,12 +49,16 @@ export class ContainerBudgetsComponent implements OnInit {
     })
 
     dialogRef.componentInstance.recordEmitter.subscribe(res => {
+      const budget = this.budgets.filter(b => b.id_budget === res.id_budget);
+      budget[0].record = res.record;
       for(let b of this.budgets){
-        if(b.id_budget === res.id_budget){
-          b = res;
+        if(b.id_budget === budget[0].id_budget){
+          b.spent = budget[0].record.reduce((acc, e) => acc + e.amount, 0);
+          b.free = budget[0].amount > budget[0].spent ? budget[0].amount - budget[0].spent : 0;
+          b.progress = budget[0].amount > budget[0].spent ? (budget[0].spent * 100) / budget[0].amount : 100;
         }
       }
+      // No se está actualizando la card del budget en la vista inicial. Debo resolverlo
     })
   }
-
 }

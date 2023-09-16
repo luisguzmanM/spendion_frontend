@@ -73,7 +73,6 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>(this.data.record);
-    console.log(this.data)
   }
 
   ngAfterViewInit() {
@@ -116,21 +115,25 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
       }
 
       this._categorySvc.updateRecord(payload).subscribe({
-        next: (res) => this.updateModal(res, dialogRef), 
+        next: (res) => this.updateBudgetModal(res, dialogRef), 
         error: (err) => console.log(err)
       })
       
     })
   }
 
-  updateModal(res:any, dialogRef):void {
+  updateBudgetModal(res:any, dialogRef):void {
     this.dataSource = new MatTableDataSource<any>(res.record);
     this.data.spent = res.record.reduce((acc, e) => acc + e.amount, 0);
     this.data.free = this.data.spent <= this.data.amount ? this.data.amount - this.data.spent : 0; 
     this.data.progress = this.data.amount > this.data.spent ? (this.data.spent * 100) / this.data.amount : 100;
-    this.recordEmitter.emit(this.data);
+    this.updateBudgetCardInMainView(this.data);
     dialogRef.componentInstance.loading = false;
     dialogRef.close();
+  }
+
+  updateBudgetCardInMainView(data):void {
+    this.recordEmitter.emit(data);
   }
 
   openModalDeleteBudget(): void {

@@ -21,12 +21,11 @@ export class UtilsService {
   }
 
   getCurrentDate():string {
-    const fechaActual = new Date();
-    const año = fechaActual.getFullYear();
-    const mes = String(fechaActual.getMonth() + 1).padStart(2, '0');
-    const día = String(fechaActual.getDate()).padStart(2, '0');
-    const fechaFormateada = `${año}-${mes}-${día}`;
-    console.log(fechaFormateada);
-    return fechaFormateada;
+    const currentDate = new Date();
+    const año = currentDate.getFullYear();
+    const mes = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const día = String(currentDate.getDate()).padStart(2, '0');
+    const formatedDate = `${año}-${mes}-${día}`;
+    return formatedDate;
   }
 }
