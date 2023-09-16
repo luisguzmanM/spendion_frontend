@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { API_URL_LOCAL, API_URL_PRODUCTION } from '../globals';
 
@@ -21,7 +21,8 @@ export class HomeService {
   }
 
   addIncome(payload:any): Observable<any>{
-    return this._httpClient.post(`${this.URL_LOCAL}/addIncome`, payload);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._httpClient.post(`${this.URL_LOCAL}/addIncome`, payload, {headers: headers});
   }
 
 }
