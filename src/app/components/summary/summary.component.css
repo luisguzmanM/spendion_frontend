@@ -33,12 +33,12 @@ mat-card-content {
   padding-bottom: 0px;
 }
 
+.income {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 1060px){
   .card {
     min-height: 150px;
   }
-}
-
-.income {
-  cursor: pointer;
 }
