@@ -25,4 +25,9 @@ export class HomeService {
     return this._httpClient.post(`${this.URL_LOCAL}/addIncome`, payload, {headers: headers});
   }
 
+  getIncome(token:any):Observable<any>{
+    const params = new HttpParams().append('token', token);
+    return this._httpClient.get<any>(`${this.URL_LOCAL}/getIncome`, { params: params });
+  }
+
 }

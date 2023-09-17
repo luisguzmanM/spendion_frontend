@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SummaryComponent } from '../summary/summary.component';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-container-summary',
@@ -14,17 +15,29 @@ import { SummaryComponent } from '../summary/summary.component';
 })
 export class ContainerSummaryComponent implements OnInit {
 
+  token = localStorage.getItem('token');
   @Input() budgets: any;
   summary: any[] = [];
 
-  constructor(){}
+  constructor(
+    private _homeSvc: HomeService
+  ){}
 
   ngOnInit(): void {
     this.getSummary();
   }
 
+  getIncome():number {
+    let income = 0;
+    this._homeSvc.getIncome(this.token).subscribe(res => {
+      income = res.income;
+    })
+    return income;
+  }
+
   getSummary():void {
-    const income = 1800;
+    const income = this.getIncome();
+    console.log(income)
     const expense = this.budgets.map(c =>{
       if(c.record !== null){
         return c.record.reduce((acc:number, e:any) => acc + e.amount, 0);

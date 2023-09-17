@@ -58,7 +58,6 @@ export class ContainerBudgetsComponent implements OnInit {
           b.progress = budget[0].amount > budget[0].spent ? (budget[0].spent * 100) / budget[0].amount : 100;
         }
       }
-      // No se está actualizando la card del budget en la vista inicial. Debo resolverlo
     })
   }
 }
