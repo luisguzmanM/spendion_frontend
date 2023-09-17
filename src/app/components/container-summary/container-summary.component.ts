@@ -25,17 +25,17 @@ export class ContainerSummaryComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    this.getSummary();
+    this.getIncome();
   }
 
   getIncome():void {
     this._homeSvc.getIncome(this.token).subscribe(res => {
       this.income = res.income;
+      this.getSummary();
     })
   }
 
   getSummary():void {
-    this.getIncome();
     const expense = this.budgets.map(c => {
       if(c.record !== null){
         return c.record.reduce((acc:number, e:any) => acc + e.amount, 0);
@@ -50,20 +50,18 @@ export class ContainerSummaryComponent implements OnInit {
       {
         title: 'Income',
         icon: '',
-        amount: this.income.toFixed(2)
+        amount: this.income
       },
       {
         title: 'Expense',
         icon: '',
-        amount: expense.toFixed(2)
+        amount: expense
       },
       {
         title: 'Balance',
         icon: '',
-        amount: balance.toFixed(2)
+        amount: balance
       },
     ]
-    console.log(this.summary)
   }
-
 }
