@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Angular material components
@@ -27,6 +27,7 @@ import { HomeService } from 'src/app/services/home.service';
 export class SummaryComponent implements OnInit {
 
   @Input() summary: any;
+  @Output() incomeEmitter: any = new EventEmitter;
 
   constructor(
     public _dialog: MatDialog,
@@ -50,6 +51,7 @@ export class SummaryComponent implements OnInit {
     dialogRef.componentInstance.addIncomeEmitter.subscribe(res => {
       this.homeSvc.addIncome(res).subscribe(res => {
         this.summary.amount = parseFloat(res.income)
+        this.incomeEmitter.emit(this.summary);
         dialogRef.componentInstance.loading = false;
         dialogRef.close();
       });

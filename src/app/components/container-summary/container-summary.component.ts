@@ -18,7 +18,10 @@ export class ContainerSummaryComponent implements OnInit {
   token = localStorage.getItem('token');
   @Input() budgets: any;
   summary: any[] = [];
+
   income: number = 0;
+  spent: number = 0;
+  balance: number = 0;
 
   constructor(
     private _homeSvc: HomeService
@@ -44,7 +47,11 @@ export class ContainerSummaryComponent implements OnInit {
       }
     }).reduce((acc, e) => acc + e, 0);
 
+    
     const balance = this.income - expense;
+
+    this.spent = expense;
+    this.balance = balance;
 
     this.summary = [
       {
@@ -61,6 +68,27 @@ export class ContainerSummaryComponent implements OnInit {
         title: 'Balance',
         icon: '',
         amount: balance
+      },
+    ]
+  }
+
+  updateValues(event){    
+    this.balance = event.amount - this.spent;
+    this.summary = [
+      {
+        title: 'Income',
+        icon: '',
+        amount: event.amount
+      },
+      {
+        title: 'Expense',
+        icon: '',
+        amount: this.spent
+      },
+      {
+        title: 'Balance',
+        icon: '',
+        amount: this.balance
       },
     ]
   }
