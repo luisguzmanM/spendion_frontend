@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
       maxHeight: '90vh',
       disableClose: true,
       data: {
-        title: 'Create category',
+        title: 'Create budget',
         labelTextField: 'Title',
         labelNumberField: 'Budget',
         type: TYPE_ELEMENT.BUDGET
