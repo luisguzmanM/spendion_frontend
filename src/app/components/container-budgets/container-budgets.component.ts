@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BudgetComponent } from '../budget/budget.component';
 import { ModalBudgetComponent } from '../modal-budget/modal-budget.component';
 import { MatDialog } from '@angular/material/dialog';
+import { BudgetService } from 'src/app/services/budget.service';
 
 @Component({
   selector: 'app-container-budgets',
@@ -22,6 +23,7 @@ export class ContainerBudgetsComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
+    private budgetSvc: BudgetService
   ){}
 
   ngOnInit(): void {}
@@ -45,6 +47,7 @@ export class ContainerBudgetsComponent implements OnInit {
 
     dialogRef.componentInstance.deleteBudgetEmitter.subscribe(res => {
       this.deleteBudgetHomeEmitter.emit(res);
+      this.getAllTransactions();
       dialogRef.close();
     })
 
@@ -58,6 +61,18 @@ export class ContainerBudgetsComponent implements OnInit {
           b.progress = budget[0].amount > budget[0].spent ? (budget[0].spent * 100) / budget[0].amount : 100;
         }
       }
+      this.getAllTransactions();
     })
+  }
+
+  getAllTransactions():void {
+    const transactions = []
+    for(let b of this.budgets){
+      if(b.record === null) return
+      for(let r of b.record){
+        transactions.push(r)
+      }
+    }
+    this.budgetSvc.setTransaction(transactions);
   }
 }
