@@ -22,9 +22,9 @@ export class BudgetService {
     return this._httpClient.post<any>(`${this.URL_LOCAL}/createBudget`, budget);
   }
 
-  getBudgets(id_person: number): Observable<any> {
+  getBudgets(id_person: number): Observable<Budget[]> {
     const params = new HttpParams().set('id', id_person.toString());
-    return this._httpClient.get(`${this.URL_LOCAL}`, { params: params });
+    return this._httpClient.get<Budget[]>(`${this.URL_LOCAL}`, { params: params });
   }
   
   updateRecord(record:any):Observable<any>{
