@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  handleResponseNewBudget(res, dialogRef):void {
+  handleResponseNewBudget(res, dialogRef):void {    
     const { id_budget, title, amount } = res.budget;
     const newBudget = {
       id_budget: id_budget,
