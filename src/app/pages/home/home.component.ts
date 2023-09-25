@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit {
   getDataUser() {
     this.loading = true;
     const person = JSON.parse(localStorage.getItem('person'));
-    this._homeSvc.getBudgets(person.id_person).subscribe({
+    this._BudgetSvc.getBudgets(person.id_person).subscribe({
       next: (res) => this.handleResponseDataUser(res),
       error: (err) => this.handleErrorDataUser(err)
     })

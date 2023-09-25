@@ -15,11 +15,6 @@ export class HomeService {
     private _httpClient: HttpClient
   ) { }
 
-  getBudgets(id: number): Observable<any> {
-    const params = new HttpParams().set('id', id.toString());
-    return this._httpClient.get(`${this.URL_LOCAL}`, { params: params });
-  }
-
   addIncome(payload:any): Observable<any>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._httpClient.post(`${this.URL_LOCAL}/addIncome`, payload, {headers: headers});
