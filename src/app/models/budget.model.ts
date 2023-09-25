@@ -3,9 +3,9 @@ export interface Budget {
   title: string,
   amount: number,
   record: Record,
-  available?: number,
   progress?: number,
   spent?: number
+  free?: number,
 }
 
 export interface Record {
