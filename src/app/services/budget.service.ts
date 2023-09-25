@@ -18,21 +18,21 @@ export class BudgetService {
     this.transactionSubject$ = new BehaviorSubject<any[]>([]);
   }
 
-  createBudget(payload:Budget):Observable<any>{
-    return this._httpClient.post<any>(`${this.URL_LOCAL}/createBudget`, payload);
+  createBudget(budget:Budget):Observable<any>{
+    return this._httpClient.post<any>(`${this.URL_LOCAL}/createBudget`, budget);
   }
 
-  getBudgets(id: number): Observable<any> {
-    const params = new HttpParams().set('id', id.toString());
+  getBudgets(id_person: number): Observable<any> {
+    const params = new HttpParams().set('id', id_person.toString());
     return this._httpClient.get(`${this.URL_LOCAL}`, { params: params });
   }
   
-  updateRecord(payload:any):Observable<any>{
-    return this._httpClient.put<any>(`${this.URL_LOCAL}/updateRecord`, payload)
+  updateRecord(record:any):Observable<any>{
+    return this._httpClient.put<any>(`${this.URL_LOCAL}/updateRecord`, record)
   }
 
-  deleteBudget(payload:any):Observable<any>{
-    const params = new HttpParams().append('id_budget', payload.id_budget);
+  deleteBudget(budget:any):Observable<any>{
+    const params = new HttpParams().append('id_budget', budget.id_budget);
     return this._httpClient.delete<any>(`${this.URL_LOCAL}/deleteBudget`, { params: params });
   }
 
