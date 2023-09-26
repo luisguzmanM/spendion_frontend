@@ -73,6 +73,5 @@ export class ContainerBudgetsComponent implements OnInit {
         transactions.push(r)
       }
     }
-    this.budgetSvc.setTransaction(transactions);
   }
 }
