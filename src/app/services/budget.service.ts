@@ -10,13 +10,10 @@ import { Budget } from '../models/budget.model';
 export class BudgetService {
 
   URL_LOCAL: string = API_URL_LOCAL + '/home';
-  transactionSubject$: BehaviorSubject<any[]>;
 
   constructor(
     private _httpClient: HttpClient
-  ) { 
-    this.transactionSubject$ = new BehaviorSubject<any[]>([]);
-  }
+  ) {}
 
   createBudget(budget:Budget):Observable<any>{
     return this._httpClient.post<any>(`${this.URL_LOCAL}/createBudget`, budget);
@@ -34,14 +31,6 @@ export class BudgetService {
   deleteBudget(budget:any):Observable<any>{
     const params = new HttpParams().append('id_budget', budget.id_budget);
     return this._httpClient.delete<any>(`${this.URL_LOCAL}/deleteBudget`, { params: params });
-  }
-
-  getTransactions(){
-    return this.transactionSubject$.asObservable();
-  }
-
-  setTransaction(transaction:any){
-    this.transactionSubject$.next(transaction);
   }
 
 }
