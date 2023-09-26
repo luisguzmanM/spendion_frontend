@@ -62,9 +62,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _dialog: MatDialog,
-    private _homeSvc: HomeService,
-    private _utilsSvc: UtilsService,
-    private _BudgetSvc: BudgetService
+    private _BudgetSvc: BudgetService,
   ) { }
 
   ngOnInit(): void {
@@ -86,82 +84,22 @@ export class HomeComponent implements OnInit {
     })
 
     dialogRef.componentInstance.newBudgetEmitter.subscribe(res => {
-      this._BudgetSvc.createBudget(res).subscribe({
-        next: (res) => this.handleResponseNewBudget(res, dialogRef),
-        error: (err) => this.handleErrorNewBudget(err)
-      })
+      this._BudgetSvc.createBudget(res);
+      dialogRef.componentInstance.loading = false
+      dialogRef.close()
     })
-  }
-
-  handleResponseNewBudget(res, dialogRef):void {    
-    const { id_budget, title, amount } = res.budget;
-    const newBudget = {
-      id_budget: id_budget,
-      title: title,
-      amount: amount,
-      record: null,
-      free: amount,
-      progress: 0,
-      spent: 0,
-    }
-    this.budgets.push(newBudget)
-    dialogRef.componentInstance.loading = false;
-    dialogRef.close()
-    this._utilsSvc.openSnackBar('Budget created successfully', 'Close');
-  }
-
-  handleErrorNewBudget(res):void {
-    this._utilsSvc.openSnackBar('Error creating budget', 'Close');
   }
 
   getDataUser() {
     this.loading = true;
-    const person = JSON.parse(localStorage.getItem('person'));
-    this._BudgetSvc.getBudgets(person.id_person).subscribe({
-      next: (res) => this.handleResponseDataUser(res),
-      error: (err) => this.handleErrorDataUser(err)
+    this._BudgetSvc.getBudgetsFromBackend();
+    this._BudgetSvc.getBudgets().subscribe(res => {
+      this.budgets = res
+      this.loading = false
     })
-  }
-
-  handleResponseDataUser(res):void {
-    this.budgets = res.budgets;
-    this.loading = false;
-    this.getTransactions();
-  }
-
-  handleErrorDataUser(err):void {
-    this._utilsSvc.openSnackBar('Error loading data', 'Close');
   }
 
   updateCategories(event:any):void {
     this.budgets = this.budgets.filter(b=>b.id_budget !== event);
   }
-
-  getTransactions(){
-    const allRecords = [];
-    const allTransactions = [];
-
-    this.budgets.forEach(b => {
-      if(b.record !== null){
-        const obj = {
-          record: b.record,
-          budget: b.title
-        }
-        allRecords.push(obj)
-      }
-    })
-
-    allRecords.forEach(r => {
-      r.record.forEach(x => {
-        const obj = {
-          budget: r.budget,
-          expense: x
-        }
-        allTransactions.push(obj);
-      })
-    })
-
-    this.transactions = allTransactions;
-  }
-
 }

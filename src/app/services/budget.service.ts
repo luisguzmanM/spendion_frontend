@@ -11,17 +11,33 @@ export class BudgetService {
 
   URL_LOCAL: string = API_URL_LOCAL + '/home';
 
+  private budgets: Budget[] = [];
+  private _budgets$: BehaviorSubject<Budget[]>;
+
   constructor(
     private _httpClient: HttpClient
-  ) {}
-
-  createBudget(budget:Budget):Observable<any>{
-    return this._httpClient.post<any>(`${this.URL_LOCAL}/createBudget`, budget);
+  ) {
+    this._budgets$ = new BehaviorSubject<Budget[]>([]);
   }
 
-  getBudgets(id_person: number): Observable<Budget[]> {
-    const params = new HttpParams().set('id', id_person.toString());
-    return this._httpClient.get<Budget[]>(`${this.URL_LOCAL}`, { params: params });
+  createBudget(budget:Budget){
+    this._httpClient.post<any>(`${this.URL_LOCAL}/createBudget`, budget).subscribe(res => {
+      this.budgets.push(res.budget);
+      this._budgets$.next(this.budgets);
+    })
+  }
+
+  getBudgetsFromBackend() {
+    const person = JSON.parse(localStorage.getItem('person'));
+    const params = new HttpParams().set('id', person.id_person.toString());
+    this._httpClient.get<any>(`${this.URL_LOCAL}`, { params: params }).subscribe(res => {
+      this.budgets = res.budgets;
+      this._budgets$.next(this.budgets);
+    })
+  }
+
+  getBudgets(){
+    return this._budgets$.asObservable();
   }
   
   updateRecord(record:any):Observable<any>{
@@ -31,6 +47,7 @@ export class BudgetService {
   deleteBudget(budget:any):Observable<any>{
     const params = new HttpParams().append('id_budget', budget.id_budget);
     return this._httpClient.delete<any>(`${this.URL_LOCAL}/deleteBudget`, { params: params });
-  }
+  } 
+
 
 }

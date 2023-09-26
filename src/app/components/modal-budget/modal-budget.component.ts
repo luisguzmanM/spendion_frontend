@@ -105,7 +105,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
         amount: res.amount,
       }
 
-      this.data.record === null ? this.data.record = [] : '';
+      this.data.record === null ? this.data.record = [] : this.data.record;
 
       this.data.record.push(newExpense);
 
