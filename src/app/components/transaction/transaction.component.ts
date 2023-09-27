@@ -19,58 +19,15 @@ import { BudgetService } from 'src/app/services/budget.service';
 
 export class TransactionComponent implements OnInit  {
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   transactions: any[] = [];
   displayedColumns: string[] = ['date', 'desc', 'amount', 'budget'];
   dataSource;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  budgets: Budget[] = [];
 
-  constructor(
-    private _budgetSvc: BudgetService
-  ) { }
-
-  ngOnInit(): void {
-    this.initData()
-  }
-
-  initData(){
-    this._budgetSvc.getBudgets().subscribe(res => {
-      this.budgets = res;
-      setTimeout(() => {
-        this.getTransactions()
-      }, 1000)
-    })
-  }
-
-  getTransactions(){
-    const allRecords = [];
-    const allTransactions = [];
-    
-    this.budgets.forEach(b => {
-      if(b.record !== null){
-        const obj = {
-          record: b.record,
-          budget: b.title
-        }
-        allRecords.push(obj)
-      }
-    })
-
-    allRecords.forEach(r => {
-      if(r.record !== undefined){
-        r.record.forEach(x => {
-          const obj = {
-            budget: r.budget,
-            expense: x
-          }
-          allTransactions.push(obj);
-        })
-      }
-    })
-
-    this.transactions = allTransactions;
+  constructor() {
     this.dataSource = new MatTableDataSource<any>(this.transactions);
-    this.dataSource.paginator = this.paginator;
   }
 
+  ngOnInit(): void {}
+  
 }

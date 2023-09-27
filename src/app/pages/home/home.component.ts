@@ -58,16 +58,13 @@ export class HomeComponent implements OnInit {
   loading: boolean = false;
   user:Person;
   budgets: Budget[] = [];
-  transactions: Transaction[] = [];
 
   constructor(
-    private _dialog: MatDialog,
-    private _BudgetSvc: BudgetService,
+    private _dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('person'));
-    this.getDataUser();
+    this.user = JSON.parse(localStorage.getItem('person'))
   }
 
   openDialogCrud(): void {
@@ -82,24 +79,5 @@ export class HomeComponent implements OnInit {
         type: TYPE_ELEMENT.BUDGET
       },
     })
-
-    dialogRef.componentInstance.newBudgetEmitter.subscribe(res => {
-      this._BudgetSvc.createBudget(res);
-      dialogRef.componentInstance.loading = false
-      dialogRef.close()
-    })
-  }
-
-  getDataUser() {
-    this.loading = true;
-    this._BudgetSvc.getBudgetsFromBackend();
-    this._BudgetSvc.getBudgets().subscribe(res => {
-      this.budgets = res
-      this.loading = false
-    })
-  }
-
-  updateCategories(event:any):void {
-    this.budgets = this.budgets.filter(b=>b.id_budget !== event);
-  }
+  }  
 }

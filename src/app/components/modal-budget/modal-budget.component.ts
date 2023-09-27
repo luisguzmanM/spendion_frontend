@@ -58,26 +58,18 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['date', 'desc', 'amount'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Output() deleteBudgetEmitter: any = new EventEmitter();
-  @Output() recordEmitter: any = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalBudgetComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _dialog: MatDialog,
-    private _budgetSvc: BudgetService,
-    private _utilsSvc: UtilsService
+    private _dialog: MatDialog
   ) {
     this.dataSource = new MatTableDataSource<any>();
   }
 
-  ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<any>(this.data.record);
-  }
+  ngOnInit(): void {}
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+  ngAfterViewInit() {}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -95,39 +87,6 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
         type: TYPE_ELEMENT.EXPENSE
       },
     })
-
-    dialogRef.componentInstance.newExpenseEmitter.subscribe(res => {
-      const newExpense = {
-        id: this._utilsSvc.generarID(),
-        date: this._utilsSvc.getCurrentDate(),
-        desc: res.title,
-        amount: res.amount,
-      }
-      this.data.record === null || this.data.record === undefined ? this.data.record = [] : this.data.record;
-      this.data.record.push(newExpense);
-      const payload = {
-        id_budget: this.data.id_budget,
-        record: this.data.record
-      }
-      this._budgetSvc.updateRecord(payload).subscribe({
-        next: (res) => this.updateBudgetModal(res, dialogRef), 
-        error: (err) => console.log(err)
-      })
-    })
-  }
-
-  updateBudgetModal(res:any, dialogRef):void {
-    this.dataSource = new MatTableDataSource<any>(res.record);
-    this.data.spent = res.record.reduce((acc, e) => acc + e.amount, 0);
-    this.data.free = this.data.spent <= this.data.amount ? this.data.amount - this.data.spent : 0; 
-    this.data.progress = this.data.amount > this.data.spent ? (this.data.spent * 100) / this.data.amount : 100;
-    this.updateBudgetCardInMainView(this.data);
-    dialogRef.componentInstance.loading = false;
-    dialogRef.close();
-  }
-
-  updateBudgetCardInMainView(data):void {
-    this.recordEmitter.emit(data);
   }
 
   openModalDeleteBudget(): void {
@@ -139,12 +98,6 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
         title: 'Delete budget',
         actionMessage: 'Are you sure to delete this budget?',
       },
-    })
-
-    dialogRef.componentInstance.confirmButton.subscribe(() => {
-      const id_budget = this.data.id_budget;
-      dialogRef.componentInstance.loading = false;
-      dialogRef.close();
     })
   }
 }

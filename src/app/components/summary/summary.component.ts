@@ -47,15 +47,6 @@ export class SummaryComponent implements OnInit {
         type: TYPE_ELEMENT.INCOME
       },
     })
-
-    dialogRef.componentInstance.addIncomeEmitter.subscribe(res => {
-      this.homeSvc.addIncome(res).subscribe(res => {
-        this.summary.amount = parseFloat(res.income)
-        this.incomeEmitter.emit(this.summary);
-        dialogRef.componentInstance.loading = false;
-        dialogRef.close();
-      });
-    })
   }
 
 }
