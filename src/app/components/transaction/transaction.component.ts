@@ -57,13 +57,15 @@ export class TransactionComponent implements OnInit  {
     })
 
     allRecords.forEach(r => {
-      r.record.forEach(x => {
-        const obj = {
-          budget: r.budget,
-          expense: x
-        }
-        allTransactions.push(obj);
-      })
+      if(r.record !== undefined){
+        r.record.forEach(x => {
+          const obj = {
+            budget: r.budget,
+            expense: x
+          }
+          allTransactions.push(obj);
+        })
+      }
     })
 
     this.transactions = allTransactions;
