@@ -142,11 +142,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     })
 
     dialogRef.componentInstance.confirmButton.subscribe(() => {
-      const payload = {
-        token: localStorage.getItem('token'),
-        id_budget: this.data.id_budget
-      }
-      
+      const id_budget = this.data.id_budget;
       dialogRef.componentInstance.loading = false;
       dialogRef.close();
     })
