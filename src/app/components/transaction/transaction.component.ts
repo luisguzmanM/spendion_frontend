@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Budget } from 'src/app/models/budget.model';
@@ -17,7 +17,7 @@ import { BudgetService } from 'src/app/services/budget.service';
   ],
 })
 
-export class TransactionComponent implements AfterViewInit, OnInit  {
+export class TransactionComponent implements OnInit  {
 
   transactions: any[] = [];
   displayedColumns: string[] = ['date', 'desc', 'amount', 'budget'];
@@ -31,17 +31,14 @@ export class TransactionComponent implements AfterViewInit, OnInit  {
 
   ngOnInit(): void {
     this.initData()
-    this.dataSource = new MatTableDataSource<any>(this.transactions);
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
   }
 
   initData(){
     this._budgetSvc.getBudgets().subscribe(res => {
       this.budgets = res;
-      // this.getTransactions();
+      setTimeout(() => {
+        this.getTransactions()
+      }, 1000)
     })
   }
 
@@ -70,6 +67,8 @@ export class TransactionComponent implements AfterViewInit, OnInit  {
     })
 
     this.transactions = allTransactions;
+    this.dataSource = new MatTableDataSource<any>(this.transactions);
+    this.dataSource.paginator = this.paginator;
   }
 
 }
