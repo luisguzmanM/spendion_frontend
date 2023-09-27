@@ -65,7 +65,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     public dialogRef: MatDialogRef<ModalBudgetComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
-    private _categorySvc: BudgetService,
+    private _budgetSvc: BudgetService,
     private _utilsSvc: UtilsService
   ) {
     this.dataSource = new MatTableDataSource<any>();
@@ -109,7 +109,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
         id_budget: this.data.id_budget,
         record: this.data.record
       }
-      this._categorySvc.updateRecord(payload).subscribe({
+      this._budgetSvc.updateRecord(payload).subscribe({
         next: (res) => this.updateBudgetModal(res, dialogRef), 
         error: (err) => console.log(err)
       })
@@ -142,24 +142,13 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     })
 
     dialogRef.componentInstance.confirmButton.subscribe(res => {
-      this.deleteBudget(dialogRef);
-    })
-  }
-
-  deleteBudget(dialog): void {
-    const payload = {
-      token: localStorage.getItem('token'),
-      id_budget: this.data.id_budget
-    }
-    this._categorySvc.deleteBudget(payload).subscribe({
-      next: (res) => {
-        this.deleteBudgetEmitter.emit(payload.id_budget);
-        dialog.loading = false;
-        dialog.close();
-      },
-      error: (err) => {
-        console.log(err);
+      const payload = {
+        token: localStorage.getItem('token'),
+        id_budget: this.data.id_budget
       }
+      
+      dialogRef.componentInstance.loading = false;
+      dialogRef.close();
     })
   }
 }
