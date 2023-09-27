@@ -41,7 +41,7 @@ export class TransactionComponent implements AfterViewInit, OnInit  {
   initData(){
     this._budgetSvc.getBudgets().subscribe(res => {
       this.budgets = res;
-      this.getTransactions();
+      // this.getTransactions();
     })
   }
 

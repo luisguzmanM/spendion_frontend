@@ -97,28 +97,22 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     })
 
     dialogRef.componentInstance.newExpenseEmitter.subscribe(res => {
-
       const newExpense = {
         id: this._utilsSvc.generarID(),
         date: this._utilsSvc.getCurrentDate(),
         desc: res.title,
         amount: res.amount,
       }
-
-      this.data.record === null ? this.data.record = [] : this.data.record;
-
+      this.data.record === null || this.data.record === undefined ? this.data.record = [] : this.data.record;
       this.data.record.push(newExpense);
-
       const payload = {
         id_budget: this.data.id_budget,
         record: this.data.record
       }
-
       this._categorySvc.updateRecord(payload).subscribe({
         next: (res) => this.updateBudgetModal(res, dialogRef), 
         error: (err) => console.log(err)
       })
-      
     })
   }
 
