@@ -46,7 +46,7 @@ export class BudgetService {
 
   deleteBudget(budget:any):Observable<any>{
     const params = new HttpParams().append('id_budget', budget.id_budget);
-    return this._httpClient.delete<any>(`${this.URL_LOCAL}/deleteBudget`, { params: params });
+    return this._httpClient.delete(`${this.URL_LOCAL}/deleteBudget`, { params: params });
   } 
 
 
