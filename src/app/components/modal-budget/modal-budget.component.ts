@@ -64,7 +64,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
   constructor(
     public dialogRef: MatDialogRef<ModalBudgetComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialog: MatDialog,
+    private _dialog: MatDialog,
     private _budgetSvc: BudgetService,
     private _utilsSvc: UtilsService
   ) {
@@ -84,7 +84,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
   }
 
   openModalAddNewExpense() {
-    const dialogRef = this.dialog.open(ModalCrudComponent, {
+    const dialogRef = this._dialog.open(ModalCrudComponent, {
       width: '250px',
       maxHeight: '90vh',
       disableClose: true,
@@ -131,7 +131,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
   }
 
   openModalDeleteBudget(): void {
-    const dialogRef = this.dialog.open(ModalConfirmationComponent, {
+    const dialogRef = this._dialog.open(ModalConfirmationComponent, {
       width: '300px',
       maxHeight: '90vh',
       disableClose: true,
@@ -141,7 +141,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
       },
     })
 
-    dialogRef.componentInstance.confirmButton.subscribe(res => {
+    dialogRef.componentInstance.confirmButton.subscribe(() => {
       const payload = {
         token: localStorage.getItem('token'),
         id_budget: this.data.id_budget
