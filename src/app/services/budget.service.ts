@@ -37,7 +37,7 @@ export class BudgetService {
     return this._budgets$.asObservable();
   }
 
-  createBudget(budget:Budget){
+  createBudget(budget:any){
     this._httpClient.post(`${this.URL_LOCAL}/createBudget`, budget).subscribe({
       next: budget => {
         this.budgets.push(budget);

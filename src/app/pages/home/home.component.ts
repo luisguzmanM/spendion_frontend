@@ -61,13 +61,15 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _dialog: MatDialog,
-    private _BudgetSvc: BudgetService
+    private _budgetSvc: BudgetService
   ) { }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('person'))    
-    this._BudgetSvc.budgetsGetter.subscribe(res => {
-      console.log(res)
+    this._budgetSvc.getBudgets(this.user.id_person);
+    this._budgetSvc.budgetsGetter.subscribe(budgets => {
+      this.budgets = budgets
+      console.log(this.budgets)
     })
   }
 
@@ -85,7 +87,7 @@ export class HomeComponent implements OnInit {
     })
 
     dialogRef.componentInstance.newBudgetEmitter.subscribe(newBudget => {
-      this._BudgetSvc.createBudget(newBudget);
+      this._budgetSvc.createBudget(newBudget);
     })
   }  
 }
