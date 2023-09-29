@@ -58,7 +58,6 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['date', 'desc', 'amount'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  budgets: Budget[] = [];
   @Output() closeModalBudgetEmitter = new EventEmitter();
 
   constructor(
@@ -109,7 +108,6 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
       dialogRef.close()
       this.closeModalBudgetEmitter.emit()
     })
-
 
   }
 }
