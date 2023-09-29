@@ -63,4 +63,19 @@ export class BudgetService {
     })
   }
 
+  updateRecordBudget(id_budget:number, record:any){
+    const data = {
+      id_budget: id_budget,
+      record: record
+    }
+    this._httpClient.put(`${this.URL_LOCAL}/updateRecord`, data).subscribe({
+      next: response => {
+        console.log(response)
+      },
+      error: () => {
+        console.log('Error creating new expense')
+      }
+    })
+  }
+
 }

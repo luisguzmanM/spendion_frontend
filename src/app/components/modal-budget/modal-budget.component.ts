@@ -64,7 +64,8 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     public dialogRef: MatDialogRef<ModalBudgetComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _dialog: MatDialog,
-    private _budgetSvc: BudgetService
+    private _budgetSvc: BudgetService,
+    private utilsSvc: UtilsService
   ) {
     this.dataSource = new MatTableDataSource<any>();
   }
@@ -88,6 +89,20 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
         labelNumberField: 'amount',
         type: TYPE_ELEMENT.EXPENSE
       },
+    })
+
+    dialogRef.componentInstance.newExpenseEmitter.subscribe(res => {
+      const expense = {
+        id: this.utilsSvc.generarID(),
+        date: this.utilsSvc.getCurrentDate(),
+        desc: res.title,
+        amount: res.amount
+      }
+      this.data.record = this.data.record !== null ? this.data.record : [];
+      this.data.record = [...this.data.record, expense];
+      this._budgetSvc.updateRecordBudget(this.data.id_budget, this.data.record);
+      dialogRef.componentInstance.loading = false;
+      dialogRef.close()
     })
   }
 
