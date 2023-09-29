@@ -51,6 +51,9 @@ export class ContainerBudgetsComponent implements OnInit {
         id_budget: id_budget,
         id_person: this.user.id_person
       },
-    });    
+    });   
+    dialogRef.componentInstance.closeModalBudgetEmitter.subscribe(() => {
+      dialogRef.close()
+    }) 
   }
 }
