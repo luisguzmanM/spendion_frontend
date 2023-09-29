@@ -4,6 +4,7 @@ import { BudgetComponent } from '../budget/budget.component';
 import { ModalBudgetComponent } from '../modal-budget/modal-budget.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Budget } from 'src/app/models/budget.model';
+import { BudgetService } from 'src/app/services/budget.service';
 
 @Component({
   selector: 'app-container-budgets',
@@ -21,10 +22,15 @@ export class ContainerBudgetsComponent implements OnInit {
   budgets: Budget[] = [];
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _budgetSvc: BudgetService
   ){}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._budgetSvc.budgetsGetter.subscribe(budgets => {
+      this.budgets = budgets
+    })
+  }
 
   openDialogSelectedBudget(budget: Budget) {
     const { title, amount, spent, free, progress, record, id_budget } = budget;
