@@ -88,6 +88,8 @@ export class HomeComponent implements OnInit {
 
     dialogRef.componentInstance.newBudgetEmitter.subscribe(newBudget => {
       this._budgetSvc.createBudget(newBudget);
+      dialogRef.componentInstance.loading = false;
+      dialogRef.close()
     })
   }  
 }

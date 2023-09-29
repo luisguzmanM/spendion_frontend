@@ -21,7 +21,7 @@ import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirma
 import { BudgetService } from 'src/app/services/budget.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TYPE_ELEMENT } from 'src/app/models/budget.model';
+import { Budget, TYPE_ELEMENT } from 'src/app/models/budget.model';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -58,11 +58,13 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['date', 'desc', 'amount'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  budgets: Budget[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<ModalBudgetComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _budgetSvc: BudgetService
   ) {
     this.dataSource = new MatTableDataSource<any>();
   }
@@ -99,5 +101,13 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
         actionMessage: 'Are you sure to delete this budget?',
       },
     })
+
+    dialogRef.componentInstance.confirmButton.subscribe(() => {
+      this._budgetSvc.deleteBudget(this.data.id_budget, this.data.id_person);
+      dialogRef.componentInstance.loading = false;
+      dialogRef.close()
+    })
+
+
   }
 }

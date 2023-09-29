@@ -49,4 +49,19 @@ export class BudgetService {
     })
   }
 
+  deleteBudget(id_budget:number, id_person:number){
+    const params = new HttpParams()
+      .append('id_budget', id_budget.toString())
+      .append('id_person', id_person.toString())
+    this._httpClient.delete(`${this.URL_LOCAL}/deleteBudget`, {params: params}).subscribe({
+      next: budgets => {
+        console.log(budgets)
+        this._budgets$.next(Array.isArray(budgets) ? budgets : this.budgets);
+      },
+      error: () => {
+        console.log('Error deleting budget')
+      }
+    })
+  }
+
 }
