@@ -57,7 +57,6 @@ export class HomeComponent implements OnInit {
 
   loading: boolean = false;
   user:Person;
-  budgets: Budget[] = [];
 
   constructor(
     private _dialog: MatDialog,
@@ -67,10 +66,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('person'))    
     this._budgetSvc.getBudgets(this.user.id_person);
-    this._budgetSvc.budgetsGetter.subscribe(budgets => {
-      this.budgets = budgets
-      console.log(this.budgets)
-    })
   }
 
   openDialogCrud(): void {

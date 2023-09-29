@@ -56,7 +56,6 @@ export class BudgetService {
     this._httpClient.delete(`${this.URL_LOCAL}/deleteBudget`, {params: params}).subscribe({
       next: budgets => {
         console.log(budgets)
-        this._budgets$.next(Array.isArray(budgets) ? budgets : this.budgets);
       },
       error: () => {
         console.log('Error deleting budget')
