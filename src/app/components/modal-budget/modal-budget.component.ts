@@ -21,7 +21,7 @@ import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirma
 import { BudgetService } from 'src/app/services/budget.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Budget, TYPE_ELEMENT } from 'src/app/models/budget.model';
+import { TYPE_ELEMENT } from 'src/app/models/budget.model';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -65,10 +65,9 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     public dialogRef: MatDialogRef<ModalBudgetComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _dialog: MatDialog,
-    private _budgetSvc: BudgetService,
     private utilsSvc: UtilsService
   ) {
-    this.dataSource = new MatTableDataSource<any>();
+    this.dataSource = new MatTableDataSource<any>(this.data);
   }
 
   ngOnInit(): void {}
