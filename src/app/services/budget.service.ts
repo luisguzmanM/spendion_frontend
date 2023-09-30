@@ -13,9 +13,10 @@ export class BudgetService {
 
   URL_LOCAL: string = API_URL_LOCAL + '/home';
 
-  private budgetSubject = new BehaviorSubject<Budget[]>([]);
+  private budgets: any[] = [];
+  private budgetSubject = new BehaviorSubject<any[]>([]);
   private person: Person;
-  public dataBudgets$: Observable<Budget[]> = this.budgetSubject.asObservable()
+  public dataBudgets$: Observable<any[]> = this.budgetSubject.asObservable()
 
   constructor(
     private _httpClient: HttpClient,
@@ -27,9 +28,10 @@ export class BudgetService {
 
   getBudgets(id_person:number){
     const params = new HttpParams().append('id_person', id_person.toString());
-    this._httpClient.get<Budget[]>(`${this.URL_LOCAL}`, {params: params}).subscribe({
+    this._httpClient.get<any[]>(`${this.URL_LOCAL}`, {params: params}).subscribe({
       next: data => {
-        this.budgetSubject.next(data);
+        this.budgets = data
+        this.budgetSubject.next(this.budgets);
       },
       error: err => {
         console.error('Error fetching budgets:', err);
@@ -40,7 +42,8 @@ export class BudgetService {
   createBudget(budget:any){
     this._httpClient.post(`${this.URL_LOCAL}/createBudget`, budget).subscribe({
       next: budget => {
-        
+        this.budgets.push(budget)
+        this.budgetSubject.next(this.budgets)
       },
       error: err => {
         console.log('Error creating new budget');
@@ -52,7 +55,8 @@ export class BudgetService {
     const params = new HttpParams().append('id_budget', id_budget.toString())
     this._httpClient.delete(`${this.URL_LOCAL}/deleteBudget`, {params: params}).subscribe({
       next: res => {
-        
+        this.budgets = this.budgets.filter(budget => budget.id_budget != id_budget);
+        this.budgetSubject.next(this.budgets)
       },
       error: () => {
         console.log('Error deleting budget')
