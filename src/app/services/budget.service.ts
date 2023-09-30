@@ -52,9 +52,10 @@ export class BudgetService {
   }
 
   deleteBudget(id_budget:number){
+    console.log(id_budget)
     const params = new HttpParams().append('id_budget', id_budget.toString())
     this._httpClient.delete(`${this.URL_LOCAL}/deleteBudget`, {params: params}).subscribe({
-      next: res => {
+      next: () => {
         this.budgets = this.budgets.filter(budget => budget.id_budget != id_budget);
         this.budgetSubject.next(this.budgets)
       },
