@@ -100,10 +100,9 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
       }
       this.data.record = this.data.record !== null ? this.data.record : [];
       this.data.record = [...this.data.record, expense];
-      this.dataSource = new MatTableDataSource(this.data.record)
-      this.addExpenseEmitter.emit(this.data.record)
       dialogRef.componentInstance.loading = false;
       dialogRef.close()
+      this.updateDataModal();
     })
   }
 
@@ -123,5 +122,16 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
       dialogRef.componentInstance.loading = false;
       dialogRef.close()
     })
+  }
+
+  updateDataModal(){
+    const spent = this.data.record.reduce((acc, e) => acc + e.amount, 0)
+    const free = this.data.amount > spent ? this.data.amount - spent : 0;
+    const progress = this.data.amount > spent ? (spent * 100) / this.data.amount : 100;
+    this.data.spent = spent;
+    this.data.free = free;
+    this.data.progress = progress;
+    this.dataSource = new MatTableDataSource(this.data.record)
+    this.addExpenseEmitter.emit(this.data.record)
   }
 }

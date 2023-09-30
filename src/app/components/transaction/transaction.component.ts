@@ -43,6 +43,7 @@ export class TransactionComponent implements OnInit  {
   getTransactions(){
     const budgetsWithRecordData = this.budgets.filter(budget => budget.record !== null);
     if(!budgetsWithRecordData.length || budgetsWithRecordData.length === 0) return;
+    this.transactions = [];
     for(let budget of budgetsWithRecordData){
       for(let transaction of budget.record){
         this.transactions.push({
@@ -54,6 +55,7 @@ export class TransactionComponent implements OnInit  {
       }
     }
     this.dataSource = new MatTableDataSource<any>(this.transactions);
+    this.dataSource.paginator = this.paginator;
   }
   
 }
