@@ -36,11 +36,11 @@ export class TransactionComponent implements OnInit  {
   getBudgetsFromService():void{
     this._budgetSvc.dataBudgets$.subscribe(data => {
       this.budgets = data;
-      this.getTransaction();
+      this.getTransactions();
     })
   }
 
-  getTransaction(){
+  getTransactions(){
     const budgetsWithRecordData = this.budgets.filter(budget => budget.record !== null);
     if(!budgetsWithRecordData.length || budgetsWithRecordData.length === 0) return;
     for(let budget of budgetsWithRecordData){
