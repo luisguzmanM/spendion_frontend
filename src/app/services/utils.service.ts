@@ -28,4 +28,8 @@ export class UtilsService {
     const formatedDate = `${año}-${mes}-${día}`;
     return formatedDate;
   }
+
+  getDataPerson(){
+    return JSON.parse(localStorage.getItem('person'));
+  }
 }

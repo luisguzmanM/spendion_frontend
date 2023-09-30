@@ -21,8 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ContainerBudgetsComponent } from 'src/app/components/container-budgets/container-budgets.component';
 import { BudgetService } from 'src/app/services/budget.service';
 import { ContainerSummaryComponent } from 'src/app/components/container-summary/container-summary.component';
-import { TYPE_ELEMENT, Transaction } from 'src/app/models/budget.model';
-import { Budget } from 'src/app/models/budget.model';
+import { TYPE_ELEMENT } from 'src/app/models/budget.model';
 import { Person } from 'src/app/models/auth.model';
 
 
@@ -60,12 +59,16 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _dialog: MatDialog,
-    private _budgetSvc: BudgetService
+    private _budgetSvc: BudgetService,
+    private _utilsSvc: UtilsService
   ) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('person'))    
-    this._budgetSvc.getBudgets(this.user.id_person);
+    this.getDataPersonFromLocalStorage();
+  }
+
+  getDataPersonFromLocalStorage(){
+    this.user = this._utilsSvc.getDataPerson();
   }
 
   openDialogCrud(): void {

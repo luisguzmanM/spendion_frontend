@@ -118,7 +118,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     })
 
     dialogRef.componentInstance.confirmButton.subscribe(() => {
-      this._budgetSvc.deleteBudget(this.data.id_budget, this.data.id_person);
+      this._budgetSvc.deleteBudget(this.data.id_budget);
       dialogRef.componentInstance.loading = false;
       dialogRef.close()
       this.closeModalBudgetEmitter.emit()
