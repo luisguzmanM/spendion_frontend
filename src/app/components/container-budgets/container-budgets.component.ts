@@ -48,7 +48,8 @@ export class ContainerBudgetsComponent implements OnInit {
         id_budget: id_budget
       },
     });   
-    dialogRef.componentInstance.closeModalBudgetEmitter.subscribe(() => {
+    dialogRef.componentInstance.deleteBudgetEmitter.subscribe(() => {
+      this._budgetSvc.deleteBudget(id_budget);
       dialogRef.close()
     }) 
   }

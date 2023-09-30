@@ -58,7 +58,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['date', 'desc', 'amount'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Output() closeModalBudgetEmitter = new EventEmitter();
+  @Output() deleteBudgetEmitter = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalBudgetComponent>,
@@ -118,10 +118,9 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     })
 
     dialogRef.componentInstance.confirmButton.subscribe(() => {
-      this._budgetSvc.deleteBudget(this.data.id_budget);
+      this.deleteBudgetEmitter.emit()
       dialogRef.componentInstance.loading = false;
       dialogRef.close()
-      this.closeModalBudgetEmitter.emit()
     })
 
   }
