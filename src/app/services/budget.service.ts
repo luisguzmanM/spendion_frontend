@@ -22,7 +22,7 @@ export class BudgetService {
     private utilsSvc: UtilsService
   ) {
     this._budgets$ = new BehaviorSubject<Budget[]>([]);
-    this.person = this.utilsSvc.getDataPerson()
+    this.person = this.utilsSvc.getDataPerson();
     this.getBudgets(this.person.id_person);
   }
 
