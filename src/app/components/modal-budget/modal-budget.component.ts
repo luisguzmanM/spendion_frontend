@@ -66,11 +66,11 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _dialog: MatDialog,
     private utilsSvc: UtilsService
-  ) {
-    this.dataSource = new MatTableDataSource<any>(this.data);
-  }
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dataSource = new MatTableDataSource<any>(this.data.record);
+  }
 
   ngAfterViewInit() {}
 
@@ -100,6 +100,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
       }
       this.data.record = this.data.record !== null ? this.data.record : [];
       this.data.record = [...this.data.record, expense];
+      this.dataSource = new MatTableDataSource(this.data.record)
       this.addExpenseEmitter.emit(this.data.record)
       dialogRef.componentInstance.loading = false;
       dialogRef.close()
@@ -122,6 +123,5 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
       dialogRef.componentInstance.loading = false;
       dialogRef.close()
     })
-
   }
 }
