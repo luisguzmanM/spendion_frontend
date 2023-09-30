@@ -5,7 +5,6 @@ import { ModalBudgetComponent } from '../modal-budget/modal-budget.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Budget } from 'src/app/models/budget.model';
 import { BudgetService } from 'src/app/services/budget.service';
-import { Person } from 'src/app/models/auth.model';
 
 @Component({
   selector: 'app-container-budgets',
@@ -21,7 +20,6 @@ import { Person } from 'src/app/models/auth.model';
 export class ContainerBudgetsComponent implements OnInit {
 
   budgets: Budget[] = [];
-  user: Person;
 
   constructor(
     public dialog: MatDialog,
@@ -29,8 +27,7 @@ export class ContainerBudgetsComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('person'))    
-    this._budgetSvc.budgetsGetter.subscribe(budgets => {
+    this._budgetSvc.dataBudgets$.subscribe(budgets => {
       this.budgets = budgets
     })
   }
@@ -48,8 +45,7 @@ export class ContainerBudgetsComponent implements OnInit {
         free: free,
         progress: progress,
         record: record,
-        id_budget: id_budget,
-        id_person: this.user.id_person
+        id_budget: id_budget
       },
     });   
     dialogRef.componentInstance.closeModalBudgetEmitter.subscribe(() => {

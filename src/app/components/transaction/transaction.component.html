@@ -3,17 +3,17 @@
 
     <ng-container matColumnDef="date">
       <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.expense.date }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ element.date }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="desc">
       <mat-header-cell class="d-flex-center" *matHeaderCellDef>Description</mat-header-cell>
-      <mat-cell class="d-flex-center" *matCellDef="let element">{{ element.expense.desc }}</mat-cell>
+      <mat-cell class="d-flex-center" *matCellDef="let element">{{ element.desc }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="amount">
       <mat-header-cell class="d-flex-center" *matHeaderCellDef>Amount</mat-header-cell>
-      <mat-cell class="d-flex-center" *matCellDef="let element">{{ element.expense.amount }}</mat-cell>
+      <mat-cell class="d-flex-center" *matCellDef="let element">{{ element.amount }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="budget">
