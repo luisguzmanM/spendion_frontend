@@ -59,6 +59,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Output() deleteBudgetEmitter = new EventEmitter();
+  @Output() addExpenseEmitter = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalBudgetComponent>,
@@ -100,7 +101,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
       }
       this.data.record = this.data.record !== null ? this.data.record : [];
       this.data.record = [...this.data.record, expense];
-      this._budgetSvc.updateRecordBudget(this.data.id_budget, this.data.record);
+      this.addExpenseEmitter.emit(this.data.record)
       dialogRef.componentInstance.loading = false;
       dialogRef.close()
     })

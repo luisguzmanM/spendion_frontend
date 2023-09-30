@@ -66,20 +66,22 @@ export class BudgetService {
   }
 
   updateRecordBudget(id_budget:number, record:any){
-
     const data = {
       id_budget: id_budget,
       record: record
     }
-
     this._httpClient.put(`${this.URL_LOCAL}/updateRecord`, data).subscribe({
-      next: res => {
-        
+      next: record => {
+        this.budgets.map(budget => {
+          if(budget.id_budget === id_budget){
+            budget.record = record
+          }
+        })
+        this.budgetSubject.next(this.budgets)
       },
       error: () => {
         console.log('Error creating new expense')
       }
     })
   }
-
 }
