@@ -75,6 +75,7 @@ export class BudgetService {
         this.budgets.map(budget => {
           if(budget.id_budget === id_budget){
             budget.record = record
+            this.updateBudgetValues(budget)
           }
         })
         this.budgetSubject.next(this.budgets)
@@ -83,5 +84,14 @@ export class BudgetService {
         console.log('Error creating new expense')
       }
     })
+  }
+
+  updateBudgetValues(budget){
+    const spent = budget.record.reduce((acc, e) => acc + e.amount, 0)
+    const free = budget.amount > spent ? budget.amount - spent : 0;
+    const progress = budget.amount > spent ? (spent * 100) / budget.amount : 100;
+    budget.spent = spent;
+    budget.free = free;
+    budget.progress = progress
   }
 }
