@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { API_URL_LOCAL } from '../globals';
+import { API_URL_LOCAL, API_URL_PRODUCTION } from '../globals';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Budget } from '../models/budget.model';
@@ -11,6 +11,7 @@ import { Person } from '../models/auth.model';
 })
 export class BudgetService {
 
+  URL_PRODUCTION: string = API_URL_PRODUCTION + '';
   URL_LOCAL: string = API_URL_LOCAL + '/home';
 
   private budgets: any[] = [];
@@ -28,7 +29,7 @@ export class BudgetService {
 
   getBudgets(id_person:number){
     const params = new HttpParams().append('id_person', id_person.toString());
-    this._httpClient.get<any[]>(`${this.URL_LOCAL}`, {params: params}).subscribe({
+    this._httpClient.get<any[]>(`${this.URL_PRODUCTION}`, {params: params}).subscribe({
       next: data => {
         this.budgets = data
         this.budgetSubject.next(this.budgets);
@@ -40,7 +41,7 @@ export class BudgetService {
   }
 
   createBudget(budget:any){
-    this._httpClient.post(`${this.URL_LOCAL}/createBudget`, budget).subscribe({
+    this._httpClient.post(`${this.URL_PRODUCTION}/createBudget`, budget).subscribe({
       next: budget => {
         this.budgets.push(budget)
         this.budgetSubject.next(this.budgets)
@@ -54,7 +55,7 @@ export class BudgetService {
   deleteBudget(id_budget:number){
     console.log(id_budget)
     const params = new HttpParams().append('id_budget', id_budget.toString())
-    this._httpClient.delete(`${this.URL_LOCAL}/deleteBudget`, {params: params}).subscribe({
+    this._httpClient.delete(`${this.URL_PRODUCTION}/deleteBudget`, {params: params}).subscribe({
       next: () => {
         this.budgets = this.budgets.filter(budget => budget.id_budget != id_budget);
         this.budgetSubject.next(this.budgets)
@@ -70,7 +71,7 @@ export class BudgetService {
       id_budget: id_budget,
       record: record
     }
-    this._httpClient.put(`${this.URL_LOCAL}/updateRecord`, data).subscribe({
+    this._httpClient.put(`${this.URL_PRODUCTION}/updateRecord`, data).subscribe({
       next: record => {
         this.budgets.map(budget => {
           if(budget.id_budget === id_budget){

@@ -17,12 +17,12 @@ export class HomeService {
 
   addIncome(payload:any): Observable<any>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._httpClient.post(`${this.URL_LOCAL}/addIncome`, payload, {headers: headers});
+    return this._httpClient.post(`${this.URL_PRODUCTION}/addIncome`, payload, {headers: headers});
   }
 
   getIncome(token:any):Observable<any>{
     const params = new HttpParams().append('token', token);
-    return this._httpClient.get<any>(`${this.URL_LOCAL}/getIncome`, { params: params });
+    return this._httpClient.get<any>(`${this.URL_PRODUCTION}/getIncome`, { params: params });
   }
 
 }
