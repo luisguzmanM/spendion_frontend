@@ -34,7 +34,9 @@ export class SummaryComponent implements OnInit {
     private _homeSvc: HomeService
   ){}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   openModalAddIncome():void{
     const dialogRef = this._dialog.open(ModalIncomeComponent, {
@@ -49,8 +51,7 @@ export class SummaryComponent implements OnInit {
     })
 
     dialogRef.componentInstance.addIncomeEmitter.subscribe(res => {
-      console.log(res)
-      this._homeSvc.addIncome(res)
+      this.incomeEmitter.emit(res);
       dialogRef.componentInstance.loading = false;
       dialogRef.close()
     })

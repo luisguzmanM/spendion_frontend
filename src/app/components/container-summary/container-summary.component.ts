@@ -31,27 +31,25 @@ export class ContainerSummaryComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    const token = localStorage.getItem('token');
-    this._homeSvc.getIncome(token).subscribe(res => {
-      this.income = res
+    this._homeSvc.getIncome(this.token).subscribe(res => {
+      this.income = parseInt(res.income);
     })
     this._budgetSvc.dataBudgets$.subscribe(budgets => {
-      this.budgets = budgets
-      this.getSummary();
-      this.buildSummary();
+      this.budgets = budgets;
+      setTimeout(() => {
+        this.buildSummary();
+      }, 500);
     })
   }
-
-  getSummary():void {
-    this.budgets.map(budget => {
+  
+  buildSummary(){
+    let allExpenses = 0;
+    this.budgets.map((budget, i) => {
       if(budget.record !== null){
-        this.spent = budget.record.reduce((acc, e) => acc + e.amount, 0);
+        allExpenses += budget.record.reduce((acc, e) => acc + e.amount, 0);
       }
     })
-    this.balance = this.income - this.spent;
-  }
-
-  buildSummary(){
+    this.balance = this.income - allExpenses;
     this.summary = [
       {
         title: 'Incomes',
@@ -59,12 +57,20 @@ export class ContainerSummaryComponent implements OnInit {
       },
       {
         title: 'Expenses',
-        amount: this.income
+        amount: allExpenses
       },
       {
         title: 'Balance',
         amount: this.balance
       }
     ]
+  }
+
+  updateIncome(event){
+    console.log('event ', event)
+    this._homeSvc.addIncome(event).subscribe(res => {
+      console.log('res ', res);
+      this.income = res;
+    })
   }
 }
