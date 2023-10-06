@@ -2,23 +2,23 @@
   <mat-table [dataSource]="dataSource">
 
     <ng-container matColumnDef="date">
-      <mat-header-cell class="m-w-115" *matHeaderCellDef>Date</mat-header-cell>
-      <mat-cell class="m-w-115" *matCellDef="let element">{{ element.date }}</mat-cell>
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell class="text-table" *matCellDef="let element">{{ element.date }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="desc">
       <mat-header-cell class="d-flex-center" *matHeaderCellDef>Description</mat-header-cell>
-      <mat-cell class="d-flex-center" *matCellDef="let element">{{ element.desc }}</mat-cell>
+      <mat-cell class="d-flex-center text-table" *matCellDef="let element">{{ element.desc }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="amount">
       <mat-header-cell class="d-flex-center" *matHeaderCellDef>Amount</mat-header-cell>
-      <mat-cell class="d-flex-center" *matCellDef="let element">{{ element.amount }}</mat-cell>
+      <mat-cell class="d-flex-center text-table" *matCellDef="let element">{{ element.amount }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="budget">
       <mat-header-cell class="d-flex-center" *matHeaderCellDef>Budget</mat-header-cell>
-      <mat-cell class="d-flex-center" *matCellDef="let element">{{ element.budget }}</mat-cell>
+      <mat-cell class="d-flex-center text-table" *matCellDef="let element">{{ element.budget }}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
