@@ -66,11 +66,10 @@ export class ContainerSummaryComponent implements OnInit {
     ]
   }
 
-  updateIncome(event){
-    console.log('event ', event)
+  updateIncome(event:Event){
     this._homeSvc.addIncome(event).subscribe(res => {
-      console.log('res ', res);
-      this.income = res;
+      this.income = res.income;
+      this.buildSummary();
     })
   }
 }

@@ -1,4 +1,4 @@
-<ng-container *ngIf="budgets.length !== 0">
+<ng-container >
   <app-summary *ngFor="let item of summary" [summary]="item" (incomeEmitter)="updateIncome($event)"></app-summary>
 </ng-container>
-<div class="empty-wrapper" *ngIf="budgets.length === 0">There is not data yet</div>
+<!-- <div class="empty-wrapper" *ngIf="budgets.length === 0">There is not data yet</div> -->
