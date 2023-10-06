@@ -35,3 +35,7 @@ mat-tab-group {
   text-overflow: ellipsis;     /* Agrega los puntos suspensivos */
   max-width: 100%; 
 }
+
+.mat-mdc-tab-body-wrapper { 
+  height: 100% !important;
+}
