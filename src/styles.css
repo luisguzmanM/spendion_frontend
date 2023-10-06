@@ -31,3 +31,7 @@ mat-tab-header {
   text-overflow: ellipsis;     /* Agrega los puntos suspensivos */
   max-width: 100%; 
 }
+
+.m-w-115 {
+  min-width: 115px;
+}
