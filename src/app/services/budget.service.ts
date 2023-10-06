@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { API_URL_LOCAL, API_URL_PRODUCTION } from '../globals';
+import { API_URL } from '../globals';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Budget } from '../models/budget.model';
 import { UtilsService } from './utils.service';
 import { Person } from '../models/auth.model';
 
@@ -11,8 +10,7 @@ import { Person } from '../models/auth.model';
 })
 export class BudgetService {
 
-  URL_PRODUCTION: string = API_URL_PRODUCTION + '/home';
-  URL_LOCAL: string = API_URL_LOCAL + '/home';
+  URL_PRODUCTION: string = API_URL + '/home';
 
   private budgets: any[] = [];
   private budgetSubject = new BehaviorSubject<any[]>([]);
