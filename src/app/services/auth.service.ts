@@ -9,7 +9,7 @@ import { API_URL_PRODUCTION, API_URL_LOCAL } from './../globals'
 })
 export class AuthService {
 
-  URL_PRODUCTION: string = API_URL_PRODUCTION + '';
+  URL_PRODUCTION: string = API_URL_PRODUCTION + '/auth';
   URL_LOCAL: string = API_URL_LOCAL + '/auth';
 
   constructor(

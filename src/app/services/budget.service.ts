@@ -11,7 +11,7 @@ import { Person } from '../models/auth.model';
 })
 export class BudgetService {
 
-  URL_PRODUCTION: string = API_URL_PRODUCTION + '';
+  URL_PRODUCTION: string = API_URL_PRODUCTION + '/home';
   URL_LOCAL: string = API_URL_LOCAL + '/home';
 
   private budgets: any[] = [];

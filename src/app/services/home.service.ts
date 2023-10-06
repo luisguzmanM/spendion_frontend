@@ -8,7 +8,7 @@ import { API_URL_LOCAL, API_URL_PRODUCTION } from '../globals';
 })
 export class HomeService {
 
-  URL_PRODUCTION: string = API_URL_PRODUCTION + '';
+  URL_PRODUCTION: string = API_URL_PRODUCTION + '/home';
   URL_LOCAL: string = API_URL_LOCAL + '/home';
 
   constructor(
