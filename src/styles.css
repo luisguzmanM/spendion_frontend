@@ -18,10 +18,6 @@ mat-tab-header {
   border: 1px solid rgba(209, 213, 219, 0.3);
 }
 
-mat-tab-group {
-  height: calc(100% -56px);
-}
-
 @media screen and (max-width: 1060px){
   body {
     overflow-y: auto;
@@ -34,8 +30,4 @@ mat-tab-group {
   overflow: hidden;            /* Oculta el contenido excedente */
   text-overflow: ellipsis;     /* Agrega los puntos suspensivos */
   max-width: 100%; 
-}
-
-.mat-mdc-tab-body-wrapper { 
-  height: 100% !important;
 }
