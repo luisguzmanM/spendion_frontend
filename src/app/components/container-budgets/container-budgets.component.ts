@@ -36,6 +36,7 @@ export class ContainerBudgetsComponent implements OnInit {
     const { title, amount, spent, free, progress, record, id_budget } = budget;
     const dialogRef = this.dialog.open(ModalBudgetComponent, {
       width: '600px',
+      maxWidth: '100%',
       maxHeight: '90vh',
       disableClose: true,
       data: {
