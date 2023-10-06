@@ -31,7 +31,7 @@ export class SummaryComponent implements OnInit {
 
   constructor(
     public _dialog: MatDialog,
-    private homeSvc: HomeService
+    private _homeSvc: HomeService
   ){}
 
   ngOnInit(): void {}
@@ -46,6 +46,13 @@ export class SummaryComponent implements OnInit {
         labelNumberField: 'Income',
         type: TYPE_ELEMENT.INCOME
       },
+    })
+
+    dialogRef.componentInstance.addIncomeEmitter.subscribe(res => {
+      console.log(res)
+      this._homeSvc.addIncome(res)
+      dialogRef.componentInstance.loading = false;
+      dialogRef.close()
     })
   }
 
