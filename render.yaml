@@ -1,0 +1,9 @@
+services:
+  - name: spendion_frontend
+    type: web
+    buildCommand: npm install && npm run build
+    startCommand: npx serve -s dist/spendion_frontend
+
+routes:
+  - source: ^/(.*)
+    destination: /index.html
