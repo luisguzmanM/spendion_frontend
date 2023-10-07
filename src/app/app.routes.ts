@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { noAuthGuard } from './guards/no-auth.guard';
+import { Page404Component } from './pages/page404/page404.component';
 
 export const ROUTES : Route[] = [
   {
@@ -24,7 +25,11 @@ export const ROUTES : Route[] = [
     canActivate: [noAuthGuard]
   },
   {
+    path: '404',
+    component: Page404Component
+  },
+  {
     path: '**',
-    redirectTo: '/login'
+    component: Page404Component
   }
 ];
