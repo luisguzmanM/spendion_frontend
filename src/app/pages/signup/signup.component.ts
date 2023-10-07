@@ -5,13 +5,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 import { SignUp, AuthResponse } from 'src/app/models/auth.model';
 import { Router, RouterModule } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LogoComponent } from 'src/app/components/logo/logo.component';
 
 @Component({
@@ -26,10 +28,11 @@ import { LogoComponent } from 'src/app/components/logo/logo.component';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    MatSnackBarModule,
     LogoComponent
   ],
   providers: [
@@ -46,6 +49,8 @@ export class SignupComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]),
   })
+
+  loading: boolean = false;
 
   constructor(
     private _AuthSvc: AuthService,
@@ -68,6 +73,7 @@ export class SignupComponent {
   }
 
   callSignUpService(userData: SignUp) {
+    this.loading = true;
     this._AuthSvc.signup(userData).subscribe({
       next: (res) => this.handleResponse(res),
       error: (err) => this.handleError(err)
@@ -76,6 +82,7 @@ export class SignupComponent {
 
   handleResponse(res: AuthResponse): void {
     this._utilSvc.openSnackBar('Signup success', 'Close');
+    this.loading = false;
     localStorage.setItem('token', res.token);
     localStorage.setItem('person', JSON.stringify(res.person));
     this.router.navigate(['/home']);
@@ -83,6 +90,7 @@ export class SignupComponent {
 
   handleError(err): void {
     this._utilSvc.openSnackBar(err.error.msj, 'Close');
+    this.loading = false;
   }
 
 }

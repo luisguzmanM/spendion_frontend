@@ -6,12 +6,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { Login } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UtilsService } from 'src/app/services/utils.service';
 import { LogoComponent } from 'src/app/components/logo/logo.component';
 
@@ -27,10 +29,11 @@ import { LogoComponent } from 'src/app/components/logo/logo.component';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    MatSnackBarModule,
     LogoComponent
   ],
   providers: [AuthService, UtilsService]
@@ -42,6 +45,8 @@ export class LoginComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]),
   })
+
+  loading: boolean = false;
 
   constructor(
     private _AuthSvc: AuthService,
@@ -62,6 +67,7 @@ export class LoginComponent {
   }
 
   callLoginService(userData: Login) {
+    this.loading = true;
     this._AuthSvc.login(userData).subscribe({
       next: (res) => this.handleResponse(res),
       error: (err) => this.handleError(err)
@@ -70,6 +76,7 @@ export class LoginComponent {
 
   handleResponse(res): void {
     this._utilSvc.openSnackBar('Login success', 'Close')
+    this.loading = false;
     localStorage.setItem('token', res.token);
     localStorage.setItem('person', JSON.stringify(res.person));
     this.router.navigate(['/home'])
@@ -77,5 +84,6 @@ export class LoginComponent {
 
   handleError(err): void {
     this._utilSvc.openSnackBar(err.error.msj, 'Close')
+    this.loading = false;
   }
 }

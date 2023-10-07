@@ -7,15 +7,19 @@
   
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput type="email" placeholder="Ex: jsmith@gmail.com" formControlName="email">
+      <input matInput type="email" placeholder="Ex: jsmith@gmail.com" formControlName="email" [readonly]="loading">
     </mat-form-field>
   
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input matInput type="password" placeholder="******" formControlName="password">
+      <input matInput type="password" placeholder="******" formControlName="password" [readonly]="loading">
     </mat-form-field>
   
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Login</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading">Login</button>
+
+    <div class="spinner" *ngIf="loading">
+      <mat-spinner mode="indeterminate" color="primary" diameter="40"></mat-spinner>
+    </div>
   
   </form>
   
