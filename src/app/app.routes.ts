@@ -24,7 +24,7 @@ export const ROUTES : Route[] = [
     canActivate: [noAuthGuard]
   },
   {
-    path: '***',
+    path: '**',
     redirectTo: '/login'
   }
 ];
