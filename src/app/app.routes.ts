@@ -25,6 +25,6 @@ export const ROUTES : Route[] = [
   },
   {
     path: '***',
-    redirectTo: '/home'
+    redirectTo: '/login'
   }
 ];
