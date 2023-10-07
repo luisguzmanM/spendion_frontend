@@ -23,4 +23,8 @@ export const ROUTES : Route[] = [
     loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
     canActivate: [noAuthGuard]
   },
+  {
+    path: '***',
+    redirectTo: '/home'
+  }
 ];
