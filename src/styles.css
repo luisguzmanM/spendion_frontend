@@ -39,3 +39,14 @@ mat-tab-header {
 .fs10 {
   font-size: 10px;
 }
+
+.text-no-wrap {
+  white-space: nowrap;
+}
+
+.ellipsis {
+  white-space: nowrap;       /* Evita el salto de línea */
+  overflow: hidden;          /* Oculta el texto que desborda el contenedor */
+  text-overflow: ellipsis;   /* Agrega tres puntos suspensivos al final del texto desbordado */
+  max-width: 200px;          /* Establece un ancho máximo para el contenedor */
+}

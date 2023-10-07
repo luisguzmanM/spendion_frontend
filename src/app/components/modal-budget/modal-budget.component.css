@@ -41,13 +41,3 @@ mat-table {
   display: flex;
   justify-content: center;
 }
-
-.text-table {
-  font-size: 16px;
-}
-
-@media screen and (max-width: 800px){
-  .text-table {
-    font-size: 10px;
-  }
-}

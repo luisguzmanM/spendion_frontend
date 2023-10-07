@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { BudgetService } from 'src/app/services/budget.service';
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 @Component({
   selector: 'app-transaction',
@@ -12,7 +13,8 @@ import { BudgetService } from 'src/app/services/budget.service';
   imports: [
     MatTableModule,
     MatPaginatorModule,
-    CommonModule
+    CommonModule,
+    MatTooltipModule
   ],
 })
 
