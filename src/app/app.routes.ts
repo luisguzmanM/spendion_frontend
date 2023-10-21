@@ -25,6 +25,16 @@ export const ROUTES : Route[] = [
     canActivate: [noAuthGuard]
   },
   {
+    path: 'confirmation',
+    loadComponent: () => import('./pages/confirmation/confirmation.component').then(m => m.ConfirmationComponent),
+    canActivate: [noAuthGuard]
+  },
+  {
+    path: 'account-confirmed',
+    loadComponent: () => import('./pages/account-confirmed/account-confirmed.component').then(m => m.AccountConfirmedComponent),
+    canActivate: [noAuthGuard]
+  },
+  {
     path: '404',
     component: Page404Component
   },

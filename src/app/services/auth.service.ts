@@ -23,4 +23,9 @@ export class AuthService {
   login(payload:Login ):Observable<AuthResponse>{
     return this._httpClient.post<AuthResponse>(`${this.URL_PRODUCTION}/login`, payload)
   }
+
+  confirmAccount(token:string):Observable<any>{
+    console.log(token)
+    return this._httpClient.put<any>(`${this.URL_PRODUCTION}/confirmation`, token);
+  }
 }
