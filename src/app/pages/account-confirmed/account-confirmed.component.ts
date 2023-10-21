@@ -37,9 +37,11 @@ export class AccountConfirmedComponent implements OnInit {
     this._route.queryParams.subscribe(params => {
       const token = params['token'];
       if (token) {
-        this._authSvc.confirmAccount(token).subscribe({
-          next: resp => {
-            console.log(resp)
+        const obj = {
+          token: 'pl8tm7770381hd9uh7ig'
+        }
+        this._authSvc.confirmAccount(obj).subscribe({
+          next: () => {
             setTimeout(() => {
               this._router.navigate(['/login'])
             }, 10000);

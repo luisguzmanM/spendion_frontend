@@ -25,7 +25,7 @@ export class AuthService {
     return this._httpClient.post<AuthResponse>(`${this.URL_PRODUCTION}/login`, payload, {headers: headers})
   }
 
-  confirmAccount(payload:string):Observable<any>{
+  confirmAccount(payload:any):Observable<any>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._httpClient.post<any>(`${this.URL_PRODUCTION}/confirmation`, payload, {headers: headers});
   }
