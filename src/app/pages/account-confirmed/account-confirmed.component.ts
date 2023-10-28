@@ -36,22 +36,23 @@ export class AccountConfirmedComponent implements OnInit {
   ngOnInit(): void {
     this._route.queryParams.subscribe(params => {
       const token = params['token'];
+      console.log('Confirmation token: ', token)
       if (token) {
         const obj = {
           token: token
         }
+        console.log('payload :', obj)
         this._authSvc.confirmAccount(obj).subscribe({
-          next: () => {
-            setTimeout(() => {
-              this._router.navigate(['/login'])
-            }, 10000);
+          next: res => {
+            console.log('Service confirmation response :', res);
           },
           error: err => {
+            console.log('Service confirmation error: ', err)
             console.log(err)
           }
         })
       } else {
-        console.log('The is an error with the url token')
+        console.log('There is an error with the url token')
       }
     });
   }
