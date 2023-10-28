@@ -81,14 +81,14 @@ export class SignupComponent {
   }
 
   handleResponse(): void {
-    this._utilSvc.openSnackBar('Signup success', 'Close');
     this.loading = false;
+    this._utilSvc.openSnackBar('Signup success', 'Close');
     this.router.navigate(['/confirmation']);
   }
 
   handleError(err): void {
-    this._utilSvc.openSnackBar(err.error.msj, 'Close');
     this.loading = false;
+    this._utilSvc.openSnackBar(err.error.msj, 'Close');
   }
 
 }
