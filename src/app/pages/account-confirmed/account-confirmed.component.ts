@@ -38,7 +38,7 @@ export class AccountConfirmedComponent implements OnInit {
       const token = params['token'];
       if (token) {
         const obj = {
-          token: 'pl8tm7770381hd9uh7ig'
+          token: token
         }
         this._authSvc.confirmAccount(obj).subscribe({
           next: () => {
