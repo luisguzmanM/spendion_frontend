@@ -10,6 +10,11 @@ export const ROUTES : Route[] = [
     pathMatch: 'full'
   },
   {
+    path: 'account-confirmed/:token',
+    loadComponent: () => import('./pages/account-confirmed/account-confirmed.component').then(m => m.AccountConfirmedComponent),
+    canActivate: [noAuthGuard]
+  },
+  {
     path: 'home',
     loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
     canActivate: [authGuard]
@@ -27,11 +32,6 @@ export const ROUTES : Route[] = [
   {
     path: 'confirmation',
     loadComponent: () => import('./pages/confirmation/confirmation.component').then(m => m.ConfirmationComponent),
-    canActivate: [noAuthGuard]
-  },
-  {
-    path: 'account-confirmed/:token',
-    loadComponent: () => import('./pages/account-confirmed/account-confirmed.component').then(m => m.AccountConfirmedComponent),
     canActivate: [noAuthGuard]
   },
   {

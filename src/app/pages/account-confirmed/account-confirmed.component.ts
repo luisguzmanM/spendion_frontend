@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LogoComponent } from 'src/app/components/logo/logo.component';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -29,7 +29,6 @@ export class AccountConfirmedComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
-    private _router: Router,
     private _authSvc: AuthService,
   ){}
 
