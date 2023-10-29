@@ -31,7 +31,8 @@ export const ROUTES : Route[] = [
   },
   {
     path: 'account-confirmed/:token',
-    loadComponent: () => import('./pages/account-confirmed/account-confirmed.component').then(m => m.AccountConfirmedComponent)
+    loadComponent: () => import('./pages/account-confirmed/account-confirmed.component').then(m => m.AccountConfirmedComponent),
+    canActivate: [noAuthGuard]
   },
   {
     path: '404',
