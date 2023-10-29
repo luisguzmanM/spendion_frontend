@@ -30,7 +30,7 @@ export const ROUTES : Route[] = [
     canActivate: [noAuthGuard]
   },
   {
-    path: 'account-confirmed/:token',
+    path: 'account-confirmed',
     loadComponent: () => import('./pages/account-confirmed/account-confirmed.component').then(m => m.AccountConfirmedComponent),
     canActivate: [noAuthGuard]
   },
