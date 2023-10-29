@@ -9,7 +9,7 @@ import { API_URL } from './../globals'
 })
 export class AuthService {
 
-  URL_PRODUCTION: string = API_URL + '/auth';
+  URL_BACKEND: string = API_URL + '/auth';
 
   constructor(
     private _httpClient : HttpClient
@@ -17,16 +17,16 @@ export class AuthService {
 
   signup(payload:SignUp ):Observable<AuthResponse>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._httpClient.post<AuthResponse>(`${this.URL_PRODUCTION}/signup`, payload, {headers: headers})
+    return this._httpClient.post<AuthResponse>(`${this.URL_BACKEND}/signup`, payload, {headers: headers})
   }
 
   login(payload:Login ):Observable<AuthResponse>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._httpClient.post<AuthResponse>(`${this.URL_PRODUCTION}/login`, payload, {headers: headers})
+    return this._httpClient.post<AuthResponse>(`${this.URL_BACKEND}/login`, payload, {headers: headers})
   }
 
   confirmAccount(payload:any):Observable<any>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._httpClient.put<any>(`${this.URL_PRODUCTION}/confirmation`, payload, {headers: headers});
+    return this._httpClient.post<any>(`${this.URL_BACKEND}/confirmation`, payload, {headers: headers});
   }
 }

@@ -8,7 +8,7 @@ import { API_URL } from '../globals';
 })
 export class HomeService {
 
-  URL_PRODUCTION: string = API_URL + '/home';
+  URL_BACKEND: string = API_URL + '/home';
 
   constructor(
     private _httpClient: HttpClient
@@ -16,12 +16,12 @@ export class HomeService {
 
   addIncome(payload:any): Observable<any>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._httpClient.post(`${this.URL_PRODUCTION}/addIncome`, payload, {headers: headers});
+    return this._httpClient.post(`${this.URL_BACKEND}/addIncome`, payload, {headers: headers});
   }
 
   getIncome(token:any):Observable<any>{
     const params = new HttpParams().append('token', token);
-    return this._httpClient.get<any>(`${this.URL_PRODUCTION}/getIncome`, { params: params });
+    return this._httpClient.get<any>(`${this.URL_BACKEND}/getIncome`, { params: params });
   }
 
 }
