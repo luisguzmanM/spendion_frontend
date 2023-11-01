@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CommonModule } from "@angular/common"
 
 // Angular material components
 import { MatCardModule } from '@angular/material/card';
@@ -18,7 +19,8 @@ import { DecimalPipe } from '@angular/common';
     MatIconModule,
     MatProgressBarModule,
     MatTooltipModule,
-    DecimalPipe
+    DecimalPipe,
+    CommonModule
   ]
 })
 export class BudgetComponent {
