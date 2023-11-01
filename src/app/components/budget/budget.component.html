@@ -10,10 +10,10 @@
       </div>
       <div class="card-info-right">
         <span class="truncate-text">
-          <strong>Spent</strong>: $ <span [ngClass]="{'spent': data.spent > 0}">{{ data.spent | number:'1.2-2' }}</span>
+          <strong>Spent</strong>: $<span [ngClass]="{'spent': data.spent > 0}">{{ data.spent | number:'1.2-2' }}</span>
         </span>
         <span class="truncate-text">
-          <strong>Free</strong>: $ <span [ngClass]="{'free': data.spent > 0}">{{ data.free | number:'1.2-2' }}</span>
+          <strong>Free</strong>: $<span [ngClass]="{'free': data.spent > 0}">{{ data.free | number:'1.2-2' }}</span>
         </span>
       </div>
     </div>
