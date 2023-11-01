@@ -61,3 +61,11 @@ mat-tab-header {
   text-overflow: ellipsis;   /* Agrega tres puntos suspensivos al final del texto desbordado */
   max-width: 200px;          /* Establece un ancho máximo para el contenedor */
 }
+
+.spent {
+  color: red;
+}
+
+.free {
+  color: green;
+}

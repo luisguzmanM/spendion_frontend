@@ -41,14 +41,6 @@
   text-align: end;
 }
 
-.spent {
-  color: red;
-}
-
-.free {
-  color: green;
-}
-
 @media screen and (max-width: 1060px){
   .card {
     min-width: 285px;
