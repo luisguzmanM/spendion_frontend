@@ -5,8 +5,8 @@
     </div>
     <div class="card-info">
       <div class="card-info-left">
-        <span class="truncate-text" [matTooltip]="data.title">Desc: {{ data.title }}</span>
-        <span class="truncate-text">Budget: ${{ data.amount | number:'1.2-2' }}</span>
+        <span class="truncate-text" [matTooltip]="data.title">Budget: {{ data.title }}</span>
+        <span class="truncate-text">Amount: ${{ data.amount | number:'1.2-2' }}</span>
       </div>
       <div class="card-info-right">
         <span class="truncate-text">Spent: ${{ data.spent | number:'1.2-2' }}</span>

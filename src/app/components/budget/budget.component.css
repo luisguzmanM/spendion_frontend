@@ -34,6 +34,7 @@
   width: 50%;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .card-info-right {
