@@ -15,7 +15,7 @@
 
     <ng-container matColumnDef="amount">
       <mat-header-cell class="d-flex-center" *matHeaderCellDef>Amount</mat-header-cell>
-      <mat-cell class="d-flex-center text-no-wrap" *matCellDef="let element">$ {{ element.amount | number: '1.2-2' }}</mat-cell>
+      <mat-cell class="d-flex-center text-no-wrap" *matCellDef="let element">${{ element.amount | number: '1.2-2' }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="budget">
