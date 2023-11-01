@@ -53,17 +53,17 @@ export class ContainerSummaryComponent implements OnInit {
     this.summary = [
       {
         title: 'Incomes',
-        amount: this.income,
+        amount: this.income.toFixed(2),
         icon: '💰'
       },
       {
         title: 'Expenses',
-        amount: allExpenses,
+        amount: allExpenses.toFixed(2),
         icon: '💸'
       },
       {
         title: 'Balance',
-        amount: this.balance,
+        amount: this.balance.toFixed(2),
         icon: '⚖️'
       }
     ]
