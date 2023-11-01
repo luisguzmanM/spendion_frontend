@@ -64,7 +64,7 @@ export class ContainerSummaryComponent implements OnInit {
       {
         title: 'Balance',
         amount: this.balance,
-        icon: '💰'
+        icon: '⚖️'
       }
     ]
   }
