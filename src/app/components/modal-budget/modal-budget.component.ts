@@ -72,7 +72,9 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     this.dataSource = new MatTableDataSource<any>(this.data.record);
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
