@@ -54,7 +54,7 @@ export class ContainerSummaryComponent implements OnInit {
       {
         title: 'Incomes',
         amount: this.income,
-        icon: '🤑'
+        icon: '💰'
       },
       {
         title: 'Expenses',
