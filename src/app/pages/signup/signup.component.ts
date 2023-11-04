@@ -15,6 +15,8 @@ import { SignUp, AuthResponse } from 'src/app/models/auth.model';
 import { Router, RouterModule } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import { LogoComponent } from 'src/app/components/logo/logo.component';
+import { IllustrationComponent } from 'src/app/components/illustration/illustration.component';
+import { SharedConstants } from 'src/app/shared/shared.constants';
 
 @Component({
   selector: 'app-signup',
@@ -33,7 +35,8 @@ import { LogoComponent } from 'src/app/components/logo/logo.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    LogoComponent
+    LogoComponent,
+    IllustrationComponent
   ],
   providers: [
     AuthService,
@@ -51,6 +54,8 @@ export class SignupComponent {
   })
 
   loading: boolean = false;
+
+  illustration: string = SharedConstants.ILLUSTRATION.PERSON_WITH_DASHBOARD;
 
   constructor(
     private _AuthSvc: AuthService,

@@ -48,7 +48,7 @@ h3 {
   display: none;
   padding: 10px 20px;
   text-align: center;
-  color: lightslategray;
+  color: rgba(0,0,0,0.5);
 }
 
 .container-message h2 {

@@ -9,11 +9,11 @@
 }
 
 h1 {
-  color: lightslategrey;
+  color: rgba(0,0,0,0.5);
 }
 
 h2 {
-  color: lightslategray
+  color: rgba(0,0,0,0.5);
 }
 
 @media screen and (max-width: 700px){
