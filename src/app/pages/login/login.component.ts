@@ -16,6 +16,8 @@ import { Login } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { LogoComponent } from 'src/app/components/logo/logo.component';
+import { SharedConstants } from 'src/app/shared/shared.constants';
+import { IllustrationComponent } from 'src/app/components/illustration/illustration.component';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +36,8 @@ import { LogoComponent } from 'src/app/components/logo/logo.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    LogoComponent
+    LogoComponent,
+    IllustrationComponent
   ],
   providers: [AuthService, UtilsService]
 })
@@ -47,6 +50,8 @@ export class LoginComponent {
   })
 
   loading: boolean = false;
+
+  illustration: string = SharedConstants.ILLUSTRATION.PERSON_WITH_DASHBOARD;
 
   constructor(
     private _AuthSvc: AuthService,

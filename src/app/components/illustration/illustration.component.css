@@ -1,0 +1,27 @@
+.container {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.container img {
+  width: 100%;
+}
+
+h1 {
+  color: lightslategrey;
+}
+
+h2 {
+  color: lightslategray
+}
+
+@media screen and (max-width: 700px){
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+}
