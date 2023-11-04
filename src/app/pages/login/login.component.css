@@ -46,9 +46,13 @@ h3 {
 
 .container-message {
   display: none;
-  padding: 20px;
+  padding: 10px 20px;
   text-align: center;
   color: lightslategray;
+}
+
+.container-message h2 {
+  margin: 0;
 }
 
 
