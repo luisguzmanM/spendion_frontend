@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
   text-align: center;
 }
 
@@ -9,11 +9,13 @@
 }
 
 h1 {
-  color: rgba(0,0,0,0.5);
+  font-weight:500;
+  font-size: 22px;
 }
 
 h2 {
-  color: rgba(0,0,0,0.5);
+  font-weight: lighter;
+  font-size: 16px;
 }
 
 @media screen and (max-width: 700px){

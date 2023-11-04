@@ -2,7 +2,8 @@ export class SharedConstants {
 
   static get ILLUSTRATION() {
     return {
-      PERSON_WITH_DASHBOARD: 'assets/illustrations/initial_form.svg'
+      SIGNUP: 'assets/illustrations/signup_form.svg',
+      LOGIN: 'assets/illustrations/login_form.svg'
     }
   }
 

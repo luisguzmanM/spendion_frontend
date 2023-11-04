@@ -55,7 +55,7 @@ export class SignupComponent {
 
   loading: boolean = false;
 
-  illustration: string = SharedConstants.ILLUSTRATION.PERSON_WITH_DASHBOARD;
+  illustration: string = SharedConstants.ILLUSTRATION.SIGNUP;
 
   constructor(
     private _AuthSvc: AuthService,
