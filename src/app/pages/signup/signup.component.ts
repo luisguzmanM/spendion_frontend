@@ -56,6 +56,7 @@ export class SignupComponent {
   loading: boolean = false;
 
   illustration: string = SharedConstants.ILLUSTRATION.SIGNUP;
+  message: string = 'A tool where you can create life budgets and where you can keep track of your expenses';
 
   constructor(
     private _AuthSvc: AuthService,

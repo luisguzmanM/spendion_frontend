@@ -52,6 +52,7 @@ export class LoginComponent {
   loading: boolean = false;
 
   illustration: string = SharedConstants.ILLUSTRATION.LOGIN;
+  message: string = 'We help you save money by establishing budgets for each area of your life';
 
   constructor(
     private _AuthSvc: AuthService,

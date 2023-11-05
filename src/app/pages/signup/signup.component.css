@@ -58,15 +58,19 @@ h3 {
   margin-top: 20px;
 }
 
+.login-wrapper span {
+  font-weight: lighter;
+}
+
 .container-message {
   display: none;
   padding: 10px 20px;
   text-align: center;
-  color: lightslategray;
 }
 
 .container-message h2 {
   margin: 0;
+  font-weight: lighter;
 }
 
 @media screen and (max-width: 480px){

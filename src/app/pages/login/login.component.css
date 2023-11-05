@@ -36,6 +36,10 @@ h3 {
   margin-top: 20px;
 }
 
+.signup-wrapper span {
+  font-weight: lighter;
+}
+
 .spinner {
   display: flex;
   justify-content: center;
@@ -48,11 +52,11 @@ h3 {
   display: none;
   padding: 10px 20px;
   text-align: center;
-  color: rgba(0,0,0,0.5);
 }
 
 .container-message h2 {
   margin: 0;
+  font-weight: lighter;
 }
 
 
