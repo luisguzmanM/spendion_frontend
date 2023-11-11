@@ -4,6 +4,7 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Person } from 'src/app/models/auth.model';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-setting',
@@ -13,7 +14,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   imports: [
     CommonModule,
     HeaderComponent,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDividerModule
   ],
   providers: [
     UtilsService
