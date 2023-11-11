@@ -10,6 +10,7 @@ import { MatDividerModule } from '@angular/material/divider';
 // Components
 import { AvatarComponent } from '../avatar/avatar.component';
 import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,7 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [
     RouterModule,
+    CommonModule,
 
     // Angular material components
     MatToolbarModule,
@@ -32,10 +34,11 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
 
-  @Input() title: string;
+  @Input() title: string = 'Dashboard';
   @Input() subtitle: boolean;
   @Input() user: any;
   @Input() avatar: string;
+  @Input() backRoute: string;
 
   constructor(
     private router: Router

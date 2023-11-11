@@ -2,7 +2,11 @@
 
   <mat-toolbar-row class="toolbar-row">
 
-    <h1>Dashboard</h1>
+    <button mat-icon-button [routerLink]="[backRoute]" *ngIf="backRoute">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <h1>{{ title }}</h1>
   
     <span class="spacer"></span>
   
@@ -16,7 +20,7 @@
         <span>😀&nbsp;Profile</span>
       </button>
   
-      <button mat-menu-item disabled>
+      <button mat-menu-item [routerLink]="['/setting']">
         <span>⚙️&nbsp;Setting</span>
       </button>
   
