@@ -91,6 +91,29 @@ export class BudgetService {
     const progress = budget.amount > spent ? (spent * 100) / budget.amount : 100;
     budget.spent = spent;
     budget.free = free;
-    budget.progress = progress
+    budget.progress = progress;
+  }
+
+  deleteExpense(payload){
+    this.budgets.map(budget => {
+      if(budget.id_budget === payload.id_budget){
+        const newRecord = budget.record.filter(r => r.id !== payload.id_expense);
+        payload.record = newRecord;
+      }
+    })
+    this._httpClient.put(`${this.URL_BACKEND}/updateRecord`, payload).subscribe({
+      next: record => {
+        this.budgets.map(budget => {
+          if(budget.id_budget === payload.id_budget){
+            budget.record = record
+            this.updateBudgetValues(budget)
+          }
+        })
+        this.budgetSubject.next(this.budgets)
+      },
+      error: () => {
+        console.log('Error creating new expense')
+      }
+    })
   }
 }

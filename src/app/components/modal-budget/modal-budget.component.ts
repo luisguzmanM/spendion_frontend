@@ -55,17 +55,19 @@ import { UtilsService } from 'src/app/services/utils.service';
 
 export class ModalBudgetComponent implements AfterViewInit, OnInit {
 
-  displayedColumns: string[] = ['date', 'desc', 'amount'];
+  displayedColumns: string[] = ['date', 'desc', 'amount', 'actions'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Output() deleteBudgetEmitter = new EventEmitter();
   @Output() addExpenseEmitter = new EventEmitter();
+  @Output() deleteExpenseEmitter = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<ModalBudgetComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _dialog: MatDialog,
-    private utilsSvc: UtilsService
+    private utilsSvc: UtilsService,
+    private _budgetSvc: BudgetService
   ) {}
 
   ngOnInit(): void {
@@ -136,4 +138,30 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     this.dataSource = new MatTableDataSource(this.data.record)
     this.addExpenseEmitter.emit(this.data.record)
   }
+
+  openModalDeleteExpense(expense:any):void {
+    const payload = {
+      id_budget: this.data.id_budget,
+      id_expense: expense.id
+    }
+
+    const dialogRef = this._dialog.open(ModalConfirmationComponent, {
+      width: '300px',
+      maxHeight: '90vh',
+      disableClose: true,
+      data: {
+        title: 'Delete expense',
+        actionMessage: 'Are you sure to delete this expense?',
+      },
+    })
+
+    dialogRef.componentInstance.confirmButton.subscribe(() => {
+      this.deleteExpenseEmitter.emit(payload);
+      this.data.record = this.data.record.filter(r => r.id !== payload.id_expense)
+      this.dataSource = new MatTableDataSource<any>(this.data.record);
+      dialogRef.componentInstance.loading = false;
+      dialogRef.close()
+    })
+  }
+
 }

@@ -48,7 +48,8 @@ export class ContainerBudgetsComponent implements OnInit {
         record: record,
         id_budget: id_budget
       },
-    });   
+    }); 
+
     dialogRef.componentInstance.deleteBudgetEmitter.subscribe(() => {
       this._budgetSvc.deleteBudget(id_budget);
       dialogRef.close()
@@ -56,6 +57,10 @@ export class ContainerBudgetsComponent implements OnInit {
 
     dialogRef.componentInstance.addExpenseEmitter.subscribe(res => {
       this._budgetSvc.updateRecordBudget(id_budget, res);
+    })
+
+    dialogRef.componentInstance.deleteExpenseEmitter.subscribe(payload => {
+      this._budgetSvc.deleteExpense(payload);
     })
   }
 }

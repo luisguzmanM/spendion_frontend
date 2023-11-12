@@ -47,6 +47,10 @@ mat-tab-header {
   min-width: 115px;
 }
 
+.m-w-60 {
+  max-width: 60px;
+}
+
 .fs10 {
   font-size: 10px;
 }

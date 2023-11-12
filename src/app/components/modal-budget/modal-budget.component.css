@@ -32,12 +32,18 @@ form {
 }
 
 mat-table {
-  min-height: 296px;
-  max-height: 296px;
+  min-height: 300px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
 .d-flex-center {
   display: flex;
   justify-content: center;
+}
+
+.d-flex-middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -55,6 +55,15 @@
         <mat-cell class="d-flex-center text-no-wrap" *matCellDef="let element">${{ element.amount | number:'1.2-2' }}</mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="actions">
+        <mat-header-cell class="d-flex-center m-w-60" *matHeaderCellDef>Action</mat-header-cell>
+        <mat-cell class="d-flex-center m-w-60" *matCellDef="let element">
+          <button mat-icon-button class="d-flex-middle" (click)="openModalDeleteExpense(element)">
+            <span>🗑️</span>
+          </button>
+        </mat-cell>
+      </ng-container>
+
       <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
       <mat-row mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
