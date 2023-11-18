@@ -76,9 +76,9 @@ export class ProfileSettingComponent implements OnInit {
   handleUpdateUserDataResponse(data){
     console.log(data)
     this.loading = false;
-    localStorage.removeItem('person')
+    localStorage.removeItem('person');
+    localStorage.setItem('person', JSON.stringify(data.person));
     this._utilsSvc.openSnackBar('Updated', 'Close');
-    this._router.navigate(['/home']);
   }
 
   handleUpdateUserDataError(error){
