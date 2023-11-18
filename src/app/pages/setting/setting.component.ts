@@ -8,6 +8,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { PaymentCardComponent } from 'src/app/components/payment-card/payment-card.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ProfileSettingComponent } from 'src/app/components/profile-setting/profile-setting.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-setting',
@@ -21,7 +22,8 @@ import { ProfileSettingComponent } from 'src/app/components/profile-setting/prof
     MatDividerModule,
     PaymentCardComponent,
     MatTabsModule,
-    ProfileSettingComponent
+    ProfileSettingComponent,
+    MatProgressSpinnerModule
   ],
   providers: [
     UtilsService

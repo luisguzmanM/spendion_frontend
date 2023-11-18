@@ -9,6 +9,7 @@ import { SettingService } from 'src/app/services/setting.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UtilsService } from 'src/app/services/utils.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-profile-setting',
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MatButtonModule,
     HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     UtilsService,
@@ -57,9 +59,9 @@ export class ProfileSettingComponent {
   
   buildUserObject() {
     return {
-      firstName: this.formCtrl.controls.firstName.value,
-      lastName: this.formCtrl.controls.lastName.value,
-      email: this.formCtrl.controls.photo.value
+      fname: this.formCtrl.controls.firstName.value,
+      lname: this.formCtrl.controls.lastName.value,
+      photo: this.formCtrl.controls.photo.value
     }
   }
 

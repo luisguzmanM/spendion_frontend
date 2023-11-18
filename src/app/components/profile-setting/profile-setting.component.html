@@ -3,15 +3,19 @@
 
     <mat-form-field>
       <mat-label>First name</mat-label>
-      <input matInput type="text" placeholder="Ex: John" formControlName="firstName">
+      <input matInput type="text" placeholder="Ex: John" formControlName="firstName" [readonly]="loading">
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Last name</mat-label>
-      <input matInput type="text" placeholder="Ex: Smith" formControlName="lastName">
+      <input matInput type="text" placeholder="Ex: Smith" formControlName="lastName" [readonly]="loading">
     </mat-form-field>
 
-    <button mat-raised-button color="primary">Save changes</button>
+    <button mat-raised-button color="primary" [disabled]="formCtrl.invalid || loading">Save changes</button>
+
+    <div class="spinner" *ngIf="loading">
+      <mat-spinner mode="indeterminate" color="primary" diameter="40"></mat-spinner>
+    </div>
 
   </form>
 </div>
