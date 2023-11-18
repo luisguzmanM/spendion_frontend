@@ -6,6 +6,7 @@ import { Person } from 'src/app/models/auth.model';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { PaymentCardComponent } from 'src/app/components/payment-card/payment-card.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-setting',
@@ -17,7 +18,8 @@ import { PaymentCardComponent } from 'src/app/components/payment-card/payment-ca
     HeaderComponent,
     MatSnackBarModule,
     MatDividerModule,
-    PaymentCardComponent
+    PaymentCardComponent,
+    MatTabsModule
   ],
   providers: [
     UtilsService
@@ -25,17 +27,17 @@ import { PaymentCardComponent } from 'src/app/components/payment-card/payment-ca
 })
 export class SettingComponent implements OnInit {
 
-  user:Person;
+  user: Person;
 
   constructor(
     private _utilsSvc: UtilsService
-  ){}
+  ) { }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.getDataPersonFromLocalStorage();
   }
 
-  getDataPersonFromLocalStorage(){
+  getDataPersonFromLocalStorage() {
     this.user = this._utilsSvc.getDataPerson();
   }
 
