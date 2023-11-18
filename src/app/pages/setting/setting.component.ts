@@ -5,7 +5,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { Person } from 'src/app/models/auth.model';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
-import { PaymentComponent } from 'src/app/components/payment/payment.component';
+import { PaymentCardComponent } from 'src/app/components/payment-card/payment-card.component';
 
 @Component({
   selector: 'app-setting',
@@ -17,7 +17,7 @@ import { PaymentComponent } from 'src/app/components/payment/payment.component';
     HeaderComponent,
     MatSnackBarModule,
     MatDividerModule,
-    PaymentComponent
+    PaymentCardComponent
   ],
   providers: [
     UtilsService
