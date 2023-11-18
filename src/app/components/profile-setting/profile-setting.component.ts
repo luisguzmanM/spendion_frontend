@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UtilsService } from 'src/app/services/utils.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-setting',
@@ -44,7 +45,8 @@ export class ProfileSettingComponent implements OnInit {
 
   constructor(
     private _settingSvc: SettingService,
-    private _utilsSvc: UtilsService
+    private _utilsSvc: UtilsService,
+    private _router: Router
   ){
 
   }
@@ -74,7 +76,9 @@ export class ProfileSettingComponent implements OnInit {
   handleUpdateUserDataResponse(data){
     console.log(data)
     this.loading = false;
+    localStorage.removeItem('person')
     this._utilsSvc.openSnackBar('Updated', 'Close');
+    this._router.navigate(['/home']);
   }
 
   handleUpdateUserDataError(error){
