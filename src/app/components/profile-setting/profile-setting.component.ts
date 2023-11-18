@@ -68,7 +68,7 @@ export class ProfileSettingComponent {
   handleUpdateUserDataResponse(data){
     console.log(data)
     this.loading = false;
-    this._utilsSvc.openSnackBar('Updated :D', 'Close');
+    this._utilsSvc.openSnackBar('Updated', 'Close');
   }
 
   handleUpdateUserDataError(error){

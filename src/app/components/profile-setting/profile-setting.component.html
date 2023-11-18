@@ -11,7 +11,7 @@
       <input matInput type="text" placeholder="Ex: Smith" formControlName="lastName" [readonly]="loading">
     </mat-form-field>
 
-    <button mat-raised-button color="primary" [disabled]="formCtrl.invalid || loading">Save changes</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="formCtrl.invalid || loading">Save changes</button>
 
     <div class="spinner" *ngIf="loading">
       <mat-spinner mode="indeterminate" color="primary" diameter="40"></mat-spinner>
