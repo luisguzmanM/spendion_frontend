@@ -5,6 +5,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { Person } from 'src/app/models/auth.model';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
+import { PaymentComponent } from 'src/app/components/payment/payment.component';
 
 @Component({
   selector: 'app-setting',
@@ -15,7 +16,8 @@ import { MatDividerModule } from '@angular/material/divider';
     CommonModule,
     HeaderComponent,
     MatSnackBarModule,
-    MatDividerModule
+    MatDividerModule,
+    PaymentComponent
   ],
   providers: [
     UtilsService
