@@ -78,7 +78,7 @@ export class ProfileSettingComponent implements OnInit {
     this.loading = false;
     localStorage.removeItem('person');
     localStorage.setItem('person', JSON.stringify(data.person));
-    this._utilsSvc.openSnackBar('Updated', 'Close');
+    this._utilsSvc.openSnackBar(data.msj, 'Close');
   }
 
   handleUpdateUserDataError(error){
