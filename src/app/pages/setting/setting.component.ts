@@ -7,6 +7,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { PaymentCardComponent } from 'src/app/components/payment-card/payment-card.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ProfileSettingComponent } from 'src/app/components/profile-setting/profile-setting.component';
 
 @Component({
   selector: 'app-setting',
@@ -19,7 +20,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSnackBarModule,
     MatDividerModule,
     PaymentCardComponent,
-    MatTabsModule
+    MatTabsModule,
+    ProfileSettingComponent
   ],
   providers: [
     UtilsService
