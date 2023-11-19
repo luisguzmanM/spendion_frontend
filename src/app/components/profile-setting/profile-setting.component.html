@@ -1,10 +1,14 @@
 <div class="container">
   <form [formGroup]="formCtrl">
 
+    <h3>First name</h3>
+
     <mat-form-field>
       <mat-label>First name</mat-label>
       <input matInput type="text" placeholder="Ex: John" formControlName="firstName" [readonly]="loading">
     </mat-form-field>
+
+    <h3>Last name</h3>
 
     <mat-form-field>
       <mat-label>Last name</mat-label>
@@ -15,7 +19,7 @@
       <mat-spinner mode="indeterminate" color="primary" diameter="40"></mat-spinner>
     </div>
 
-    <button type="submit" mat-raised-button color="primary" [disabled]="formCtrl.invalid || loading" (click)="saveChanges()">Save changes</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="formCtrl.invalid || formCtrl.pristine || loading" (click)="saveChanges()">Save changes</button>
 
   </form>
 </div>

@@ -36,11 +36,7 @@ export class ProfileSettingComponent implements OnInit {
   loading: boolean = false;
   user;
 
-  formCtrl = new FormGroup({
-    firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    photo: new FormControl(null),
-  })
+  formCtrl : FormGroup;
 
   constructor(
     private _settingSvc: SettingService,
@@ -51,6 +47,11 @@ export class ProfileSettingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDataPersonFromLocalStorage();
+    this.formCtrl = new FormGroup({
+      firstName: new FormControl(this.user.fname, [Validators.required, Validators.minLength(3)]),
+      lastName: new FormControl(this.user.lname, [Validators.required, Validators.minLength(3)]),
+      photo: new FormControl(null),
+    })
   }
 
   saveChanges():void {
@@ -65,9 +66,9 @@ export class ProfileSettingComponent implements OnInit {
   buildUserObject() {
     return {
       id_person: this.user.id_person,
-      fname: this.formCtrl.controls.firstName.value,
-      lname: this.formCtrl.controls.lastName.value,
-      photo: this.formCtrl.controls.photo.value
+      fname: this.formCtrl.controls['firstName'].value,
+      lname: this.formCtrl.controls['lastName'].value,
+      photo: this.formCtrl.controls['photo'].value
     }
   }
 
