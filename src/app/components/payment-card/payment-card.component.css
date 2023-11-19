@@ -10,3 +10,12 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.card-price {
+  text-align: center;
+  margin: 5px 0;
+}
+
+.card-icon {
+  font-size: 50px;
+}
