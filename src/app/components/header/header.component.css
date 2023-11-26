@@ -36,3 +36,9 @@ mat-toolbar mat-toolbar-row h1 {
   background: linear-gradient(to right, #de6161, #2657eb);
   color: white;
 }
+
+@media screen and (max-width: 800px){
+  .banner {
+    display: none;
+  }
+}
