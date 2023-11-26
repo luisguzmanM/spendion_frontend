@@ -37,6 +37,10 @@ mat-toolbar mat-toolbar-row h1 {
   color: white;
 }
 
+.banner a {
+  color: white;
+}
+
 @media screen and (max-width: 800px){
   .banner {
     display: none;
