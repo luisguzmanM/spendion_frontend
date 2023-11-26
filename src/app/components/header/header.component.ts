@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 // Angular material components
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -11,6 +11,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-header',
@@ -32,7 +33,7 @@ import { CommonModule } from '@angular/common';
     AvatarComponent,
   ]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   @Input() title: string = 'Dashboard';
   @Input() subtitle: boolean;
@@ -41,16 +42,32 @@ export class HeaderComponent {
   @Input() backRoute: string;
   @Input() premium_plan: boolean = false;
 
-  free_days: number = 30;
+  free_days: number = null;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private _utilsSvc: UtilsService
   ) {}
+
+  ngOnInit():void {
+    this.getFreeDays();
+  }
 
   loggout():void {
     localStorage.removeItem('person');
     localStorage.removeItem('token');
     this.router.navigate(['/login'])
+  }
+
+  getFreeDays():void {
+    const person = this._utilsSvc.getDataPerson();
+    const { created, confirmed } = person;
+    if(confirmed){
+      const days = 30;
+      const currentDate = new Date();
+      const freeDays =  Math.floor((currentDate.getTime() - new Date(created).getTime()) / (1000 * 3600 * 24));
+      this.free_days = days - freeDays;
+    }
   }
 
 }
