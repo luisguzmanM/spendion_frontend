@@ -9,6 +9,12 @@
     <h1>{{ title }}</h1>
   
     <span class="spacer"></span>
+
+    <div class="banner" *ngIf="!premium_plan">
+      <p>🚀 You have <strong>30</strong> free days. After this you need to get a <strong><a [routerLink]="['/setting']">subscription</a></strong></p>
+    </div>
+
+    <span class="spacer"></span>
   
     <span class="username">Hey, {{ user.fname }}</span>
   
@@ -16,17 +22,9 @@
   
     <mat-menu #menu="matMenu">
   
-      <!-- <button mat-menu-item disabled>
-        <span>😀&nbsp;Profile</span>
-      </button> -->
-  
       <button mat-menu-item [routerLink]="['/setting']">
         <span>⚙️&nbsp;Setting</span>
       </button>
-  
-      <!-- <button mat-menu-item disabled>
-        <span>🚀&nbsp;Upgrade</span>
-      </button> -->
   
       <mat-divider></mat-divider>
   

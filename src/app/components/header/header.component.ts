@@ -39,6 +39,9 @@ export class HeaderComponent {
   @Input() user: any;
   @Input() avatar: string;
   @Input() backRoute: string;
+  @Input() premium_plan: boolean = false;
+
+  free_days: number = 30;
 
   constructor(
     private router: Router
