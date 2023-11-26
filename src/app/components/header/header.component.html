@@ -11,7 +11,8 @@
     <span class="spacer"></span>
 
     <div class="banner" *ngIf="!premium_plan">
-      <p>🚀 You have <strong>30</strong> free days. After this you need to get a <strong><a [routerLink]="['/setting']">subscription</a></strong></p>
+      <p *ngIf="free_days > 0">🚀&nbsp;You have <strong>{{ free_days }}</strong> {{ free_days > 1 ? 'days' : 'day' }} of free use. After this you need to get a <strong><a [routerLink]="['/setting']">subscription</a></strong></p>
+      <p *ngIf="free_days === 0">🚀&nbsp;Get a <strong><a [routerLink]="['/setting']">subscription</a></strong> to continue using <strong>spendion</strong></p>
     </div>
 
     <span class="spacer"></span>
