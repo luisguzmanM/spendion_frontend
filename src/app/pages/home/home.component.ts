@@ -75,10 +75,7 @@ export class HomeComponent implements OnInit {
   openDialogCrud(): void {
 
     const { tp_susc } = this.user;
-
     const free_days = this._utilsSvc.getFreeDays();
-
-    console.log(free_days, this.user)
 
     if(tp_susc === 0 && free_days !== 0 || tp_susc === 1 && free_days === 0){
       console.log('Puede crear presupuesto')
@@ -106,9 +103,10 @@ export class HomeComponent implements OnInit {
 
   validateSubscription():void{
     const dialogRef = this._dialog.open(SubscriptionModalComponent, {
-      width: '250px',
+      width: '500px',
+      height: '300px',
       maxHeight: '90vh',
-      disableClose: true,
+      disableClose: false,
       data: {}
     })
   }
