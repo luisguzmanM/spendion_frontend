@@ -18,7 +18,9 @@ export interface Person {
 	email: string,
   fname: string,
   lname: string,
-  id_person: number
+  created?: string,
+  confirmed?: boolean,
+  id_person: number,
   dc_susc?: string,
   id_susc?: number,
   tp_susc?: number,

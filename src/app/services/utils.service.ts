@@ -32,4 +32,17 @@ export class UtilsService {
   getDataPerson(){
     return JSON.parse(localStorage.getItem('person'));
   }
+
+  getFreeDays() {
+    const person = this.getDataPerson();
+    const { created, confirmed } = person;
+    let free_days = null;
+    if(confirmed){
+      const days = 30;
+      const currentDate = new Date();
+      const freeDays =  Math.floor((currentDate.getTime() - new Date(created).getTime()) / (1000 * 3600 * 24));
+      free_days = days - freeDays;
+      return free_days;
+    }
+  }
 }

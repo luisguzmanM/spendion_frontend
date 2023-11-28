@@ -23,6 +23,7 @@ import { BudgetService } from 'src/app/services/budget.service';
 import { ContainerSummaryComponent } from 'src/app/components/container-summary/container-summary.component';
 import { TYPE_ELEMENT } from 'src/app/models/budget.model';
 import { Person } from 'src/app/models/auth.model';
+import { SubscriptionModalComponent } from 'src/app/components/subscription-modal/subscription-modal.component';
 
 
 @Component({
@@ -72,22 +73,43 @@ export class HomeComponent implements OnInit {
   }
 
   openDialogCrud(): void {
-    const dialogRef = this._dialog.open(ModalCrudComponent, {
+
+    const { tp_susc } = this.user;
+
+    const free_days = this._utilsSvc.getFreeDays();
+
+    console.log(free_days, this.user)
+
+    if(tp_susc === 0 && free_days !== 0 || tp_susc === 1 && free_days === 0){
+      console.log('Puede crear presupuesto')
+      const dialogRef = this._dialog.open(ModalCrudComponent, {
+        width: '250px',
+        maxHeight: '90vh',
+        disableClose: true,
+        data: {
+          title: 'Create budget',
+          labelTextField: 'Title',
+          labelNumberField: 'Budget',
+          type: TYPE_ELEMENT.BUDGET
+        },
+      })
+  
+      dialogRef.componentInstance.newBudgetEmitter.subscribe(newBudget => {
+        this._budgetSvc.createBudget(newBudget);
+        dialogRef.componentInstance.loading = false;
+        dialogRef.close()
+      })
+    } else {
+      this.validateSubscription();
+    }
+  }  
+
+  validateSubscription():void{
+    const dialogRef = this._dialog.open(SubscriptionModalComponent, {
       width: '250px',
       maxHeight: '90vh',
       disableClose: true,
-      data: {
-        title: 'Create budget',
-        labelTextField: 'Title',
-        labelNumberField: 'Budget',
-        type: TYPE_ELEMENT.BUDGET
-      },
+      data: {}
     })
-
-    dialogRef.componentInstance.newBudgetEmitter.subscribe(newBudget => {
-      this._budgetSvc.createBudget(newBudget);
-      dialogRef.componentInstance.loading = false;
-      dialogRef.close()
-    })
-  }  
+  }
 }
