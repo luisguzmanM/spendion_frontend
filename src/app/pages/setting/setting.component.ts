@@ -38,10 +38,6 @@ export class SettingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getDataPersonFromLocalStorage();
-  }
-
-  getDataPersonFromLocalStorage() {
     this.user = this._utilsSvc.getDataPerson();
   }
 

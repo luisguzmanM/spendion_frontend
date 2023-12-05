@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit():void {
-    this.getFreeDays();
+    this.free_days = this._utilsSvc.getFreeDays();
   }
 
   loggout():void {
@@ -58,16 +58,4 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['/login'])
   }
-
-  getFreeDays():void {
-    const person = this._utilsSvc.getDataPerson();
-    const { created, confirmed } = person;
-    if(confirmed){
-      const days = 30;
-      const currentDate = new Date();
-      const freeDays =  Math.floor((currentDate.getTime() - new Date(created).getTime()) / (1000 * 3600 * 24));
-      this.free_days = days - freeDays;
-    }
-  }
-
 }

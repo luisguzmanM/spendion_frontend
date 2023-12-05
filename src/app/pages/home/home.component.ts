@@ -65,17 +65,14 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getDataPersonFromLocalStorage();
-  }
-
-  getDataPersonFromLocalStorage(){
     this.user = this._utilsSvc.getDataPerson();
+    console.log(this.user)
   }
 
   openDialogCrud(): void {
 
     const { tp_susc } = this.user;
-    const free_days = this._utilsSvc.getFreeDays();
+    const free_days = this._utilsSvc.getFreeDays();    
 
     if(tp_susc === 0 && free_days !== 0 || tp_susc === 1 && free_days === 0){
       console.log('Puede crear presupuesto')

@@ -97,7 +97,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
 
     dialogRef.componentInstance.newExpenseEmitter.subscribe(res => {
       const expense = {
-        id: this.utilsSvc.generarID(),
+        id: this.utilsSvc.generateID(),
         date: this.utilsSvc.getCurrentDate(),
         desc: res.title,
         amount: res.amount

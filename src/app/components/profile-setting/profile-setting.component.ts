@@ -46,7 +46,8 @@ export class ProfileSettingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getDataPersonFromLocalStorage();
+    this.user = this._utilsSvc.getDataPerson();
+    
     this.formCtrl = new FormGroup({
       firstName: new FormControl(this.user.fname, [Validators.required, Validators.minLength(3)]),
       lastName: new FormControl(this.user.lname, [Validators.required, Validators.minLength(3)]),
@@ -82,10 +83,6 @@ export class ProfileSettingComponent implements OnInit {
   handleUpdateUserDataError(error){
     this.loading = false;
     this._utilsSvc.openSnackBar('Error trying to update user data', 'Close');
-  }
-
-  getDataPersonFromLocalStorage(){
-    this.user = this._utilsSvc.getDataPerson();
   }
 
 }
