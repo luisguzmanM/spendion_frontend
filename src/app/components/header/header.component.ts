@@ -40,13 +40,13 @@ export class HeaderComponent implements OnInit {
   @Input() user: any;
   @Input() avatar: string;
   @Input() backRoute: string;
-  @Input() premium_plan: boolean = false;
+  premium_plan: boolean = false;
 
   free_days: number = null;
 
   constructor(
     private router: Router,
-    private _utilsSvc: UtilsService
+    private _utilsSvc: UtilsService,
   ) {}
 
   ngOnInit():void {
@@ -57,5 +57,14 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('person');
     localStorage.removeItem('token');
     this.router.navigate(['/login'])
+  }
+
+  handleBannerSubscription():boolean {
+    const { tp_susc }  = this.user;
+    if(tp_susc === 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
