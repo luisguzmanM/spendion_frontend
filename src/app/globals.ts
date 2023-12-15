@@ -1,2 +1,1 @@
-export const API_URL = 'https://spendion-backend.onrender.com';
-// export const API_URL = 'http://localhost:4200';
+export const API_URL = window.location.href.includes('localhost') ? 'http://localhost:4200' : 'https://spendion-backend.onrender.com';
