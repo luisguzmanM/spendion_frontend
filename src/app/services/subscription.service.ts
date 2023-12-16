@@ -22,7 +22,7 @@ export class SubscriptionService {
     return this._httpClient.post(`${this.URL_BACKEND}/createPlan`, {product_id: idProduct});
   }
 
-  createSubscription(idPlan:string):Observable<any>{
-    return this._httpClient.post(`${this.URL_BACKEND}/createSubscription`, {plan_id: idPlan})
+  createSubscription(payload):Observable<any>{
+    return this._httpClient.post(`${this.URL_BACKEND}/createSubscription`, payload);
   }
 }

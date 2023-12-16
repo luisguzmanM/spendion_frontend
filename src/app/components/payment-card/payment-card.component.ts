@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SubscriptionService } from 'src/app/services/subscription.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-payment-card',
@@ -25,7 +26,8 @@ import { SubscriptionService } from 'src/app/services/subscription.service';
 export class PaymentCardComponent {
 
   constructor(
-    private _subscriptionSvc: SubscriptionService
+    private _subscriptionSvc: SubscriptionService,
+    private utilsSvc: UtilsService
   ){}
 
   createProduct(){
@@ -43,7 +45,12 @@ export class PaymentCardComponent {
   }
 
   createSubscription(idPlan:string){
-    this._subscriptionSvc.createSubscription(idPlan).subscribe(res => {
+    const person = this.utilsSvc.getDataPerson();
+    const body = {
+      id_person: person.id_person,
+      plan_id: idPlan
+    }
+    this._subscriptionSvc.createSubscription(body).subscribe(res => {
       this.redirectUserToPaymentPage(res.data.links);
     })
   }
