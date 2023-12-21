@@ -43,6 +43,16 @@ mat-toolbar mat-toolbar-row h1 {
 
 @media screen and (max-width: 800px){
   .banner {
-    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55%;
+    padding: 20px 10px;
+    text-align: center;
+  }
+
+  .banner p {
+    white-space: break-spaces;
   }
 }
