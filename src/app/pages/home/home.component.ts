@@ -66,36 +66,39 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this._utilsSvc.getDataPerson();
-    console.log(this.user)
   }
 
   openDialogCrud(): void {
-
     const { tp_susc } = this.user;
-    const free_days = this._utilsSvc.getFreeDays();    
 
-    if(tp_susc === 0 && free_days !== 0 || tp_susc === 1 && free_days === 0){
-      console.log('Puede crear presupuesto')
-      const dialogRef = this._dialog.open(ModalCrudComponent, {
-        width: '250px',
-        maxHeight: '90vh',
-        disableClose: true,
-        data: {
-          title: 'Create budget',
-          labelTextField: 'Title',
-          labelNumberField: 'Budget',
-          type: TYPE_ELEMENT.BUDGET
-        },
-      })
-  
-      dialogRef.componentInstance.newBudgetEmitter.subscribe(newBudget => {
-        this._budgetSvc.createBudget(newBudget);
-        dialogRef.componentInstance.loading = false;
-        dialogRef.close()
-      })
-    } else {
-      this.validateSubscription();
+    let free_days = this._utilsSvc.getFreeDays();    
+
+    if(tp_susc === 1){
+      free_days = 0
     }
+
+    if(tp_susc === 0 && free_days === 0){
+      this.validateSubscription();
+      return;
+    }
+
+    const dialogRef = this._dialog.open(ModalCrudComponent, {
+      width: '250px',
+      maxHeight: '90vh',
+      disableClose: true,
+      data: {
+        title: 'Create budget',
+        labelTextField: 'Title',
+        labelNumberField: 'Budget',
+        type: TYPE_ELEMENT.BUDGET
+      },
+    })
+
+    dialogRef.componentInstance.newBudgetEmitter.subscribe(newBudget => {
+      this._budgetSvc.createBudget(newBudget);
+      dialogRef.componentInstance.loading = false;
+      dialogRef.close()
+    })
   }  
 
   validateSubscription():void{
