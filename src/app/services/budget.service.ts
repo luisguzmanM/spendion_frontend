@@ -22,11 +22,12 @@ export class BudgetService {
     private utilsSvc: UtilsService
   ) {
     this.person = this.utilsSvc.getDataPerson();
+    console.log(this.person)
     this.getBudgets(this.person.id_person);
   }
 
   getBudgets(id_person:number){
-    const params = new HttpParams().append('id_person', id_person.toString());
+    const params = new HttpParams().append('id_person', id_person);
     this._httpClient.get<any[]>(`${this.URL_BACKEND}`, {params: params}).subscribe({
       next: data => {
         this.budgets = data

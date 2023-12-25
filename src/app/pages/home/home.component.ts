@@ -69,15 +69,15 @@ export class HomeComponent implements OnInit {
   }
 
   openDialogCrud(): void {
-    const { tp_susc } = this.user;
+    const { flg_premium } = this.user;
 
     let free_days = this._utilsSvc.getFreeDays();    
 
-    if(tp_susc === 1){
+    if(flg_premium === 1){
       free_days = 0
     }
 
-    if(tp_susc === 0 && free_days === 0){
+    if(flg_premium === 0 && free_days === 0){
       this.validateSubscription();
       return;
     }

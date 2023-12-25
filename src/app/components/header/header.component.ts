@@ -41,7 +41,6 @@ export class HeaderComponent implements OnInit {
   @Input() avatar: string;
   @Input() backRoute: string;
   premium_plan: boolean = false;
-
   free_days: number = null;
 
   constructor(
@@ -59,9 +58,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login'])
   }
 
-  handleBannerSubscription():boolean {
-    const { tp_susc }  = this.user;
-    if(tp_susc === 0) {
+  handleBannerSubscription(): boolean {
+    const { flg_premium }  = this.user;
+    if (flg_premium === false) {
       return true;
     } else {
       return false;

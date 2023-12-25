@@ -35,12 +35,9 @@ export class UtilsService {
 
   getFreeDays():any {
     const { created } = this.getDataPerson();
-
     const daysLimit = 30; // Definir aquí la cantidad de días que se quieran dar gratis
     const currentDate = new Date();
     const elapsedTime = currentDate.getTime() - new Date(created).getTime();
-    const remainingDays = Math.max(daysLimit - Math.floor(elapsedTime / (1000 * 3600 * 24)), 0);
-
-    return remainingDays;
+    return Math.max(daysLimit - Math.floor(elapsedTime / (1000 * 3600 * 24)), 0);
   }
 }

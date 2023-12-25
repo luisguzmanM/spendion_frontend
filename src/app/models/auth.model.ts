@@ -23,5 +23,5 @@ export interface Person {
   id_person: number,
   dc_susc?: string,
   id_susc?: number,
-  tp_susc?: number,
+  flg_premium?: number,
 }
