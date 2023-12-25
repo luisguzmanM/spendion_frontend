@@ -73,11 +73,11 @@ export class HomeComponent implements OnInit {
 
     let free_days = this._utilsSvc.getFreeDays();    
 
-    if(flg_premium === 1){
+    if(flg_premium === true){
       free_days = 0
     }
 
-    if(flg_premium === 0 && free_days === 0){
+    if(flg_premium === false && free_days === 0){
       this.validateSubscription();
       return;
     }
