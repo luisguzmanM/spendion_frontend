@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+declare var gtag;
 
 @Component({
   selector: 'app-root',
@@ -15,6 +19,19 @@ import { RouterModule } from '@angular/router';
 
 export class AppComponent {
 
-  constructor() {}
+  constructor(
+    private router: Router
+  ) {
+    const navEndEvents$ = this.router.events
+    .pipe(
+      filter(event => event instanceof NavigationEnd)
+    );
+
+    navEndEvents$.subscribe((event: NavigationEnd) => {
+      gtag('config', 'G-6SQLL8ENHZ', {
+        'page_path': event.urlAfterRedirects 
+      });
+    })
+  }
 
 }
