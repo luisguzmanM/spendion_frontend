@@ -68,6 +68,7 @@
   right: 20px;
   background: black;
   color: white;
+  z-index: 3;
 }
 
 .categories::-webkit-scrollbar {
