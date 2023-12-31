@@ -22,11 +22,7 @@ export class AppComponent {
   constructor(
     private router: Router
   ) {
-    const navEndEvents$ = this.router.events
-    .pipe(
-      filter(event => event instanceof NavigationEnd)
-    );
-
+    const navEndEvents$ = this.router.events.pipe(filter(event => event instanceof NavigationEnd));
     navEndEvents$.subscribe((event: NavigationEnd) => {
       gtag('config', 'G-6SQLL8ENHZ', {
         'page_path': event.urlAfterRedirects 
