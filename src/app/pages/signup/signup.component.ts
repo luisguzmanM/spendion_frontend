@@ -17,6 +17,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { LogoComponent } from 'src/app/components/logo/logo.component';
 import { IllustrationComponent } from 'src/app/components/illustration/illustration.component';
 import { SharedConstants } from 'src/app/shared/shared.constants';
+import { CreatorComponent } from 'src/app/components/creator/creator.component';
 
 @Component({
   selector: 'app-signup',
@@ -36,7 +37,8 @@ import { SharedConstants } from 'src/app/shared/shared.constants';
     HttpClientModule,
     RouterModule,
     LogoComponent,
-    IllustrationComponent
+    IllustrationComponent,
+    CreatorComponent
   ],
   providers: [
     AuthService,

@@ -9,6 +9,7 @@ import { PaymentCardComponent } from 'src/app/components/payment-card/payment-ca
 import { MatTabsModule } from '@angular/material/tabs';
 import { ProfileSettingComponent } from 'src/app/components/profile-setting/profile-setting.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CreatorComponent } from 'src/app/components/creator/creator.component';
 
 @Component({
   selector: 'app-setting',
@@ -23,7 +24,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     PaymentCardComponent,
     MatTabsModule,
     ProfileSettingComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    CreatorComponent
   ],
   providers: [
     UtilsService
