@@ -12,7 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
-import { Login } from 'src/app/models/auth.model';
+import { AuthResponse, Login } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { LogoComponent } from 'src/app/components/logo/logo.component';
@@ -45,22 +45,19 @@ import { CreatorComponent } from 'src/app/components/creator/creator.component';
 })
 
 export class LoginComponent {
-
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]),
   })
 
   loading: boolean = false;
-  
-
   illustration: string = SharedConstants.ILLUSTRATION.LOGIN;
   message: string = 'We help you save money by establishing budgets for each area of your life';
 
   constructor(
     private _AuthSvc: AuthService,
     private _utilSvc: UtilsService,
-    private router: Router
+    private _router: Router
   ) { }
 
   login(): void {
@@ -83,15 +80,16 @@ export class LoginComponent {
     })
   }
 
-  handleResponse(res): void {
-    this._utilSvc.openSnackBar('Login success', 'Close')
-    this.loading = false;
+  handleResponse(res:AuthResponse): void {
+    const { msj } = res;
+    this._utilSvc.openSnackBar(msj, 'Close')
     localStorage.setItem('token', res.token);
     localStorage.setItem('person', JSON.stringify(res.person));
-    this.router.navigate(['/home'])
+    this.loading = false;
+    this._router.navigate(['/home'])
   }
 
-  handleError(err): void {
+  handleError(err:any): void {
     this._utilSvc.openSnackBar(err.error.msj, 'Close')
     this.loading = false;
   }

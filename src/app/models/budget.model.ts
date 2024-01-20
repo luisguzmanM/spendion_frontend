@@ -8,6 +8,19 @@ export interface Budget {
   free?: number,
 }
 
+export interface BudgetToSend {
+  title: string;
+  amount: number;
+  token: string;
+}
+
+export interface RecordToSend {
+  desc: string;
+  amount: number;
+  id: string;
+  date: string;
+}
+
 export interface Record {
   id: number,
   title: string,

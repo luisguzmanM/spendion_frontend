@@ -4,14 +4,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UtilsService } from './utils.service';
 import { Person } from '../models/auth.model';
+import { BudgetToSend, RecordToSend } from '../models/budget.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BudgetService {
-
-  URL_BACKEND: string = API_URL + '/home';
-
+  private URL_BACKEND: string = API_URL + '/home';
   private budgets: any[] = [];
   private budgetSubject = new BehaviorSubject<any[]>([]);
   private person: Person;
@@ -22,7 +21,6 @@ export class BudgetService {
     private utilsSvc: UtilsService
   ) {
     this.person = this.utilsSvc.getDataPerson();
-    console.log(this.person)
     this.getBudgets(this.person.id_person);
   }
 
@@ -39,7 +37,7 @@ export class BudgetService {
     })
   }
 
-  createBudget(budget:any){
+  createBudget(budget:BudgetToSend){
     this._httpClient.post(`${this.URL_BACKEND}/createBudget`, budget).subscribe({
       next: budget => {
         this.budgets.push(budget)
@@ -52,8 +50,8 @@ export class BudgetService {
   }
 
   deleteBudget(id_budget:number){
-    console.log(id_budget)
     const params = new HttpParams().append('id_budget', id_budget.toString())
+    
     this._httpClient.delete(`${this.URL_BACKEND}/deleteBudget`, {params: params}).subscribe({
       next: () => {
         this.budgets = this.budgets.filter(budget => budget.id_budget != id_budget);
@@ -65,11 +63,12 @@ export class BudgetService {
     })
   }
 
-  updateRecordBudget(id_budget:number, record:any){
+  updateRecordBudget(id_budget:number, record:RecordToSend){
     const data = {
       id_budget: id_budget,
       record: record
     }
+
     this._httpClient.put(`${this.URL_BACKEND}/updateRecord`, data).subscribe({
       next: record => {
         this.budgets.map(budget => {

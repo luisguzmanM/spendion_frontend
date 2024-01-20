@@ -66,8 +66,7 @@ export class ModalBudgetComponent implements AfterViewInit, OnInit {
     public dialogRef: MatDialogRef<ModalBudgetComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _dialog: MatDialog,
-    private utilsSvc: UtilsService,
-    private _budgetSvc: BudgetService
+    private utilsSvc: UtilsService
   ) {}
 
   ngOnInit(): void {

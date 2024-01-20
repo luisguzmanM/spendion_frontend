@@ -11,7 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
-import { SignUp, AuthResponse } from 'src/app/models/auth.model';
+import { SignUp } from 'src/app/models/auth.model';
 import { Router, RouterModule } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import { LogoComponent } from 'src/app/components/logo/logo.component';
@@ -47,16 +47,13 @@ import { CreatorComponent } from 'src/app/components/creator/creator.component';
 })
 
 export class SignupComponent {
-
   form = new FormGroup({
     firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]),
   })
-
   loading: boolean = false;
-
   illustration: string = SharedConstants.ILLUSTRATION.SIGNUP;
   message: string = 'A tool where you can create life budgets and where you can keep track of your expenses';
 
@@ -83,18 +80,19 @@ export class SignupComponent {
   callSignUpService(userData: SignUp) {
     this.loading = true;
     this._AuthSvc.signup(userData).subscribe({
-      next: () => this.handleResponse(),
-      error: (err) => this.handleError(err)
+      next: res => this.handleResponse(res),
+      error: err => this.handleError(err)
     })
   }
 
-  handleResponse(): void {
+  handleResponse(res:any): void {
+    const { msj } = res;
     this.loading = false;
-    this._utilSvc.openSnackBar('Signup success', 'Close');
+    this._utilSvc.openSnackBar(msj, 'Close');
     this.router.navigate(['/confirmation']);
   }
 
-  handleError(err): void {
+  handleError(err:any): void {
     this.loading = false;
     this._utilSvc.openSnackBar(err.error.msj, 'Close');
   }
